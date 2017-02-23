@@ -1,4 +1,4 @@
-# HEIG-VD - GEN 2017 - Jeu de réflexe en ligne {#heig-vd---pro-2017---cahier-des-charges}
+# HEIG-VD - GEN 2017 - Jeu de réflexe en ligne
 
 Abass Mahdavi, Denise Gemesio, Luca Sivillica & Ludovic Delafontaine
 
