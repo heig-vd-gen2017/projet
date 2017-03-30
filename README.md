@@ -79,3 +79,20 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
     * Réactivité correcte
     * Apparition des différents objets
     * Actions liées aux différents objets
+
+## Cas d'utilisation
+
+
+## Protocole d'échange entre le client et serveur
+
+
+## Modèles de domaine
+
+
+## Base de données
+
+
+## Rôles des participants
+
+
+## Plan d'itérations
