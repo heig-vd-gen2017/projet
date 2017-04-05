@@ -1,0 +1,28 @@
+@startuml
+
+object player {
+    id : INTEGER
+    name : VARCHAR
+    date_added : TIMESTAMP
+    date_played : TIMESTAMP
+}
+
+object score {
+    player_id : INTEGER
+    mode_id : INTEGER
+    best_score : INTEGER
+    date : TIMESTAMP
+}
+
+object mode {
+    id : INTEGER
+    name : VARCHAR
+    path : VARCHAR
+    date_added : TIMESTAMP
+    date_played : TIMESTAMP
+}
+
+player "1" -- "*" score
+score "*" -- "1" mode
+
+@enduml

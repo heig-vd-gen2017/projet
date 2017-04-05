@@ -1,0 +1,55 @@
+@startuml
+
+Client -> Serveur : JOIN <i>{username}</i>
+
+Serveur -> Serveur : Le pseudo est-il déjà utilisé ?
+
+Client <-x Serveur : USERNAME_USED
+
+Serveur -> Serveur : Reste-il de la place dans la partie ?
+
+Client <-x Serveur : GAME_FULL
+
+Serveur -> Serveur : Ajout du joueur
+
+Serveur -> Client : JOINED <i>{configuration and spirtes}</i>
+
+Client -> Client : Chargement de la configuration
+
+Serveur --> Client : UPDATE <i>{players and scores}</i>
+
+Client -> Serveur : UPDATED
+
+Serveur -> Serveur : Supprime les éventuels joueurs déconnectés
+
+Serveur -> Serveur : Attend qu'il y a le bon nombre de joueurs
+
+Serveur --> Client : BEGIN_GAME
+
+Serveur -> Serveur : Temps aléatoire
+
+Serveur --> Client : SEND <i>{object type, id, timeout}</i>
+
+Client --> Serveur : SEND <i>{object type, id, time}</i>
+
+Serveur -> Serveur : Vérifie les scores et joueurs vivants et définit si la partie est terminée
+
+Serveur --> Client : UPDATE <i>{players and scores}</i>
+
+Client --> Serveur : UPDATED
+
+Serveur -> Serveur : Supprime les éventuels joueurs déconnectés/morts
+
+Serveur -> Serveur : Vérifie si la partie est terminée
+
+Serveur --> Client
+
+Client --> Serveur
+
+Serveur --> Client
+
+Client --> Serveur
+
+Serveur --> Client : END_OF_GAME
+
+@enduml

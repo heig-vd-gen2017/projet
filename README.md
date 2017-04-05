@@ -8,17 +8,17 @@ Le jeu se compose d'une surface interactive sur laquelle il est possible de dép
 # Fonctionnement du programme
 Un groupe d'amis souhaite jouer à notre jeu. Ils se réunissent sur le même réseau local et démarre le serveur.
 
-![Interface du serveur](Mockups/Serveur.png)
+![Interface du serveur](Mockups/ServerConfiguration.png)
 
 Le serveur permet la configuration de la partie selon plusieurs options et envies de chacun. La partie est lancée et le serveur se met en attente du nombre de joueurs requis. De plus, le serveur, qui joue le rôle d'administrateur, permet de nettoyer la base de données des scores enregistrés.
 
 Les joueurs démarrent leur client et saissent l'adresse IP du serveur.
 
-![Interface du client](Mockups/Connexion.png)
+![Interface du client](Mockups/ClientConnection.png)
 
 Ils choissent un pseudonyme qui les identifie et rejoigne la partie, ce qui ouvre une nouvelle fenêtre avec le nombre de joueurs actuellement connectés par rapport au nombre de joueurs nécessaires.
 
-![Interface de jeu](Mockups/Jeu.png)
+![Interface de jeu](Mockups/ClientGame.png)
 
 Une fois le nombre requis de joueurs nécessaire, le serveur lance la partie et le jeu commence.
 
@@ -84,12 +84,15 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
 
 
 ## Protocole d'échange entre le client et serveur
-
+Notre application communiquera à travers le réseau en utilisant le protocole suivant.
+![Protocole](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Protocol.puml)
 
 ## Modèles de domaine
 
 
 ## Base de données
+La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait jouer. La base de données est illustrée avec le schéma suivant.
+![Schéma de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Database.puml)
 
 
 ## Rôles des participants
