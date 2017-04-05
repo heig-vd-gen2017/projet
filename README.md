@@ -85,6 +85,7 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
 
 ## Protocole d'échange entre le client et serveur
 Notre application communiquera à travers le réseau en utilisant le protocole suivant.
+
 ![Protocole](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Protocol.puml)
 
 ## Modèles de domaine
@@ -92,6 +93,7 @@ Notre application communiquera à travers le réseau en utilisant le protocole s
 
 ## Base de données
 La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait jouer. La base de données est illustrée avec le schéma suivant.
+
 ![Schéma de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Database.puml)
 
 
