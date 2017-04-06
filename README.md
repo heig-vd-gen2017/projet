@@ -31,8 +31,10 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
 
 ### Fonctionnalités propre au serveur / administrateur
 * Configuration des modes de jeu
+* Lancer la partie
 * Attente de connexion des joueurs
 * Dès que le nombre de joueurs requis est atteint, la partie se lance
+* Mettre fin à la partie prématurément
 * Remise des scores contenus dans la base de données des joueurs à zéro
 * Modes de jeu
     * First to click: un objet apparaît après un temps aléatoire sur la surface et le premier joueur qui arrive à cliquer sur l'objet gagne. Plusieurs options peuvent être activées pour ce mode:
