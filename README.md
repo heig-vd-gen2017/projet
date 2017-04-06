@@ -45,6 +45,7 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
 ### Côté client / joueur
 * Spécifier notre pseudo
 * Rejoindre une partie
+* Jouer la partie
 * Voir le score des différents joueurs pendant le jeu
 * Quitter la partie (note: la partie en cours n'est pas interrompue. Le joueur est considéré comme ayant perdu)
 
