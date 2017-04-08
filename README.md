@@ -84,6 +84,9 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
     * Actions liées aux différents objets
 
 ## Cas d'utilisation
+### Diagramme général de contexte
+### Description des acteurs
+### Scénario principal par cas d'utilisation
 
 
 ## Protocole d'échange entre le client et serveur
@@ -105,11 +108,11 @@ La base de données servira à stocker les scores des différents joueurs pour c
 
 ## Plan d'itération
 
-|  Itération  |       Description        | Semaines |
-|-------------|:------------------------:|:--------:|
-| Itération 1 |"Joindre une partie"      |     1    |
-| Itération 2 |"Configurer une partie"   |    2-3   | 
-| Itération 3 |"Lancer une partie"       |     4    |
-| Itération 4 |"Jouer une partie"        |    5-6   |
-| Itération 5 |"Réinitialiser les scores"|     7    |
-| Itération 6 |"Mettre fin à une partie" |     8    |
+|  Itération  |       Description        | Semaines | Développeur |
+|-------------|:------------------------:|:--------:|:-----------:|
+| Itération 1 |"Joindre une partie"      |     1    |             |
+| Itération 2 |"Configurer une partie"   |    2-3   |             |
+| Itération 3 |"Lancer une partie"       |     4    |             |
+| Itération 4 |"Jouer une partie"        |    5-6   |             |
+| Itération 5 |"Réinitialiser les scores"|     7    |             |
+| Itération 6 |"Mettre fin à une partie" |     8    |             |
