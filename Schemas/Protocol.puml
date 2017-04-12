@@ -8,7 +8,7 @@ Client <-x Serveur : USERNAME_USED
 
 Serveur -> Serveur : Reste-il de la place dans la partie ?
 
-Client <-x Serveur : GAME_FULL
+Client <-x Serveur : FULL_GAME
 
 Serveur -> Serveur : Ajout du joueur
 
