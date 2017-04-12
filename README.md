@@ -110,7 +110,7 @@ La base de données servira à stocker les scores des différents joueurs pour c
 
 |  Itération  |       Description        | Semaines | Développeur |
 |-------------|:------------------------:|:--------:|:-----------:|
-| Itération 1 |"Joindre une partie"      |     1    |             |
+| Itération 1 |"Joindre une partie"      |     1    |Luca & Denise|
 | Itération 2 |"Configurer une partie"   |    2-3   |             |
 | Itération 3 |"Lancer une partie"       |     4    |             |
 | Itération 4 |"Jouer une partie"        |    5-6   |             |
