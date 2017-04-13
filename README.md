@@ -84,35 +84,59 @@ Une fois la partie terminée, les joueurs sont invités à recommencer la partie
     * Actions liées aux différents objets
 
 ## Cas d'utilisation
-### Diagramme général de contexte
-### Description des acteurs
-### Scénario principal par cas d'utilisation
+![Cas d'utilisation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/UseCases.puml)
 
+## Scénarios
+### Lancement du serveur
+1. Démarrage du serveur
+- Configuration de la partie
+- Démarrage du jeu
+
+### Nettoyage de la base de donnée
+1. Lancement du serveur
+- Nettoyage de la base de données
+- Confirmation de la réussite
+
+### Arrêt prématuré d'une partie
+1. Lancement du serveur
+- Arrêt de la partie
+- Les clients sont notifiés et la partie se termine
+
+### Lancement du jeu
+1. Connexion au serveur
+- Attente de tous les joueurs nécessaires à la partie
+- Le jeu se déroule jusqu'à ce qu'il ne reste plus qu'un joueur ou que le temps est écoulé
+- A la fin de la partie, les joueurs sont invités à rejouer
 
 ## Protocole d'échange entre le client et serveur
 Notre application communiquera à travers le réseau en utilisant le protocole suivant.
 
 ![Protocole](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Protocol.puml)
 
-## Modèles de domaine
-
+## Modèle de domaine
+![Modèle de domaine](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Domaine.puml)
 
 ## Base de données
 La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait jouer. La base de données est illustrée avec le schéma suivant.
 
 ![Schéma de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Schemas/Database.puml)
 
-
 ## Rôles des participants
+* Tout le monde: Architecteur/concepteur en chef, programmeur, responsable des tests
 
+
+* Ludovic: Chef de projet, responsable de la configuration
+* Luca: Responsable des normes et procédures,
+* Abass: Représentatant des clients & utilisateurs
+* Denise: Analyste
 
 ## Plan d'itération
 
 |  Itération  |       Description        | Semaines | Développeur |
 |-------------|:------------------------:|:--------:|:-----------:|
-| Itération 1 |"Joindre une partie"      |     1    |Luca & Denise|
-| Itération 2 |"Configurer une partie"   |    2-3   |             |
-| Itération 3 |"Lancer une partie"       |     4    |             |
-| Itération 4 |"Jouer une partie"        |    5-6   |             |
-| Itération 5 |"Réinitialiser les scores"|     7    |             |
-| Itération 6 |"Mettre fin à une partie" |     8    |             |
+| Itération 1 |"Joindre une partie"      |     1    | Protocole réseau: Luca, Interface graphique: Abass & Ludovic, Lier l'interface graphique avec le code: Denise |
+| Itération 2 |"Configurer une partie"   |    2-3   | Structure et validation XML: Ludovic, Conversion XML en object: Abass, Serialisation de l'objet en JSON, envoi au client et desérialisation: Denise et Luca |
+| Itération 3 |"Lancer une partie"       |     4    | Gestion des prérequis: tout le monde |
+| Itération 4 |"Jouer une partie"        |    5-6   | Gestion des événements clients: Luca et Abass, gestion des événements de la part du serveur: Ludovic & Denise |
+| Itération 5 |"Réinitialiser les scores"|     7    | Tout le monde |
+| Itération 6 |"Mettre fin à une partie" |     8    | Tout le monde |

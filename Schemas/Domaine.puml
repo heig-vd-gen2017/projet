@@ -1,0 +1,26 @@
+@startuml
+
+object Joueur {
+    pseudo : String
+}
+
+object Serveur {
+    adresse IP : String
+    port : Integer
+    connection : Socket
+}
+
+object Mode {
+    nom : String
+    proprietes : Objet
+}
+
+object Partie {
+
+}
+
+Mode "1" -- Partie
+Partie -- "2..*" Joueur
+Partie - "1" Serveur
+
+@enduml

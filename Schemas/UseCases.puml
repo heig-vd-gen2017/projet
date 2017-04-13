@@ -1,0 +1,19 @@
+@startuml
+
+left to right direction
+
+actor administrateur
+actor joueur
+
+rectangle jeu {
+    joueur -- (jouer une partie)
+    (jouer une partie) ..>  (joindre une partie):<includes>
+    administrateur -- (configurer une partie)
+    administrateur -- (lancer une partie)
+    administrateur -- (reinitialisation des scores)
+    (lancer une partie)<..(mettre fin a une partie):<extends>
+}
+
+
+
+@enduml
