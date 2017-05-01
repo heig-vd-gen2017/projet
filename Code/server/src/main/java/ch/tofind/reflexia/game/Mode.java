@@ -5,6 +5,7 @@ import ch.tofind.reflexia.utils.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,6 +15,21 @@ public class Mode implements DatabaseObject {
 
     //! ID of the game mode in the database
     private Integer id;
+
+    //! Game mode name
+    private String name;
+
+    //! BestScore to start with
+    private Integer startScore;
+
+    //! BestScore to end with
+    private Integer endScore;
+
+    //! Number of rounds
+    private Integer rounds;
+
+    //! Objects composed by the mode
+    private List<GameObject> gameObjects;
 
     //! Path to the XML mode file
     private String uri;
@@ -35,73 +51,73 @@ public class Mode implements DatabaseObject {
     }
 
     /**
-     * @brief Create a track
-     * @param title Title of the track
-     * @param artist Artist of the track
-     * @param album Album of the track
-     * @param length Length (in seconds) of the track
+     * @brief Create a new mode
      * @param uri URI of the file
      */
-    public Mode(String title, String artist, String album, Integer length, String uri) {
-        this.title = title;
-        this.artist = artist;
-        this.album = album;
-        this.length = length;
+    public Mode(String uri) {
         this.uri = uri;
+        /*
+        // Load the data from the XML file
+        this.name = name;
+        this.startScore = startScore;
+        this.endScore = endScore;
+        this.rounds = rounds;
+        this.gameObjects = gameObjects;
+         */
         this.dateAdded = new Date();
     }
 
     /**
-     * @brief Get the track's title
-     * @return The track's title
+     * @brief Get the mode's name
+     * @return The mode's name
      */
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
     /**
-     * @brief Get the track's artist
-     * @return The track's artist
+     * @brief Get the mode's starting score
+     * @return The mode's starting score
      */
-    public String getArtist() {
-        return artist;
+    public Integer getStartScore() {
+        return startScore;
     }
 
     /**
-     * @brief Get the track's album
-     * @return The track's album
+     * @brief Get the mode's ending score
+     * @return The mode's ending score
      */
-    public String getAlbum() {
-        return album;
+    public Integer getEndingScore() {
+        return endScore;
     }
 
     /**
-     * @brief Get the track's length
-     * @return The track's length
+     * @brief Get the mode's number of rounds
+     * @return The mode's number of rounds
      */
-    public Integer getLength() {
-        return length;
+    public Integer getRounds() {
+        return rounds;
     }
 
     /**
-     * @brief Get the track's URI
-     * @return The track's URI
+     * @brief Get the mode's game objects
+     * @return The mode's game objects
      */
-    public String getUri() {
-        return uri;
+    public List<GameObject> getGameObjects() {
+        return gameObjects;
     }
 
     /**
-     * @brief Get the date when the track was added
      * @return The added date
+     * @brief Get the date when the track was added
      */
     public Date getDateAdded() {
         return dateAdded;
     }
 
     /**
-     * @brief Get the date when the track was played
      * @return The played date
+     * @brief Get the date when the track was played
      */
     public Date getDatePlayed() {
         return datePlayed;
@@ -119,21 +135,18 @@ public class Mode implements DatabaseObject {
             return true;
         }
 
-        if (!(object instanceof ch.tofind.commusica.media.Mode)) {
+        if (!(object instanceof Mode)) {
             return false;
         }
 
-        ch.tofind.commusica.media.Mode mode = (ch.tofind.commusica.media.Mode) object;
+        Mode mode = (Mode) object;
 
-        return Objects.equals(title, mode.title) &&
-               Objects.equals(artist, mode.artist) &&
-               Objects.equals(album, mode.album) &&
-               length == mode.length;
+        return Objects.equals(uri, mode.uri);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(title, artist, album);
+        return Objects.hash(uri);
     }
 
     @Override
@@ -146,13 +159,13 @@ public class Mode implements DatabaseObject {
         String dateAddedString = dateAdded == null ? "N/A" : dateFormat.format(dateAdded);
         String datePlayedString = datePlayed == null ? "N/A" : dateFormat.format(datePlayed);
 
-        return "Mode"                           + '\n' + '\t' +
-               "Title......: " + title            + '\n' + '\t' +
-               "Artist.....: " + artist           + '\n' + '\t' +
-               "Album......: " + album            + '\n' + '\t' +
-               "Length.....: " + length           + '\n' + '\t' +
-               "URI........: " + uri              + '\n' + '\t' +
-               "Date added.: " + dateAddedString  + '\n' + '\t' +
-               "Date played: " + datePlayedString + '\n';
+        return "Mode"                              + '\n' + '\t' +
+                "Name.......: " + name             + '\n' + '\t' +
+                "Start score: " + startScore       + '\n' + '\t' +
+                "End score..: " + endScore         + '\n' + '\t' +
+                "Rounds.....: " + rounds           + '\n' + '\t' +
+                "URI........: " + uri              + '\n' + '\t' +
+                "Date added.: " + dateAddedString  + '\n' + '\t' +
+                "Date played: " + datePlayedString + '\n';
     }
 }

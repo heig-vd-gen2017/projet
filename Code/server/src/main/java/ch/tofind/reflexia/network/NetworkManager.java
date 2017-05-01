@@ -1,33 +1,21 @@
-package ch.tofind.reflexia.server;
+package ch.tofind.reflexia.network;
 
+import ch.tofind.reflexia.game.GameObject;
 import com.google.gson.Gson;
-import ch.tofind.reflexia.protocol.Protocol;
 
 import java.io.*;
+import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 
-/**
- * Created by luca on 26.04.17.
- */
-public class GameHandler implements Runnable, Protocol {
+public class NetworkManager implements Protocol {
 
-    private static Configuration configuration = new Configuration("config");
-    private static DataGame dataGame = new DataGame("data");
-    private static ArrayList<Spirte> spirtes = new ArrayList<>();
+    /*
+    private ServerSocket socket;
 
-    private Socket gameSocket;
+    public NetworkManager() throws IOException {
+        socket = new ServerSocket(DEFAULT_PORT);
 
-    private BufferedReader reader;
-    private PrintWriter writer;
 
-    private Gson gsonMotor;
-
-    private String usernameUsed = "James Bond";
-    private boolean gameFull = true;
-
-    private boolean isUsernameUsed(String username) {
-        return username.equals(usernameUsed);
     }
 
     private void handleCmdJoin(String usernameReceived) {
@@ -54,8 +42,8 @@ public class GameHandler implements Runnable, Protocol {
     }
 
     private void handleCmdSend(String spirte) {
-        Spirte spirteReceived = gsonMotor.fromJson(spirte, Spirte.class);
-        System.out.println(spirteReceived.getExampleSpirte());
+        GameObject gameObjectReceived = gsonMotor.fromJson(spirte, GameObject.class);
+        System.out.println(gameObjectReceived.getExampleSprite());
     }
 
     public GameHandler(Socket gameSocket) throws IOException {
@@ -99,4 +87,20 @@ public class GameHandler implements Runnable, Protocol {
             gameFull = false;
         }
     }
+
+    public void handleConnection() throws IOException {
+        Socket gamerSocket;
+
+        while (true) {
+            gamerSocket = socket.accept();
+
+            new Thread(new GameHandler(gamerSocket)).start();
+        }
+    }
+
+    private boolean isUsernameUsed(String username) {
+        return username.equals(usernameUsed);
+    }
+
+    */
 }

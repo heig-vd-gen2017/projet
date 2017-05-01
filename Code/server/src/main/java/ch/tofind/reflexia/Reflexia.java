@@ -1,6 +1,9 @@
 package ch.tofind.reflexia;
 
-import ch.tofind.reflexia.server.Server;
+import ch.tofind.reflexia.database.DatabaseManager;
+import ch.tofind.reflexia.game.BestScore;
+import ch.tofind.reflexia.game.Mode;
+import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.utils.Configuration;
 
 import java.io.File;
@@ -25,7 +28,28 @@ public class Reflexia {
             e.printStackTrace();
         }
 
-        Server server = new Server();
-        server.handleConnection();
+        dropDatabase();
+        
+        Player player1 = new Player("Player1");
+        Player player2 = new Player("Player2");
+
+        Mode mode1 = new Mode("Mode1.xml");
+        Mode mode2 = new Mode("Mode2.xml");
+
+        BestScore bestScore1 = new BestScore(player1, mode1, 1400);
+        BestScore bestScore2 = new BestScore(player1, mode2, 1200);
+        BestScore bestScore3 = new BestScore(player2, mode1, 1300);
+
+        DatabaseManager.getInstance().save(player1);
+        DatabaseManager.getInstance().save(player2);
+
+        DatabaseManager.getInstance().save(mode1);
+        DatabaseManager.getInstance().save(mode2);
+
+        DatabaseManager.getInstance().save(bestScore1);
+        DatabaseManager.getInstance().save(bestScore2);
+        DatabaseManager.getInstance().save(bestScore3);
+
+        DatabaseManager.getInstance().close();
     }
 }
