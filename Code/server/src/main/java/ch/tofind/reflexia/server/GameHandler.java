@@ -1,9 +1,6 @@
 package ch.tofind.reflexia.server;
 
 import com.google.gson.Gson;
-import ch.tofind.reflexia.game.Configuration;
-import ch.tofind.reflexia.game.DataGame;
-import ch.tofind.reflexia.game.Spirte;
 import ch.tofind.reflexia.protocol.Protocol;
 
 import java.io.*;
