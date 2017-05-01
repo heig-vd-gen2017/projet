@@ -1,6 +1,4 @@
-package ch.tofind.reflexia.server;
-
-import ch.tofind.reflexia.protocol.Protocol;
+package ch.tofind.reflexia.network;
 
 import java.io.IOException;
 import java.net.ServerSocket;

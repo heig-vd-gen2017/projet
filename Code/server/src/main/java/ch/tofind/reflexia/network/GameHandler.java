@@ -1,9 +1,9 @@
-package ch.tofind.reflexia.server;
+package ch.tofind.reflexia.network;
 
 import com.google.gson.Gson;
 import ch.tofind.reflexia.game.Configuration;
 import ch.tofind.reflexia.game.DataGame;
-import ch.tofind.reflexia.game.Spirte;
+import ch.tofind.reflexia.game.GameObject;
 import ch.tofind.reflexia.protocol.Protocol;
 
 import java.io.*;
@@ -17,7 +17,7 @@ public class GameHandler implements Runnable, Protocol {
 
     private static Configuration configuration = new Configuration("config");
     private static DataGame dataGame = new DataGame("data");
-    private static ArrayList<Spirte> spirtes = new ArrayList<>();
+    private static ArrayList<GameObject> gameObjects = new ArrayList<>();
 
     private Socket gameSocket;
 
@@ -57,8 +57,8 @@ public class GameHandler implements Runnable, Protocol {
     }
 
     private void handleCmdSend(String spirte) {
-        Spirte spirteReceived = gsonMotor.fromJson(spirte, Spirte.class);
-        System.out.println(spirteReceived.getExampleSpirte());
+        GameObject gameObjectReceived = gsonMotor.fromJson(spirte, GameObject.class);
+        System.out.println(gameObjectReceived.getExampleSprite());
     }
 
     public GameHandler(Socket gameSocket) throws IOException {

@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.protocol;
+package ch.tofind.reflexia.network;
 
 /**
  * Created by luca on 26.04.17.

@@ -1,6 +1,6 @@
 package ch.tofind.reflexia;
 
-import ch.tofind.reflexia.server.Server;
+import ch.tofind.reflexia.network.Server;
 
 import java.io.IOException;
 
