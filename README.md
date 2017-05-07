@@ -1,4 +1,4 @@
-# HEIG-VD - GEN 2017 - Jeu de réflexe en multijoueur
+# HEIG-VD - GEN 2017 - Jeu de réflexe en multijoueur 
 
 Abass Mahdavi, Denise Gemesio, Luca Sivillica & Ludovic Delafontaine
 
