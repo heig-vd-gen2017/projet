@@ -1,10 +1,13 @@
 package ch.tofind.reflexia.ui;
 
+import ch.tofind.reflexia.game.GameManager;
 import com.sun.corba.se.spi.activation.Server;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
@@ -37,6 +40,9 @@ public class ServerConfiguration extends Application implements Initializable {
 
 
     //! Selection of mode and initial requirements
+    @FXML
+    private ChoiceBox<Mode> choiceBoxModeName;
+
     @FXML
     private TextField textFieldModeName;
 
@@ -86,6 +92,7 @@ public class ServerConfiguration extends Application implements Initializable {
     @FXML
     private Button buttonStopGame;
 
+
     public void start(Stage stage) {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
@@ -107,13 +114,21 @@ public class ServerConfiguration extends Application implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
 
+        // Add modes to choice box!!!
+        // choiceBoxModeName = new ChoiceBox(FXCollections.observableArrayList(mode1.getName(), mode2.getName()));
+
         stage.show();
+    }
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loader.setController(this);
     }
 
     public ServerConfiguration() {
         FXMLLoader loader = new FXMLLoader(getClass().getClassLoader().getResource(FXML_FILE));
         loader.setRoot(this);
-        loader.setController(this);
 
         try {
             loader.load();
@@ -121,7 +136,10 @@ public class ServerConfiguration extends Application implements Initializable {
             throw new RuntimeException(e);
         }
 
+        buttonSaveMode
 
+        String modeName = textFieldModeName.getSelectedText();
 
     }
+
 }
