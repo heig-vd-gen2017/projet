@@ -1,9 +1,12 @@
 package ch.tofind.reflexia.ui;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,6 +19,8 @@ public class ServerConfiguration extends Application {
 
     //! FXML file to use for the view.
     private static final String FXML_FILE = "ui/ServerConfiguration.fxml";
+
+    Button buttonSaveMode;
 
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
@@ -37,9 +42,12 @@ public class ServerConfiguration extends Application {
         stage.setTitle("Reflexia");
         stage.setResizable(false);
         stage.setScene(scene);
-        stage.sizeToScene();
 
         stage.show();
+    }
+
+    public void saveMode(MouseEvent event) {
+        System.out.println("Hello!");
     }
 
 }

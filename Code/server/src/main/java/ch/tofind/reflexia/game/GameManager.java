@@ -14,6 +14,10 @@ public class GameManager {
     private Mode mode;
     private List<Player> players;
 
+    public GameManager() {
+
+    }
+
     public GameManager(String ipAddress, int port, Mode mode) {
         this.ipAddress = ipAddress;
         this.port = port;
@@ -25,5 +29,9 @@ public class GameManager {
     public synchronized void addPlayer(Player p) {
         players.add(p);
         ++nbOfGamers;
+    }
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
     }
 }

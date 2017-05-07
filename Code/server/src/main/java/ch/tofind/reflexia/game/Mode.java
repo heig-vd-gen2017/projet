@@ -34,19 +34,25 @@ public class Mode implements DatabaseObject {
     //! Path to the XML mode file
     private String uri;
 
-    //! When was the track added for the first time in the database
+    //! When was the mode added for the first time in the database
     private Date dateAdded;
 
-    //! When was the track played for the last time
+    //! When was the mode used for the last time
     private Date datePlayed;
 
     //! Version control for concurrency
     private Integer version;
 
+    private boolean bonusObjects;
+
+    private boolean malusObjects;
+
+    private boolean mysteryObjects;
+
     /**
      * @brief Empty constructor for Hibernate
      */
-    protected Mode() {
+    public Mode() {
 
     }
 
@@ -75,12 +81,20 @@ public class Mode implements DatabaseObject {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     /**
      * @brief Get the mode's starting score
      * @return The mode's starting score
      */
     public Integer getStartScore() {
         return startScore;
+    }
+
+    public void setStartScore(Integer startScore) {
+        this.startScore = startScore;
     }
 
     /**
@@ -91,12 +105,20 @@ public class Mode implements DatabaseObject {
         return endScore;
     }
 
+    public void setEndingScore(Integer endScore) {
+        this.endScore = endScore;
+    }
+
     /**
      * @brief Get the mode's number of rounds
      * @return The mode's number of rounds
      */
     public Integer getRounds() {
         return rounds;
+    }
+
+    public void setRounds(Integer rounds) {
+        this.rounds = rounds;
     }
 
     /**
@@ -122,6 +144,19 @@ public class Mode implements DatabaseObject {
     public Date getDatePlayed() {
         return datePlayed;
     }
+
+    public void setBonusObjects(boolean bonusObjects) {
+        this.bonusObjects = bonusObjects;
+    }
+
+    public void setMalusObjects(boolean malusObjects) {
+        this.malusObjects = malusObjects;
+    }
+
+    public void setMysteryObjects(boolean mysteryObjects) {
+        this.mysteryObjects = mysteryObjects;
+    }
+
 
     @Override
     public void update() {

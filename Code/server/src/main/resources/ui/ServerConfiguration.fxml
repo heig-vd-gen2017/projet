@@ -13,6 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?language javascript?>
 
+
 <AnchorPane maxWidth="600.0" minWidth="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -179,7 +180,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Button fx:id="buttonSaveMode" disable="true" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le mode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                        <Button fx:id="buttonSaveMode" onMouseClicked="saveMode" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le mode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                             <font>
                                 <Font name="Courier New Bold" size="13.0" />
                             </font>
@@ -279,7 +280,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <children>
-                                        <Button fx:id="buttonBeginGame" disable="true" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Commencer la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <Button fx:id="buttonBeginGame" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Commencer la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -288,7 +289,7 @@
                                 </AnchorPane>
                                 <AnchorPane fx:id="buttonStopGame" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <Button disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
