@@ -2,6 +2,7 @@ package ch.tofind.reflexia.ui;
 
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -20,6 +21,7 @@ public class ServerConfiguration extends Application {
     //! FXML file to use for the view.
     private static final String FXML_FILE = "ui/ServerConfiguration.fxml";
 
+    @FXML
     Button buttonSaveMode;
 
     public void start(Stage stage) throws IOException {
