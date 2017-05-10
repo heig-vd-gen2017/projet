@@ -149,13 +149,19 @@ public class Mode implements DatabaseObject {
         this.bonusObjects = bonusObjects;
     }
 
+    public boolean getBonusObjects() { return bonusObjects; }
+
     public void setMalusObjects(boolean malusObjects) {
         this.malusObjects = malusObjects;
     }
 
+    public boolean getMalusObjects() { return malusObjects; }
+
     public void setMysteryObjects(boolean mysteryObjects) {
         this.mysteryObjects = mysteryObjects;
     }
+
+    public boolean getMysteryObjects() { return mysteryObjects; }
 
 
     @Override
