@@ -29,7 +29,7 @@ public class Reflexia {
         }
 
         dropDatabase();
-        
+
         Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
 
