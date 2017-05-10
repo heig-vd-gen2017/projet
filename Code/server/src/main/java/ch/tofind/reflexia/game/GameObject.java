@@ -14,9 +14,6 @@ public class GameObject {
         this.timeout = timeout;
     }
 
-
-
-
     public String getExampleSprite() {
         return sprite;
     }

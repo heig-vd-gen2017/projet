@@ -13,9 +13,10 @@
 <?import javafx.scene.text.Font?>
 <?language javascript?>
 
-<AnchorPane maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+
+<AnchorPane maxWidth="600.0" minWidth="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.tofind.reflexia.ui.ServerConfiguration">
     <children>
-        <GridPane maxHeight="700.0" maxWidth="600.0" minHeight="700.0" minWidth="600.0" prefHeight="700.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <GridPane AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             </columnConstraints>
@@ -31,7 +32,7 @@
                 <RowConstraints prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <AnchorPane maxHeight="80.0" maxWidth="600.0" minHeight="80.0" minWidth="600.0" prefHeight="80.0" prefWidth="600.0">
+                <AnchorPane prefHeight="200.0" prefWidth="200.0">
                     <children>
                         <Label alignment="CENTER" contentDisplay="CENTER" layoutX="96.0" layoutY="36.0" prefHeight="86.0" prefWidth="600.0" text="Reflexia" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                             <font>
@@ -42,7 +43,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                     <children>
-                        <Label layoutX="71.0" layoutY="6.0" maxHeight="40.0" maxWidth="580.0" minHeight="40.0" minWidth="580.0" prefHeight="40.0" prefWidth="580.0" text="Configuration de la partie" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <Label layoutX="71.0" layoutY="6.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" text="Configuration de la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                             <font>
                                 <Font name="Courier New Bold" size="22.0" />
                             </font>
@@ -87,7 +88,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
-                                        <TextField fx:id="TextFieldModeName" prefHeight="131.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldModeName" prefHeight="131.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -101,7 +102,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
-                                        <TextField fx:id="TextFieldInitialScore" layoutX="34.0" layoutY="53.0" prefHeight="131.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldInitialScore" layoutX="34.0" layoutY="53.0" prefHeight="131.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -115,7 +116,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <children>
-                                        <TextField fx:id="TextFieldScoreToGet" layoutX="65.0" layoutY="52.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldScoreToGet" layoutX="65.0" layoutY="52.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -129,12 +130,12 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <TextField fx:id="TextFieldNumberOfRounds" layoutX="106.0" layoutY="39.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldNumberOfRounds" layoutX="106.0" layoutY="39.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                     <children>
-                                        <CheckBox fx:id="TickBoxBonus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus (+ 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <CheckBox fx:id="tickBoxBonus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus (+ 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -143,7 +144,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                                     <children>
-                                        <CheckBox fx:id="TickBoxMalus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus (- 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <CheckBox fx:id="tickBoxMalus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus (- 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -152,7 +153,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                                     <children>
-                                        <CheckBox fx:id="TickBoxMystery" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets mystères" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <CheckBox fx:id="tickBoxMystery" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets mystères" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -170,7 +171,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                     <children>
-                                        <ChoiceBox layoutX="57.0" layoutY="1.0" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <ChoiceBox fx:id="choiceBoxModeName" layoutX="57.0" layoutY="1.0" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -179,7 +180,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <children>
-                        <Button fx:id="ButtonSaveMode" disable="true" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le mode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                        <Button fx:id="buttonSaveMode" onMouseClicked="#saveMode" layoutX="172.0" layoutY="12.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le mode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                             <font>
                                 <Font name="Courier New Bold" size="13.0" />
                             </font>
@@ -215,7 +216,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <DatePicker fx:id="DatePickerResetScores" layoutX="43.0" layoutY="18.0" prefHeight="80.0" prefWidth="300.0" promptText="Antiérieures à..." AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <DatePicker fx:id="datePickerResetScores" layoutX="43.0" layoutY="18.0" prefHeight="80.0" prefWidth="300.0" promptText="Antiérieures à..." AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -256,7 +257,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
-                                        <TextField fx:id="TextFieldServerPort" layoutX="67.0" layoutY="1.0" prefHeight="30.0" prefWidth="360.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldServerPort" layoutX="67.0" layoutY="1.0" prefHeight="30.0" prefWidth="360.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -270,7 +271,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
-                                        <Button fx:id="ButtonAcceptConnexions" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Accepter les connexions" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <Button fx:id="buttonAcceptConnexions" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Accepter les connexions" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -279,16 +280,16 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                     <children>
-                                        <Button fx:id="ButtonBeginGame" disable="true" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Commencer la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <Button fx:id="buttonBeginGame" mnemonicParsing="false" prefHeight="246.0" prefWidth="360.0" text="Commencer la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
                                         </Button>
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane fx:id="ButtonStopGame" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                <AnchorPane fx:id="buttonStopGame" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                     <children>
-                                        <Button disable="true" mnemonicParsing="false" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New" size="13.0" />
                                             </font>
@@ -320,7 +321,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                     <children>
-                                        <ChoiceBox fx:id="ChoiceBoxIPAddress" layoutX="57.0" layoutY="1.0" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <ChoiceBox fx:id="choiceBoxIPAddress" layoutX="57.0" layoutY="1.0" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -329,7 +330,7 @@
                 </AnchorPane>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
                     <children>
-                        <Button fx:id="ButtonResetScores" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                        <Button fx:id="buttonResetScores" mnemonicParsing="false" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                             <font>
                                 <Font name="Courier New Bold" size="13.0" />
                             </font>

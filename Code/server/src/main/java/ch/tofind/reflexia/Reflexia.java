@@ -4,7 +4,9 @@ import ch.tofind.reflexia.database.DatabaseManager;
 import ch.tofind.reflexia.game.BestScore;
 import ch.tofind.reflexia.game.Mode;
 import ch.tofind.reflexia.game.Player;
+import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Configuration;
+import javafx.application.Application;
 
 import java.io.File;
 import java.io.IOException;
@@ -51,5 +53,9 @@ public class Reflexia {
         DatabaseManager.getInstance().save(bestScore3);
 
         DatabaseManager.getInstance().close();
+
+        Application.launch(ServerConfiguration.class, args);
+
+
     }
 }
