@@ -5,9 +5,11 @@ import ch.tofind.reflexia.game.BestScore;
 import ch.tofind.reflexia.game.Mode;
 import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameModeManager;
+import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Configuration;
 
+import com.google.gson.Gson;
 import javafx.application.Application;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -41,6 +43,7 @@ public class Reflexia {
 
         GameModeManager.getInstance().getGameModes();
 
+
         /*
         dropDatabase();
 
@@ -66,7 +69,7 @@ public class Reflexia {
 
         DatabaseManager.getInstance().close();
         */
-        
+
         Application.launch(ServerConfiguration.class, args);
     }
 }

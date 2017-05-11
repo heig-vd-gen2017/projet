@@ -75,6 +75,9 @@ public class GameMode {
     public void setGameObjects(GameObjects gameObjects) {
         this.gameObjects = gameObjects;
     }
+    public void addGameObject(GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
 
     @Override
     public String toString() {

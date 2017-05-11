@@ -50,9 +50,21 @@ public class GameModeManager {
 
                 GameMode gameGameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
 
-                GameObject gameObject = new GameObject();
+                gameGameMode.addGameObject(new GameObject("mystery", null, null));
+                gameGameMode.addGameObject(new GameObject("waiting", null, null));
+                gameGameMode.addGameObject(new GameObject("starting_in_3", null, 2000));
+                gameGameMode.addGameObject(new GameObject("starting_in_2", null, 2000));
+                gameGameMode.addGameObject(new GameObject("starting_in_1", null, 2000));
+                gameGameMode.addGameObject(new GameObject("start", null, 2000));
+                gameGameMode.addGameObject(new GameObject("winner", null, null));
+                gameGameMode.addGameObject(new GameObject("loser", null, null));
+                gameGameMode.addGameObject(new GameObject("end_of_game", null, null));
+                gameGameMode.addGameObject(new GameObject("restart", null, null));
+                gameGameMode.addGameObject(new GameObject("background", null, null));
 
                 gameModes.put(gameGameMode.getName(), gameGameMode);
+
+                System.out.println(gameGameMode);
 
             }
 

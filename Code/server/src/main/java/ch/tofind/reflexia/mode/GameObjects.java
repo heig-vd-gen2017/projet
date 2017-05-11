@@ -21,6 +21,10 @@ public class GameObjects {
         this.gameObjects = gameObjects;
     }
 
+    public void add(GameObject gameObject) {
+        gameObjects.add(gameObject);
+    }
+
     @XmlElement(name = "gameObject")
     public List<GameObject> getGameObjects() {
         return gameObjects;
