@@ -8,10 +8,15 @@
         <gameObject type="bonus">
             <points>50</points>
             <timeout>1500</timeout>
+            <enabled>false</enabled>
         </gameObject>
         <gameObject type="malus">
             <points>-75</points>
             <timeout>1500</timeout>
+            <enabled>false</enabled>
+        </gameObject>
+        <gameObject type="malus">
+            <enabled>true</enabled>
         </gameObject>
     </gameObjects>
 </mode>

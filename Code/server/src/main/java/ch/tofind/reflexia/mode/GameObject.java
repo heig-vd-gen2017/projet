@@ -16,16 +16,20 @@ public class GameObject {
     //!
     private Integer timeout;
 
+    //!
+    private Boolean enabled;
+
 
     protected GameObject() {
 
     }
 
-    public GameObject(String type, Integer points, Integer timeout) {
+    public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
         super();
         this.type = type;
         this.points = points;
         this.timeout = timeout;
+        this.enabled = enabled;
     }
 
     @XmlAttribute(name = "type")
@@ -34,6 +38,14 @@ public class GameObject {
     }
     public void setType(String type) {
         this.type = type;
+    }
+
+    @XmlElement(name = "enabled")
+    public Boolean getEnabled() {
+        return enabled;
+    }
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     @XmlElement(name = "points")
@@ -54,9 +66,11 @@ public class GameObject {
 
     @Override
     public String toString() {
-        return "Game object"          + '\n' + '\t' +
-                "Type...: " + type    + '\n' + '\t' +
-                "Points.: " + points  + '\n' + '\t' +
-                "Timeout: " + timeout + '\n';
+
+        return "Game object"                   + '\n' + '\t' +
+                "Type............: " + type    + '\n' + '\t' +
+                "Points..........: " + points  + '\n' + '\t' +
+                "Enabled.........: " + enabled + '\n' + '\t' +
+                "Timeout.........: " + timeout + '\n';
     }
 }

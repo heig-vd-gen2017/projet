@@ -1,25 +1,19 @@
 package ch.tofind.reflexia;
 
-import ch.tofind.reflexia.database.DatabaseManager;
-import ch.tofind.reflexia.game.BestScore;
-import ch.tofind.reflexia.game.Mode;
-import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameModeManager;
-import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Configuration;
 
-import com.google.gson.Gson;
+import ch.tofind.reflexia.utils.Network;
+import ch.tofind.reflexia.utils.Serialize;
 import javafx.application.Application;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
-
-import org.apache.commons.io.FileUtils;
+import java.net.InetAddress;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.TreeMap;
 
 public class Reflexia {
 
@@ -40,6 +34,29 @@ public class Reflexia {
             e.printStackTrace();
         }
 
+        Scanner scanner = new Scanner(System.in);
+
+        Map<String, InetAddress> networkInterfaces = Network.getIPv4Interfaces();
+
+        String interfaceChoice = "";
+        while (!networkInterfaces.containsKey(interfaceChoice)) {
+            System.out.println("Which interface to use for the multicast ?");
+            for (Map.Entry<String, InetAddress> networkInterface : networkInterfaces.entrySet()) {
+                System.out.println(networkInterface.getKey() + " - " + networkInterface.getValue());
+            }
+            System.out.print("> ");
+            interfaceChoice = scanner.next();
+        }
+
+        Network.INTERFACE_TO_USE = networkInterfaces.get(interfaceChoice);
+
+
+        String testToJson = Serialize.serialize(Network.INTERFACE_TO_USE);
+
+        InetAddress testFromJson = Serialize.unserialize(testToJson, InetAddress.class);
+
+        System.out.println(testToJson);
+        System.out.println(testFromJson);
 
         GameModeManager.getInstance().getGameModes();
 

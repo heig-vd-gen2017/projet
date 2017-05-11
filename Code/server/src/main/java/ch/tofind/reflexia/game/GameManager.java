@@ -1,35 +1,35 @@
 package ch.tofind.reflexia.game;
 
+import ch.tofind.reflexia.mode.GameMode;
+
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class GameManager {
 
-    private String ipAddress;
+    private InetAddress ipAddress;
     private int port;
-    private int nbOfGamers;
-    private Mode mode;
+    private GameMode gameMode;
     private List<Player> players;
 
     public GameManager() {
 
     }
 
-    public GameManager(String ipAddress, int port, Mode mode) {
+    public GameManager(InetAddress ipAddress, int port, GameMode gameMode) {
         this.ipAddress = ipAddress;
         this.port = port;
-        this.mode = mode;
-        nbOfGamers = 0; // or 1 if the admin is taken as a player directly
-        this.players = new ArrayList<Player>();
+        this.gameMode = gameMode;
+        this.players = new ArrayList<>();
     }
 
-    public synchronized void addPlayer(Player p) {
-        players.add(p);
-        ++nbOfGamers;
+    public synchronized void addPlayer(Player player) {
+        players.add(player);
     }
 
-    public void setMode(Mode mode) {
-        this.mode = mode;
+    public int getNumberOfPlayers() {
+        return players.size();
     }
 
     // TODO

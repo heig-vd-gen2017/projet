@@ -1,6 +1,7 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.mode.GameMode;
 import javafx.application.Application;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -8,17 +9,13 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.time.format.DateTimeFormatter;
-
-import ch.tofind.reflexia.game.Mode;
 
 public class ServerConfiguration extends Application {
 
@@ -30,14 +27,14 @@ public class ServerConfiguration extends Application {
 
     private GameManager gameManager;
     private boolean choseExistingMode;
-    private Mode newMode;
+    private GameMode newMode;
     private String serverPort;
     private String ipAddress;
     private String resetDate;
 
 
     @FXML
-    private ChoiceBox<Mode> choiceBoxModeName;
+    private ChoiceBox<GameMode> choiceBoxModeName;
 
     @FXML
     private TextField textFieldModeName;
@@ -114,7 +111,8 @@ public class ServerConfiguration extends Application {
 
     @FXML
     private void saveMode(MouseEvent event) {
-        newMode = new Mode();
+        /*
+        newMode = new GameMode();
 
         if (choseExistingMode) {
             newMode = choiceBoxModeName.getValue();
@@ -130,7 +128,7 @@ public class ServerConfiguration extends Application {
 
             System.out.println("New mode saved!");
         }
-
+        */
     }
 
     @FXML

@@ -81,11 +81,11 @@ public class GameMode {
 
     @Override
     public String toString() {
-        return "GameMode"                            + '\n' + '\t' +
-               "Name.........: " + name          + '\n' + '\t' +
-               "Start score..: " + startingScore + '\n' + '\t' +
-               "End score....: " + endingScore   + '\n' + '\t' +
-               "Rounds.......: " + rounds        + '\n' +
-               gameObjects                       + '\n';
+        return "GameMode"                           + '\n' + '\t' +
+               "Name............: " + name          + '\n' + '\t' +
+               "Starting score..: " + startingScore + '\n' + '\t' +
+               "Ending  score...: " + endingScore   + '\n' + '\t' +
+               "Rounds..........: " + rounds        + '\n' +
+               gameObjects                          + '\n';
     }
 }

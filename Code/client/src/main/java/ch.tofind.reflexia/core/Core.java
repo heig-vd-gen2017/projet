@@ -2,8 +2,7 @@ package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
-import ch.tofind.reflexia.network.Server;
-import ch.tofind.reflexia.utils.Network;
+import ch.tofind.reflexia.network.UnicastClient;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,20 +15,18 @@ public class Core implements ICore {
     //! Shared instance of the object for all the application
     private static Core instance = null;
 
-    //! Multicast client to send commands via multicast.
-    MulticastClient multicast;
+    //! Multicast client
+    private MulticastClient multicast;
 
-    //! The server.
-    Server server;
+    //! Unicast client
+    private UnicastClient client;
 
-    private Core(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
+    private Core(String multicastAddress, int port, InetAddress interfaceToUse) {
 
-        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
-
-        server = new Server(unicastPort);
+        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
 
         new Thread(multicast).start();
-        new Thread(server).start();
+
     }
 
     /**
@@ -41,7 +38,11 @@ public class Core implements ICore {
         if(instance == null) {
             synchronized (Core.class) {
                 if (instance == null) {
-                    instance = new Core(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, Network.INTERFACE_TO_USE, NetworkProtocol.UNICAST_PORT);
+                    try {
+                        instance = new Core(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, InetAddress.getLocalHost());
+                    } catch (UnknownHostException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
@@ -69,7 +70,9 @@ public class Core implements ICore {
 
     @Override
     public void sendUnicast(InetAddress hostname, String message) {
-
+        client = new UnicastClient(hostname, NetworkProtocol.UNICAST_PORT);
+        new Thread(client).start();
+        client.send(message);
     }
 
     @Override
@@ -80,7 +83,6 @@ public class Core implements ICore {
     @Override
     public void stop() {
         multicast.stop();
-        server.stop();
     }
 
     public String END_OF_COMMUNICATION(ArrayList<Object> args) {
