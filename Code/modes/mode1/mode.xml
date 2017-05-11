@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mode>
+    <name>Mode 1</name>
+    <start_score>100</start_score>
+    <end_score>500</end_score>
+    <rounds>10</rounds>
+	<gameObjects type="bonus">
+		<points>50</points>
+		<timeout>1500</timeout>
+	</gameObjects>
+	<gameObjects type="malus">
+		<points>-75</points>
+		<timeout>1500</timeout>
+	</gameObjects>
+</mode>

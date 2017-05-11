@@ -79,7 +79,7 @@ public class BestScore implements DatabaseObject {
     @Override
     public String toString() {
 
-        return "BestScore"                                     + '\n' + '\t' +
+        return "BestScore"                                 + '\n' + '\t' +
                "Player....: " + id.getPlayer().getPseudo() + '\n' + '\t' +
                "Mode......: " + id.getMode().getName()     + '\n' + '\t' +
                "Best score: " + bestScore                  + '\n';

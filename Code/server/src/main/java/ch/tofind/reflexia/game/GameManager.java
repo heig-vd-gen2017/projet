@@ -3,9 +3,6 @@ package ch.tofind.reflexia.game;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Denise on 06.05.2017.
- */
 public class GameManager {
 
     private String ipAddress;

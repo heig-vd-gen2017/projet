@@ -8,6 +8,9 @@ import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Configuration;
 import javafx.application.Application;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.IOException;
 
@@ -29,6 +32,12 @@ public class Reflexia {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        // Get the game modes path from configuration file
+        File gameModes = new File(Configuration.getInstance().get("MODES_PATH"));
+
+        // Create the modes path
+        gameModes.mkdirs();
 
         dropDatabase();
 
@@ -54,8 +63,20 @@ public class Reflexia {
 
         DatabaseManager.getInstance().close();
 
+        try {
+
+            File file = new File("/home/ludelafo/Desktop/mode.xml");
+            JAXBContext jaxbContext = JAXBContext.newInstance(ch.tofind.reflexia.xml.Mode.class);
+
+            Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+            ch.tofind.reflexia.xml.Mode mode = (ch.tofind.reflexia.xml.Mode) jaxbUnmarshaller.unmarshal(file);
+
+            System.out.println(mode);
+
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
         Application.launch(ServerConfiguration.class, args);
-
-
     }
 }

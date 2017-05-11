@@ -5,8 +5,9 @@ import ch.tofind.reflexia.utils.Configuration;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Objects;
+
+import javax.xml.bind.annotation.XmlElement;
 
 /**
  * @brief This class represents a game mode and can be stored in a database
@@ -29,7 +30,7 @@ public class Mode implements DatabaseObject {
     private Integer rounds;
 
     //! Objects composed by the mode
-    private List<GameObject> gameObjects;
+    private GameObjects gameObjects;
 
     //! Path to the XML mode file
     private String uri;
@@ -50,10 +51,19 @@ public class Mode implements DatabaseObject {
     private boolean mysteryObjects;
 
     /**
-     * @brief Empty constructor for Hibernate
+     * @brief Empty constructor
      */
     public Mode() {
 
+    }
+
+    public Mode(String name, Integer startScore, Integer endScore, Integer rounds, GameObjects gameObjects) {
+        super();
+        this.name = name;
+        this.startScore = startScore;
+        this.endScore = endScore;
+        this.rounds = rounds;
+        this.gameObjects = gameObjects;
     }
 
     /**
@@ -73,60 +83,44 @@ public class Mode implements DatabaseObject {
         this.dateAdded = new Date();
     }
 
-    /**
-     * @brief Get the mode's name
-     * @return The mode's name
-     */
+    @XmlElement(name = "name")
     public String getName() {
         return name;
     }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     * @brief Get the mode's starting score
-     * @return The mode's starting score
-     */
+    @XmlElement(name = "startScore")
     public Integer getStartScore() {
         return startScore;
     }
-
     public void setStartScore(Integer startScore) {
         this.startScore = startScore;
     }
 
-    /**
-     * @brief Get the mode's ending score
-     * @return The mode's ending score
-     */
-    public Integer getEndingScore() {
+    @XmlElement(name = "endScore")
+    public Integer getEndScore() {
         return endScore;
     }
-
-    public void setEndingScore(Integer endScore) {
+    public void setEndScore(Integer endScore) {
         this.endScore = endScore;
     }
 
-    /**
-     * @brief Get the mode's number of rounds
-     * @return The mode's number of rounds
-     */
+    @XmlElement(name = "rounds")
     public Integer getRounds() {
         return rounds;
     }
-
     public void setRounds(Integer rounds) {
         this.rounds = rounds;
     }
 
-    /**
-     * @brief Get the mode's game objects
-     * @return The mode's game objects
-     */
-    public List<GameObject> getGameObjects() {
+    @XmlElement(name = "gameObjects")
+    public GameObjects getGameObjects() {
         return gameObjects;
+    }
+    public void setGameObjects(GameObjects gameObjects) {
+        this.gameObjects = gameObjects;
     }
 
     /**
@@ -156,7 +150,6 @@ public class Mode implements DatabaseObject {
     public void setMysteryObjects(boolean mysteryObjects) {
         this.mysteryObjects = mysteryObjects;
     }
-
 
     @Override
     public void update() {
