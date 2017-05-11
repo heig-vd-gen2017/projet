@@ -1,9 +1,9 @@
-package ch.tofind.reflexia.game;
+package ch.tofind.reflexia.mode;
 
-import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
 @XmlType(propOrder = { "gameObjects"})
 @XmlRootElement(name = "gameObjects")
@@ -12,11 +12,11 @@ public class GameObjects {
     //! Objects for the mode
     private List<GameObject> gameObjects;
     
-    GameObjects() {
+    protected GameObjects() {
 
     }
     
-    GameObjects(List<GameObject> gameObjects){
+    public GameObjects(List<GameObject> gameObjects){
         super();
         this.gameObjects = gameObjects;
     }

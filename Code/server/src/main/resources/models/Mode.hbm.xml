@@ -4,9 +4,9 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class name="ch.tofind.reflexia.game.Mode" table="mode">
+    <class name="ch.tofind.reflexia.game.Mode" table="gameMode">
         <meta attribute="class-description">
-            This class represents a game mode.
+            This class represents a game gameMode.
         </meta>
         <id name="id" type="int" column="id">
             <generator class="increment"/>

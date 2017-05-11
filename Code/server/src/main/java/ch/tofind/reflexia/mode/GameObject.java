@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.xml;
+package ch.tofind.reflexia.mode;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
@@ -17,15 +17,15 @@ public class GameObject {
     private Integer timeout;
 
 
-    public GameObject() {
+    protected GameObject() {
 
     }
 
-    public GameObject(Integer points, Integer timeout, String type) {
+    public GameObject(String type, Integer points, Integer timeout) {
         super();
+        this.type = type;
         this.points = points;
         this.timeout = timeout;
-        this.type = type;
     }
 
     @XmlAttribute(name = "type")

@@ -6,11 +6,11 @@
 <hibernate-mapping default-access="field">
     <class name="ch.tofind.reflexia.game.BestScore" table="best_score" optimistic-lock="version">
         <meta attribute="class-description">
-            This class represents the link between a player and a mode associated with a bestScore.
+            This class represents the link between a player and a gameMode associated with a bestScore.
         </meta>
         <composite-id name="id" class="ch.tofind.reflexia.game.BestScoreId">
             <key-many-to-one name="player" column="player_id"/>
-            <key-many-to-one name="mode" column="mode_id"/>
+            <key-many-to-one name="gameMode" column="mode_id"/>
         </composite-id>
         <property name="bestScore" column="best_score" type="int" not-null="true"/>
         <property name="date" column="date" type="timestamp" length="50" not-null="true"/>

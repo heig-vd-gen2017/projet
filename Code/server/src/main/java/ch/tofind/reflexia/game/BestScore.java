@@ -81,7 +81,7 @@ public class BestScore implements DatabaseObject {
 
         return "BestScore"                                 + '\n' + '\t' +
                "Player....: " + id.getPlayer().getPseudo() + '\n' + '\t' +
-               "Mode......: " + id.getMode().getName()     + '\n' + '\t' +
+               "GameMode......: " + id.getMode().getName()     + '\n' + '\t' +
                "Best score: " + bestScore                  + '\n';
     }
 }

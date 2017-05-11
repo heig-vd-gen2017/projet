@@ -2,17 +2,17 @@
 <!DOCTYPE mode SYSTEM "mode.dtd">
 <mode>
     <name>Mode 1</name>
-    <start_score>100</start_score>
-    <end_score>500</end_score>
+    <startScore>100</startScore>
+    <endScore>500</endScore>
     <rounds>10</rounds>
-    <objects>
-        <object type="bonus">
+	<gameObjects>
+        <gameObject type="bonus">
             <points>50</points>
             <timeout>1500</timeout>
-        </object>
-        <object type="malus">
+        </gameObject>
+        <gameObject type="malus">
             <points>-75</points>
             <timeout>1500</timeout>
-        </object>
-    </objects>
+        </gameObject>
+    </gameObjects>
 </mode>

@@ -21,16 +21,13 @@ public class Mode implements DatabaseObject {
     private String name;
 
     //! BestScore to start with
-    private Integer startScore;
+    private Integer startingScore;
 
     //! BestScore to end with
-    private Integer endScore;
+    private Integer endingScore;
 
     //! Number of rounds
     private Integer rounds;
-
-    //! Objects composed by the mode
-    private GameObjects gameObjects;
 
     //! Path to the XML mode file
     private String uri;
@@ -57,13 +54,12 @@ public class Mode implements DatabaseObject {
 
     }
 
-    public Mode(String name, Integer startScore, Integer endScore, Integer rounds, GameObjects gameObjects) {
+    public Mode(String name, Integer startingScore, Integer endingScore, Integer rounds) {
         super();
         this.name = name;
-        this.startScore = startScore;
-        this.endScore = endScore;
+        this.startingScore = startingScore;
+        this.endingScore = endingScore;
         this.rounds = rounds;
-        this.gameObjects = gameObjects;
     }
 
     /**
@@ -75,8 +71,8 @@ public class Mode implements DatabaseObject {
         /*
         // Load the data from the XML file
         this.name = name;
-        this.startScore = startScore;
-        this.endScore = endScore;
+        this.startingScore = startingScore;
+        this.endingScore = endingScore;
         this.rounds = rounds;
         this.gameObjects = gameObjects;
          */
@@ -91,20 +87,20 @@ public class Mode implements DatabaseObject {
         this.name = name;
     }
 
-    @XmlElement(name = "startScore")
-    public Integer getStartScore() {
-        return startScore;
+    @XmlElement(name = "startingScore")
+    public Integer getStartingScore() {
+        return startingScore;
     }
-    public void setStartScore(Integer startScore) {
-        this.startScore = startScore;
+    public void setStartingScore(Integer startingScore) {
+        this.startingScore = startingScore;
     }
 
-    @XmlElement(name = "endScore")
-    public Integer getEndScore() {
-        return endScore;
+    @XmlElement(name = "endingScore")
+    public Integer getEndingScore() {
+        return endingScore;
     }
-    public void setEndScore(Integer endScore) {
-        this.endScore = endScore;
+    public void setEndingScore(Integer endingScore) {
+        this.endingScore = endingScore;
     }
 
     @XmlElement(name = "rounds")
@@ -113,14 +109,6 @@ public class Mode implements DatabaseObject {
     }
     public void setRounds(Integer rounds) {
         this.rounds = rounds;
-    }
-
-    @XmlElement(name = "gameObjects")
-    public GameObjects getGameObjects() {
-        return gameObjects;
-    }
-    public void setGameObjects(GameObjects gameObjects) {
-        this.gameObjects = gameObjects;
     }
 
     /**
@@ -143,13 +131,18 @@ public class Mode implements DatabaseObject {
         this.bonusObjects = bonusObjects;
     }
 
+    public boolean getBonusObjects() { return bonusObjects; }
+
     public void setMalusObjects(boolean malusObjects) {
         this.malusObjects = malusObjects;
     }
 
+    public boolean getMalusObjects() { return malusObjects; }
+
     public void setMysteryObjects(boolean mysteryObjects) {
         this.mysteryObjects = mysteryObjects;
     }
+    public boolean getMysteryObjects() { return mysteryObjects; }
 
     @Override
     public void update() {
@@ -187,10 +180,10 @@ public class Mode implements DatabaseObject {
         String dateAddedString = dateAdded == null ? "N/A" : dateFormat.format(dateAdded);
         String datePlayedString = datePlayed == null ? "N/A" : dateFormat.format(datePlayed);
 
-        return "Mode"                              + '\n' + '\t' +
+        return "GameMode"                              + '\n' + '\t' +
                 "Name.......: " + name             + '\n' + '\t' +
-                "Start score: " + startScore       + '\n' + '\t' +
-                "End score..: " + endScore         + '\n' + '\t' +
+                "Start score: " + startingScore       + '\n' + '\t' +
+                "End score..: " + endingScore         + '\n' + '\t' +
                 "Rounds.....: " + rounds           + '\n' + '\t' +
                 "URI........: " + uri              + '\n' + '\t' +
                 "Date added.: " + dateAddedString  + '\n' + '\t' +

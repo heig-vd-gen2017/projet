@@ -31,4 +31,14 @@ public class GameManager {
     public void setMode(Mode mode) {
         this.mode = mode;
     }
+
+    // TODO
+    public void start(){
+
+    }
+
+    // TODO
+    public void stop() {
+
+    }
 }

@@ -8,7 +8,7 @@ public class BestScoreId implements Serializable {
     //! Player related to the mode
     private Player player;
 
-    //! Mode related to the player
+    //! GameMode related to the player
     private Mode mode;
 
     /**
