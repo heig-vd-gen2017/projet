@@ -1,8 +1,14 @@
 package ch.tofind.reflexia.ui;
 
-import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameMode;
+import ch.tofind.reflexia.mode.GameModeManager;
+import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,7 +21,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 public class ServerConfiguration extends Application {
 
@@ -25,16 +35,18 @@ public class ServerConfiguration extends Application {
     //! FXML file to use for the view.
     private static final String FXML_FILE = "ui/ServerConfiguration.fxml";
 
-    private GameManager gameManager;
-    private boolean choseExistingMode;
-    private GameMode newMode;
     private String serverPort;
     private String ipAddress;
     private String resetDate;
 
+    private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
+    private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
-    private ChoiceBox<GameMode> choiceBoxModeName;
+    private ChoiceBox<String> choiceBoxModeName;
+
+    @FXML
+    private ChoiceBox<String> choiceBoxIPAddress;
 
     @FXML
     private TextField textFieldModeName;
@@ -61,9 +73,6 @@ public class ServerConfiguration extends Application {
     private TextField textFieldServerPort;
 
     @FXML
-    private ChoiceBox<String> choiceBoxIPAddress;
-
-    @FXML
     private DatePicker datePickerResetScores;
 
     public void start(Stage stage) throws IOException {
@@ -87,48 +96,12 @@ public class ServerConfiguration extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
 
-        choseExistingMode = false;
-        choiceBoxIPAddress = new ChoiceBox<>();
-        /*
-        for (int i = 0; i < ???.size; i++)
-            choiceBoxIPAddress.getItems().add(???[i]);
-        */
-        choiceBoxModeName = new ChoiceBox<>();
-        /*
-        for (int i = 0; i < GameMode.modes.size(); i++)
-            choiceBoxModeName.getItems().add(modes[i]);
-        */
-
         stage.show();
-    }
-
-
-    // TODO: tests supplémentaires pour savoir si quelque chose a été sélectionné
-    @FXML
-    private void chosenExistingMode(Event event) {
-        choseExistingMode = true;
     }
 
     @FXML
     private void saveMode(MouseEvent event) {
-        /*
-        newMode = new GameMode();
-
-        if (choseExistingMode) {
-            newMode = choiceBoxModeName.getValue();
-
-        } else {
-            newMode.setName(textFieldModeName.getText());
-            newMode.setStartingScore(Integer.parseInt(textFieldInitialScore.getText()));
-            newMode.setEndingScore(Integer.parseInt(textFieldScoreToGet.getText()));
-            newMode.setRounds(Integer.parseInt(textFieldNumberOfRounds.getText()));
-            newMode.setMysteryObjects((boolean)checkBoxMystery.isSelected());
-            newMode.setBonusObjects((boolean)checkBoxBonus.isSelected());
-            newMode.setMalusObjects((boolean)checkBoxMalus.isSelected());
-
-            System.out.println("New mode saved!");
-        }
-        */
+        // permet de confirmer le mode et le charger dans la partie en cours -> à voir avec Ludal
     }
 
     @FXML
@@ -158,7 +131,30 @@ public class ServerConfiguration extends Application {
 
     @FXML
     private void setResetDate(MouseEvent event) {
-        resetDate = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(datePickerResetScores.getValue());
-        System.out.println("Date of reset selected: " + resetDate);
+        LocalDate localDate = datePickerResetScores.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+        System.out.println(date);
+    }
+
+    @FXML
+    private void initialize() {
+        choiceBoxModeName.setItems(modesString);
+        choiceBoxIPAddress.setItems(ipAddressString);
+        choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                textFieldModeName.setText(newValue);
+                textFieldInitialScore.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getStartingScore()));
+                textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
+                textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
+                List<GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects().getGameObjects();
+                // Objets en dur, pas super!
+                if (gameObjects.get(0).getEnabled()) checkBoxBonus.setSelected(true);
+                if (gameObjects.get(1).getEnabled()) checkBoxMalus.setSelected(true);
+                // Ludal: attention, l'objet à l'index 2 est noté comme malus aussi dans la console, il devrait être mystery
+                if (gameObjects.get(2).getEnabled()) checkBoxMystery.setSelected(true);
+            }
+        });
     }
 }
