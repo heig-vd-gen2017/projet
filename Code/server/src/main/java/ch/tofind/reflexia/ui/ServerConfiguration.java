@@ -75,6 +75,20 @@ public class ServerConfiguration extends Application {
     @FXML
     private DatePicker datePickerResetScores;
 
+    @FXML
+    private Button buttonSaveMode;
+
+    @FXML
+    private Button buttonAcceptConnexions;
+
+    @FXML
+    private Button buttonBeginGame;
+
+    @FXML
+    private Button buttonStopGame;
+
+
+
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
@@ -101,19 +115,27 @@ public class ServerConfiguration extends Application {
 
     @FXML
     private void saveMode(MouseEvent event) {
-        // permet de confirmer le mode et le charger dans la partie en cours -> à voir avec Ludal
+        // sauver dans GameManager qui sera un singleton
+        buttonSaveMode.setDisable(true);
+        choiceBoxModeName.setDisable(true);
+        buttonAcceptConnexions.setDisable(false);
+
     }
 
     @FXML
     private void acceptConnexions(MouseEvent event) {
-        System.out.println("Accepting connexions");
         ipAddress = choiceBoxIPAddress.getValue();
         serverPort = textFieldServerPort.getText();
+        System.out.println("Accepting connexions on IP address " + Network.getIPv4Interfaces().get(ipAddress) + " and port " + serverPort + " ..." );
+        buttonAcceptConnexions.setDisable(true);
+        buttonBeginGame.setDisable(false);
     }
 
     @FXML
     private void beginGame(MouseEvent event) {
+        buttonStopGame.setDisable(false);
         System.out.println("Game about to start...");
+        buttonBeginGame.setDisable(true);
         /*
         TODO
         gameManager.start();
@@ -140,7 +162,6 @@ public class ServerConfiguration extends Application {
     @FXML
     private void initialize() {
         choiceBoxModeName.setItems(modesString);
-        choiceBoxIPAddress.setItems(ipAddressString);
         choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -152,9 +173,14 @@ public class ServerConfiguration extends Application {
                 // Objets en dur, pas super!
                 if (gameObjects.get(0).getEnabled()) checkBoxBonus.setSelected(true);
                 if (gameObjects.get(1).getEnabled()) checkBoxMalus.setSelected(true);
-                // Ludal: attention, l'objet à l'index 2 est noté comme malus aussi dans la console, il devrait être mystery
                 if (gameObjects.get(2).getEnabled()) checkBoxMystery.setSelected(true);
             }
         });
+        choiceBoxModeName.getSelectionModel().selectFirst();
+        choiceBoxIPAddress.setItems(ipAddressString);
+        choiceBoxIPAddress.getSelectionModel().selectFirst();
+        buttonAcceptConnexions.setDisable(true);
+        buttonBeginGame.setDisable(true);
+        buttonStopGame.setDisable(true);
     }
 }
