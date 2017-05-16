@@ -8,23 +8,54 @@ import java.util.List;
 
 public class GameManager {
 
+    //! Shared instance of the object for all the application
+    private static GameManager instance = null;
+
+    //!
     private InetAddress ipAddress;
+
+    //!
     private int port;
+
+    //!
     private GameMode gameMode;
+
+    //!
     private List<Player> players;
 
-    public GameManager() {
-
-    }
-
-    public GameManager(InetAddress ipAddress, int port, GameMode gameMode) {
-        this.ipAddress = ipAddress;
-        this.port = port;
-        this.gameMode = gameMode;
+    /**
+     * @brief GameManager single constructor. Avoid the instantiation.
+     */
+    private GameManager() {
         this.players = new ArrayList<>();
     }
 
-    public synchronized void addPlayer(Player player) {
+    /**
+     * @brief Get the object instance
+     * @return The instance of the object
+     */
+    public static GameManager getInstance() {
+
+        if(instance == null) {
+            synchronized (GameManager.class) {
+                if (instance == null) {
+                    instance = new GameManager();
+                }
+            }
+        }
+
+        return instance;
+    }
+
+    public void setIpAddress(InetAddress ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public void setPort(int port) {
+        this.port = port;
+    }
+
+    public void addPlayer(Player player) {
         players.add(player);
     }
 
@@ -32,13 +63,21 @@ public class GameManager {
         return players.size();
     }
 
-    // TODO
-    public void start(){
+    public void setGameMode(GameMode gameMode) {
+        this.gameMode = gameMode;
+    }
+
+    public void acceptConnection() {
+        System.out.println("Accepting connexions on IP address " + ipAddress + " and port " + port + " ..." );
 
     }
 
-    // TODO
-    public void stop() {
+    public void start() {
+        System.out.println("Starting game !");
 
+    }
+
+    public void stop() {
+        System.out.println("Stoping game !");
     }
 }

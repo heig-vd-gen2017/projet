@@ -58,7 +58,7 @@ public class GameModeManager {
                 gameGameMode.addGameObject(new GameObject("winner", true, null, null));
                 gameGameMode.addGameObject(new GameObject("loser", true, null, null));
                 gameGameMode.addGameObject(new GameObject("end_of_game", true, null, null));
-                gameGameMode.addGameObject(new GameObject("restart", true, null, null));
+                gameGameMode.addGameObject(new GameObject("end_of_round", true, null, null));
                 gameGameMode.addGameObject(new GameObject("background", true, null, null));
 
                 gameModes.put(gameGameMode.getName(), gameGameMode);
