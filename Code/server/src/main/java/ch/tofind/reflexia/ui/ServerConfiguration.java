@@ -1,17 +1,14 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.game.GameManager;
-import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.utils.Network;
-import ch.tofind.reflexia.utils.Serialize;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -27,7 +24,6 @@ import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class ServerConfiguration extends Application {

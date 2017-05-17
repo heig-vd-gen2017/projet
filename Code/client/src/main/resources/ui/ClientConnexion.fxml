@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="350.0" maxWidth="500.0" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="350.0" maxWidth="500.0" minHeight="350.0" minWidth="500.0" prefHeight="350.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.tofind.reflexia.ui.ClientConnexion">
     <children>
         <GridPane prefHeight="350.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -54,7 +54,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                                     <children>
-                                        <TextField layoutX="32.0" layoutY="7.0" prefHeight="39.0" prefWidth="250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldPseudo" layoutX="32.0" layoutY="7.0" prefHeight="39.0" prefWidth="250.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
@@ -68,7 +68,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                     <children>
-                                        <TextField layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldIpAddress" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -82,7 +82,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
-                                        <TextField layoutX="14.0" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldPort" layoutX="14.0" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                             </children>
@@ -101,7 +101,7 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <Button alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="30.0">
+                                        <Button fx:id="buttonConnect" onMouseClicked="#savePlayer" alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="30.0">
                                             <font>
                                                 <Font name="Courier New Bold" size="20.0" />
                                             </font>
