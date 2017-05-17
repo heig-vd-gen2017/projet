@@ -65,6 +65,7 @@ public class GameManager {
 
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
+        System.out.println("The game mode has been set!");
     }
 
     public void acceptConnection() {
@@ -78,6 +79,6 @@ public class GameManager {
     }
 
     public void stop() {
-        System.out.println("Stoping game !");
+        System.out.println("Stopping game !");
     }
 }

@@ -11,7 +11,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableMap;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,20 +38,20 @@ public class ServerConfiguration extends Application {
 
     private static GameManager gameManager = GameManager.getInstance();
 
+    private static GameModeManager gameModeManager = GameModeManager.getInstance();
+
     private int serverPort;
 
     private InetAddress ipAddress;
 
     private String resetDate;
 
-    private ObservableMap<String, GameMode> modes = FXCollections.observableHashMap();
-
-    //private ObservableList<Map.Entry<String, GameMode>> modes = FXCollections.observableArrayList(GameModeManager.getInstance().getGameModes()));
+    private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(gameModeManager.getGameModes().keySet()));
 
     private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
-    private ChoiceBox<Map.Entry<String, GameMode>> choiceBoxModeName;
+    private ChoiceBox<String> choiceBoxModeName;
 
     @FXML
     private ChoiceBox<String> choiceBoxIPAddress;
@@ -96,8 +95,9 @@ public class ServerConfiguration extends Application {
     @FXML
     private Button buttonStopGame;
 
-    public void start(Stage stage) throws IOException {
 
+
+    public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
         if (fileURL == null) {
@@ -123,20 +123,22 @@ public class ServerConfiguration extends Application {
 
     @FXML
     private void saveMode(MouseEvent event) {
-        //gameManager.setGameMode([LE MODE SÉLECTIONNÉ PAR L'UTILISATEUR]);
+        gameManager.setGameMode(gameModeManager.getGameModes().get(buttonSaveMode.getText()));
+
         buttonSaveMode.setDisable(true);
         choiceBoxModeName.setDisable(true);
         buttonAcceptConnexions.setDisable(false);
-
+        choiceBoxIPAddress.setDisable(false);
+        textFieldServerPort.setDisable(false);
     }
 
     @FXML
     private void acceptConnexions(MouseEvent event) {
-        String ipAddressString = choiceBoxIPAddress.getValue();
-        String serverPortString = choiceBoxIPAddress.getValue();
+        choiceBoxIPAddress.setDisable(true);
+        textFieldServerPort.setDisable(true);
 
-        serverPort = Integer.valueOf(serverPortString);
-        ipAddress = Serialize.unserialize(ipAddressString, InetAddress.class);
+        ipAddress = Network.getIPv4Interfaces().get(choiceBoxIPAddress.getValue());
+        serverPort = Integer.valueOf(textFieldServerPort.getText());
 
         gameManager.setIpAddress(ipAddress);
         gameManager.setPort(Integer.valueOf(serverPort));
@@ -154,6 +156,7 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(true);
 
         gameManager.start();
+
     }
 
     @FXML
@@ -161,6 +164,10 @@ public class ServerConfiguration extends Application {
         System.out.println("Game about to stop...");
 
         gameManager.stop();
+
+        buttonSaveMode.setDisable(false);
+        choiceBoxModeName.setDisable(false);
+        buttonStopGame.setDisable(true);
     }
 
     @FXML
@@ -174,20 +181,8 @@ public class ServerConfiguration extends Application {
     @FXML
     private void initialize() {
 
-        modes.putAll(GameModeManager.getInstance().getGameModes());
+        choiceBoxModeName.setItems(modesString);
 
-        choiceBoxModeName = new ChoiceBox<>();
-
-        for (Map.Entry<String, GameMode> mode : GameModeManager.getInstance().getGameModes().entrySet()) {
-            choiceBoxModeName.getItems().add(mode);
-        }
-
-        choiceBoxModeName.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Map.Entry<String, GameMode>>() {
-            @Override
-            public void changed(ObservableValue<? extends Map.Entry<String, GameMode>> observableValue, Map.Entry<String, GameMode> number, Map.Entry<String, GameMode> t1) {
-
-            }
-        });
         choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -202,11 +197,14 @@ public class ServerConfiguration extends Application {
                 if (gameObjects.get(2).getEnabled()) checkBoxMystery.setSelected(true);
             }
         });
+
         choiceBoxModeName.getSelectionModel().selectFirst();
         choiceBoxIPAddress.setItems(ipAddressString);
         choiceBoxIPAddress.getSelectionModel().selectFirst();
         buttonAcceptConnexions.setDisable(true);
         buttonBeginGame.setDisable(true);
         buttonStopGame.setDisable(true);
+        choiceBoxIPAddress.setDisable(true);
+        textFieldServerPort.setDisable(true);
     }
 }
