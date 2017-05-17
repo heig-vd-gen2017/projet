@@ -1,5 +1,6 @@
 package ch.tofind.reflexia.ui;
 
+import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.game.Player;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -21,6 +22,8 @@ public class ClientConnexion extends Application {
     private static FXMLLoader loader = new FXMLLoader();
 
     private static final String FXML_FILE = "ui/ClientConnexion.fxml";
+
+    private static Core core = Core.getInstance();
 
     @FXML
     TextField textFieldPseudo;
@@ -59,12 +62,7 @@ public class ClientConnexion extends Application {
     }
 
     @FXML
-    private void savePlayer(MouseEvent event) {
-        Player player = new Player(textFieldPseudo.getText(),
-                textFieldIpAddress.getText(),
-                Integer.valueOf(textFieldPort.getText()));
-        System.out.println(player);
+    private void connexion(MouseEvent event) {
+        core.connexion(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
     }
-
-
 }

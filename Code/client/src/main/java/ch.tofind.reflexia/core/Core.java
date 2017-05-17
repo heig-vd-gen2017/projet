@@ -21,11 +21,7 @@ public class Core implements ICore {
     //! Unicast client
     private UnicastClient client;
 
-    private Core(String multicastAddress, int port, InetAddress interfaceToUse) {
-
-        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
-
-        new Thread(multicast).start();
+    private Core() {
 
     }
 
@@ -38,16 +34,27 @@ public class Core implements ICore {
         if(instance == null) {
             synchronized (Core.class) {
                 if (instance == null) {
-                    try {
-                        instance = new Core(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, InetAddress.getLocalHost());
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
+                    instance = new Core();
                 }
             }
         }
 
         return instance;
+    }
+    /*
+
+    private Core(String multicastAddress, int port, InetAddress interfaceToUse) {
+
+        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
+
+        new Thread(multicast).start();
+
+    }
+     */
+
+    public void connexion(String playerName, String hostname, String port) {
+
+        System.out.println("Coucou");
     }
 
     public String execute(String command, ArrayList<Object> args) {
