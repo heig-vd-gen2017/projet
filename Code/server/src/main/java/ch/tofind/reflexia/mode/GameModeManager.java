@@ -63,8 +63,6 @@ public class GameModeManager {
 
                 gameModes.put(gameGameMode.getName(), gameGameMode);
 
-                System.out.println(gameGameMode);
-
             }
 
         } catch (JAXBException e) {

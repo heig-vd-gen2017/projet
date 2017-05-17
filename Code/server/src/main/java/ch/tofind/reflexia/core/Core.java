@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Core implements ICore {
 
@@ -22,14 +23,8 @@ public class Core implements ICore {
     //! The server.
     Server server;
 
-    private Core(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
+    private Core() {
 
-        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
-
-        server = new Server(unicastPort);
-
-        new Thread(multicast).start();
-        new Thread(server).start();
     }
 
     /**
@@ -41,12 +36,49 @@ public class Core implements ICore {
         if(instance == null) {
             synchronized (Core.class) {
                 if (instance == null) {
-                    instance = new Core(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, Network.INTERFACE_TO_USE, NetworkProtocol.UNICAST_PORT);
+                    instance = new Core();
                 }
             }
         }
 
         return instance;
+    }
+
+    public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
+
+        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
+
+        server = new Server(unicastPort);
+
+        new Thread(multicast).start();
+        new Thread(server).start();
+    }
+
+    public void setGameMode(String gameModeName) {
+
+        System.out.println("The mode was set.");
+
+    }
+
+    public void setNetworkSettings(String networkInterfaceName, String networkPortString) {
+
+        System.out.println("The network settings were set.");
+    }
+
+    public void beginGame() {
+
+        System.out.println("The game begins.");
+    }
+
+    public void endGame() {
+
+        System.out.println("The game ends.");
+    }
+
+    public void resetScores(Date date) {
+
+        System.out.println("The scores are reset.");
+
     }
 
     public String execute(String command, ArrayList<Object> args) {

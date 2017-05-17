@@ -282,7 +282,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <children>
-                                <Button fx:id="buttonStopGame" mnemonicParsing="false" onMouseClicked="#stopGame" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <Button fx:id="buttonStopGame" mnemonicParsing="false" onMouseClicked="#endGame" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -323,7 +323,7 @@
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
             <children>
-                <Button fx:id="buttonResetScores" mnemonicParsing="false" onMouseClicked="#setResetDate" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                <Button fx:id="buttonResetScores" mnemonicParsing="false" onMouseClicked="#resetScores" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                     <font>
                         <Font name="Courier New Bold" size="13.0" />
                     </font>

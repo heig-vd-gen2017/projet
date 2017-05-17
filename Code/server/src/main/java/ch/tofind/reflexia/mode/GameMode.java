@@ -27,6 +27,14 @@ public class GameMode {
 
     }
 
+    /**
+     * @brief Create a game mode
+     * @param name Name of the mode
+     * @param startingScore Starting score
+     * @param endingScore Ending score
+     * @param rounds Number of rounds
+     * @param gameObjects Objects composed by the game mode
+     */
     public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects) {
         super();
         this.name = name;
@@ -36,6 +44,10 @@ public class GameMode {
         this.gameObjects = gameObjects;
     }
 
+    /**
+     *
+     * @return
+     */
     @XmlElement(name = "name")
     public String getName() {
         return name;
