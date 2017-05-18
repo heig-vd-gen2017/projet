@@ -81,7 +81,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                             <children>
-                                <TextField fx:id="textFieldModeName" prefHeight="131.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <TextField fx:id="textFieldModeName" disable="true" prefHeight="131.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
@@ -95,7 +95,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
-                                <TextField fx:id="textFieldInitialScore" layoutX="34.0" layoutY="53.0" prefHeight="131.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <TextField fx:id="textFieldInitialScore" disable="true" layoutX="34.0" layoutY="53.0" prefHeight="131.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -109,7 +109,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                             <children>
-                                <TextField fx:id="textFieldScoreToGet" layoutX="65.0" layoutY="52.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <TextField fx:id="textFieldScoreToGet" disable="true" layoutX="65.0" layoutY="52.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
@@ -123,12 +123,12 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <children>
-                                <TextField fx:id="textFieldNumberOfRounds" layoutX="106.0" layoutY="39.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <TextField fx:id="textFieldNumberOfRounds" disable="true" layoutX="106.0" layoutY="39.0" prefHeight="130.0" prefWidth="300.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <children>
-                                <CheckBox fx:id="checkBoxBonus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus (+ 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <CheckBox fx:id="checkBoxBonus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus (+ 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -137,7 +137,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <children>
-                                <CheckBox fx:id="checkBoxMalus" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus (- 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <CheckBox fx:id="checkBoxMalus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus (- 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -146,7 +146,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
                             <children>
-                                <CheckBox fx:id="checkBoxMystery" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets mystères" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <CheckBox fx:id="checkBoxMystery" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets mystères" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -164,7 +164,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <ChoiceBox fx:id="choiceBoxModeName" layoutX="57.0" layoutY="1.0" onInputMethodTextChanged="#chosenExistingMode" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <ChoiceBox fx:id="choiceBoxModeName" layoutX="57.0" layoutY="1.0" onInputMethodTextChanged="#modeSelected" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -264,7 +264,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                             <children>
-                                <Button fx:id="buttonAcceptConnexions" mnemonicParsing="false" onMouseClicked="#acceptConnexions" prefHeight="246.0" prefWidth="360.0" text="Accepter les connexions" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <Button fx:id="buttonAcceptConnexions" mnemonicParsing="false" onMouseClicked="#acceptConnections" prefHeight="246.0" prefWidth="360.0" text="Accepter les connexions" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -282,7 +282,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                             <children>
-                                <Button fx:id="buttonStopGame" onMouseClicked="#stopGame" mnemonicParsing="false" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <Button fx:id="buttonStopGame" mnemonicParsing="false" onMouseClicked="#endGame" prefHeight="30.0" prefWidth="360.0" text="Arrêter la partie" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -323,7 +323,7 @@
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="8">
             <children>
-                <Button fx:id="buttonResetScores" mnemonicParsing="false" onMouseClicked="#setResetDate" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                <Button fx:id="buttonResetScores" mnemonicParsing="false" onMouseClicked="#resetScores" prefHeight="50.0" prefWidth="600.0" text="Réinitialiser les scores" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                     <font>
                         <Font name="Courier New Bold" size="13.0" />
                     </font>

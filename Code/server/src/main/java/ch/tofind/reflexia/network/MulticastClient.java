@@ -12,7 +12,6 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 /**
  * @brief This class receives data from the server by multicast.
@@ -111,7 +110,7 @@ public class MulticastClient implements Runnable {
             ArrayList<Object> args = new ArrayList<>(commands);
 
             // Send the command and its arguments to the controller and get the result
-            String result = Core.execute(command, args);
+            String result = Core.getInstance().execute(command, args);
 
             if (!Objects.equals(result, "")) {
                 send(result + NetworkProtocol.END_OF_LINE);

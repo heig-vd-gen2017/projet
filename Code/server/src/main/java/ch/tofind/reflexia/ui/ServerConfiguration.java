@@ -1,43 +1,49 @@
 package ch.tofind.reflexia.ui;
 
+import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.mode.GameModeManager;
+import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
-import javafx.event.Event;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.InetAddress;
 import java.net.URL;
-import java.sql.Date;
-import java.time.format.DateTimeFormatter;
-
-import ch.tofind.reflexia.game.Mode;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.*;
 
 public class ServerConfiguration extends Application {
 
-    //!
     private static FXMLLoader loader = new FXMLLoader();
 
-    //! FXML file to use for the view.
     private static final String FXML_FILE = "ui/ServerConfiguration.fxml";
 
-    private GameManager gameManager;
-    private boolean choseExistingMode;
-    private Mode newMode;
-    private String serverPort;
-    private String ipAddress;
-    private String resetDate;
+    private static Core core = Core.getInstance();
 
+    private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
+
+    private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
-    private ChoiceBox<Mode> choiceBoxModeName;
+    private ChoiceBox<String> choiceBoxModeName;
+
+    @FXML
+    private ChoiceBox<String> choiceBoxIPAddress;
 
     @FXML
     private TextField textFieldModeName;
@@ -64,10 +70,19 @@ public class ServerConfiguration extends Application {
     private TextField textFieldServerPort;
 
     @FXML
-    private ChoiceBox<String> choiceBoxIPAddress;
+    private DatePicker datePickerResetScores;
 
     @FXML
-    private DatePicker datePickerResetScores;
+    private Button buttonSaveMode;
+
+    @FXML
+    private Button buttonAcceptConnexions;
+
+    @FXML
+    private Button buttonBeginGame;
+
+    @FXML
+    private Button buttonStopGame;
 
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
@@ -90,77 +105,105 @@ public class ServerConfiguration extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
 
-        choseExistingMode = false;
-        choiceBoxIPAddress = new ChoiceBox<>();
-        /*
-        for (int i = 0; i < ???.size; i++)
-            choiceBoxIPAddress.getItems().add(???[i]);
-        */
-        choiceBoxModeName = new ChoiceBox<>();
-        /*
-        for (int i = 0; i < GameMode.modes.size(); i++)
-            choiceBoxModeName.getItems().add(modes[i]);
-        */
-
         stage.show();
-    }
-
-
-    // TODO: tests supplémentaires pour savoir si quelque chose a été sélectionné
-    @FXML
-    private void chosenExistingMode(Event event) {
-        choseExistingMode = true;
     }
 
     @FXML
     private void saveMode(MouseEvent event) {
-        newMode = new Mode();
 
-        if (choseExistingMode) {
-            newMode = choiceBoxModeName.getValue();
+        // Change the interface
+        buttonSaveMode.setDisable(true);
+        choiceBoxModeName.setDisable(true);
+        buttonAcceptConnexions.setDisable(false);
+        choiceBoxIPAddress.setDisable(false);
+        textFieldServerPort.setDisable(false);
 
-        } else {
-            newMode.setName(textFieldModeName.getText());
-            newMode.setStartingScore(Integer.parseInt(textFieldInitialScore.getText()));
-            newMode.setEndingScore(Integer.parseInt(textFieldScoreToGet.getText()));
-            newMode.setRounds(Integer.parseInt(textFieldNumberOfRounds.getText()));
-            newMode.setMysteryObjects((boolean)checkBoxMystery.isSelected());
-            newMode.setBonusObjects((boolean)checkBoxBonus.isSelected());
-            newMode.setMalusObjects((boolean)checkBoxMalus.isSelected());
-
-            System.out.println("New mode saved!");
-        }
-
+        // Tells the Core what mode was selected
+        core.setGameMode(buttonSaveMode.getText());
     }
 
     @FXML
-    private void acceptConnexions(MouseEvent event) {
-        System.out.println("Accepting connexions");
-        ipAddress = choiceBoxIPAddress.getValue();
-        serverPort = textFieldServerPort.getText();
+    private void acceptConnections(MouseEvent event) {
+
+        // Change the interface
+        choiceBoxIPAddress.setDisable(true);
+        textFieldServerPort.setDisable(true);
+        buttonAcceptConnexions.setDisable(true);
+        buttonBeginGame.setDisable(false);
+
+        // Tells the Core what network settings were set
+        core.setNetworkSettings(choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
+
     }
 
     @FXML
     private void beginGame(MouseEvent event) {
-        System.out.println("Game about to start...");
-        /*
-        TODO
-        gameManager.start();
-        */
+
+        // Change interface
+        buttonStopGame.setDisable(false);
+        buttonBeginGame.setDisable(true);
+
+        // Tells the Core that we want to game to start
+        core.beginGame();
+
     }
 
     @FXML
-    private void stopGame(MouseEvent event) {
-        System.out.println("Game about to stop...");
-        /*
-        TODO
-        gameManager.stop();
-        */
+    private void endGame(MouseEvent event) {
+
+        // Tells the Core that we want to start the game
+        core.endGame();
+
+        // Reset the interface
+        initialize();
     }
 
     @FXML
-    private void setResetDate(MouseEvent event) {
-        resetDate = DateTimeFormatter.ofPattern("dd-MM-yyyy").format(datePickerResetScores.getValue());
-        System.out.println("Date of reset selected: " + resetDate);
+    private void resetScores(MouseEvent event) {
+        LocalDate localDate = datePickerResetScores.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date date = Date.from(instant);
+
+        // Tells the Core that we want to reset the scores
+        core.resetScores(date);
+    }
+
+    @FXML
+    private void initialize() {
+
+        choiceBoxModeName.setItems(modesString);
+
+        choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+
+                // Change the interface
+                textFieldModeName.setText(newValue);
+                textFieldInitialScore.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getStartingScore()));
+                textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
+                textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
+
+                List<GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects().getGameObjects();
+
+                checkBoxBonus.setSelected(gameObjects.get(0).getEnabled());
+                checkBoxMalus.setSelected(gameObjects.get(1).getEnabled());
+                checkBoxMystery.setSelected(gameObjects.get(2).getEnabled());
+            }
+        });
+
+        choiceBoxModeName.getSelectionModel().selectFirst();
+
+        choiceBoxIPAddress.setItems(ipAddressString);
+        choiceBoxIPAddress.getSelectionModel().selectFirst();
+
+        // Set the interface
+        choiceBoxModeName.setDisable(false);
+        buttonSaveMode.setDisable(false);
+
+        choiceBoxIPAddress.setDisable(true);
+        textFieldServerPort.setDisable(true);
+        buttonAcceptConnexions.setDisable(true);
+        buttonBeginGame.setDisable(true);
+        buttonStopGame.setDisable(true);
     }
 }

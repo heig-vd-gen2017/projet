@@ -1,54 +1,23 @@
 package ch.tofind.reflexia.game;
 
-import ch.tofind.reflexia.database.DatabaseObject;
-import ch.tofind.reflexia.utils.Configuration;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Objects;
-
 /**
- * @brief This class represents a player and can be stored in a database
+ * @brief This class represents a player
  */
-public class Player implements DatabaseObject {
-
-    //! ID of the player
-    private Integer id;
+public class Player {
 
     //! Name of the player
     private String pseudo;
 
-    //! When was the player added for the first time in the database
-    private Date dateAdded;
-
-    //! When was the track played for the last time
-    private Date datePlayed;
-
-    //! Version control for concurrency
-    private Integer version;
-
-    /**
-     * @brief Empty constructor for Hibernate
-     */
-    protected Player() {
-
-    }
+    private Integer score;
 
     /**
      * @brief Create a player
      * @param pseudo Name of the player
+     * @param initialScore Initial score for the Player
      */
-    public Player(String pseudo) {
+    public Player(String pseudo, Integer initialScore) {
         this.pseudo = pseudo;
-        this.dateAdded = new Date();
-    }
-
-    /**
-     * @brief Get the player's ID
-     * @return The player's ID
-     */
-    public Integer getId() {
-        return id;
+        this.score = initialScore;
     }
 
     /**
@@ -63,57 +32,15 @@ public class Player implements DatabaseObject {
      * @brief Get the date when the player was added
      * @return The added date
      */
-    public Date getDateAdded() {
-        return dateAdded;
-    }
-
-    /**
-     * @brief Get the date when the player was played
-     * @return The played date
-     */
-    public Date getDatePlayed() {
-        return datePlayed;
-    }
-
-    @Override
-    public void update() {
-        this.datePlayed = new Date();
-    }
-
-    @Override
-    public boolean equals(Object object) {
-
-        if (object == this) {
-            return true;
-        }
-
-        if (!(object instanceof Player)) {
-            return false;
-        }
-
-        Player player = (Player) object;
-
-        return Objects.equals(pseudo, player.pseudo);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(pseudo);
+    public Integer getScore() {
+        return score;
     }
 
     @Override
     public String toString() {
 
-        String format = Configuration.getInstance().get("DEFAULT_DATE_FORMAT");
-
-        SimpleDateFormat dateFormat = new SimpleDateFormat(format);
-
-        String dateAddedString = dateAdded == null ? "N/A" : dateFormat.format(dateAdded);
-        String datePlayedString = datePlayed == null ? "N/A" : dateFormat.format(datePlayed);
-
-        return "Player"                           + '\n' + '\t' +
-               "Pseudo.....: " + pseudo           + '\n' + '\t' +
-               "Date added.: " + dateAddedString  + '\n' + '\t' +
-               "Date played: " + datePlayedString + '\n';
+        return "Player"                      + '\n' + '\t' +
+               "Pseudo..........: " + pseudo + '\n' + '\t' +
+               "Score...........: " + score  + '\n';
     }
 }

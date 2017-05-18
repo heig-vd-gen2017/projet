@@ -53,21 +53,18 @@ public class GameModeManager {
 
                 GameMode gameGameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
 
-                gameGameMode.addGameObject(new GameObject("mystery", null, null));
-                gameGameMode.addGameObject(new GameObject("waiting", null, null));
-                gameGameMode.addGameObject(new GameObject("starting_in_3", null, 2000));
-                gameGameMode.addGameObject(new GameObject("starting_in_2", null, 2000));
-                gameGameMode.addGameObject(new GameObject("starting_in_1", null, 2000));
-                gameGameMode.addGameObject(new GameObject("start", null, 2000));
-                gameGameMode.addGameObject(new GameObject("winner", null, null));
-                gameGameMode.addGameObject(new GameObject("loser", null, null));
-                gameGameMode.addGameObject(new GameObject("end_of_game", null, null));
-                gameGameMode.addGameObject(new GameObject("restart", null, null));
-                gameGameMode.addGameObject(new GameObject("background", null, null));
+                gameGameMode.addGameObject(new GameObject("waiting", true, null, 3000));
+                gameGameMode.addGameObject(new GameObject("starting_in_3", true, null, 2000));
+                gameGameMode.addGameObject(new GameObject("starting_in_2", true, null, 2000));
+                gameGameMode.addGameObject(new GameObject("starting_in_1", true, null, 2000));
+                gameGameMode.addGameObject(new GameObject("start", true, null, 2000));
+                gameGameMode.addGameObject(new GameObject("winner", true, null, null));
+                gameGameMode.addGameObject(new GameObject("loser", true, null, null));
+                gameGameMode.addGameObject(new GameObject("end_of_game", true, null, null));
+                gameGameMode.addGameObject(new GameObject("end_of_round", true, null, null));
+                gameGameMode.addGameObject(new GameObject("background", true, null, null));
 
                 gameModes.put(gameGameMode.getName(), gameGameMode);
-
-                System.out.println(gameGameMode);
 
             }
 
@@ -98,7 +95,6 @@ public class GameModeManager {
      * @return gameModes attribute
      */
     public Map<String, GameMode> getGameModes() {
-
         return gameModes;
     }
 }

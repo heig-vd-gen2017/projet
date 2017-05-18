@@ -32,8 +32,13 @@ public class GameMode {
     }
 
     /**
+<<<<<<< HEAD
      * @brief Game Mode constructor with parameters
      * @param name name of the mode
+=======
+     * @brief Create a game mode
+     * @param name Name of the mode
+>>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      * @param startingScore Starting score
      * @param endingScore Ending score
      * @param rounds Number of rounds
@@ -49,8 +54,13 @@ public class GameMode {
     }
 
     /**
+<<<<<<< HEAD
      * @brief gets the name of a game mode
      * @return the name of the mode
+=======
+     *
+     * @return
+>>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      */
     @XmlElement(name = "name")
     public String getName() {
@@ -146,11 +156,11 @@ public class GameMode {
      */
     @Override
     public String toString() {
-        return "GameMode"                            + '\n' + '\t' +
-               "Name.........: " + name          + '\n' + '\t' +
-               "Start score..: " + startingScore + '\n' + '\t' +
-               "End score....: " + endingScore   + '\n' + '\t' +
-               "Rounds.......: " + rounds        + '\n' +
-               gameObjects                       + '\n';
+        return "GameMode"                           + '\n' + '\t' +
+               "Name............: " + name          + '\n' + '\t' +
+               "Starting score..: " + startingScore + '\n' + '\t' +
+               "Ending  score...: " + endingScore   + '\n' + '\t' +
+               "Rounds..........: " + rounds        + '\n' +
+               gameObjects                          + '\n';
     }
 }

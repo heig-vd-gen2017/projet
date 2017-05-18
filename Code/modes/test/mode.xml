@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mode>
+    <name>test</name>
+    <startingScore>100</startingScore>
+    <endingScore>500</endingScore>
+    <rounds>10</rounds>
+	<gameObjects>
+        <gameObject type="bonus">
+            <points>50</points>
+            <timeout>1500</timeout>
+            <enabled>false</enabled>
+        </gameObject>
+        <gameObject type="malus">
+            <points>-75</points>
+            <timeout>1500</timeout>
+            <enabled>false</enabled>
+        </gameObject>
+        <gameObject type="mystery">
+            <enabled>true</enabled>
+        </gameObject>
+    </gameObjects>
+</mode>
