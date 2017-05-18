@@ -36,6 +36,10 @@ public class Player {
         return score;
     }
 
+    /**
+     * @brief toString method for player class
+     * @return a string representation of a player
+     */
     @Override
     public String toString() {
 

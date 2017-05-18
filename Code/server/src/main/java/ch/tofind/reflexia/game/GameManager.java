@@ -6,15 +6,18 @@ import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @brief game management class
+ */
 public class GameManager {
 
     //! Shared instance of the object for all the application
     private static GameManager instance = null;
 
-    //!
+    //! game mode
     private GameMode gameMode;
 
-    //!
+    //! list of players
     private List<Player> players;
 
     /**
@@ -41,14 +44,26 @@ public class GameManager {
         return instance;
     }
 
+    /**
+     * @brief adds a player
+     * @param player
+     */
     public void addPlayer(Player player) {
         players.add(player);
     }
 
+    /**
+     * gets the number of players
+     * @return the number of players
+     */
     public int getNumberOfPlayers() {
         return players.size();
     }
 
+    /**
+     * @brief sets the game mode
+     * @param gameMode
+     */
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
 
