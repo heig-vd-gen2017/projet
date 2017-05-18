@@ -4,6 +4,7 @@ import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
 import ch.tofind.reflexia.utils.Network;
+import ch.tofind.reflexia.utils.Serialize;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -62,7 +63,13 @@ public class Core implements ICore {
 
     public void setNetworkSettings(String networkInterfaceName, String networkPortString) {
 
-        System.out.println("The network settings were set.");
+        System.out.println("Server is started.");
+
+        InetAddress networkInterface = Network.getIPv4Interfaces().get(networkInterfaceName);
+        int port = Integer.valueOf(networkPortString);
+
+        start(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, networkInterface, port);
+
     }
 
     public void beginGame() {
@@ -73,6 +80,8 @@ public class Core implements ICore {
     public void endGame() {
 
         System.out.println("The game ends.");
+        stop();
+
     }
 
     public void resetScores(Date date) {
@@ -91,7 +100,7 @@ public class Core implements ICore {
             method = this.getClass().getMethod( command, ArrayList.class);
             result = (String) method.invoke(this, args);
         } catch (NoSuchMethodException e) {
-            // Do nothing
+            return "Method called: " + command;
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -116,7 +125,7 @@ public class Core implements ICore {
     }
 
     public String END_OF_COMMUNICATION(ArrayList<Object> args) {
-        System.out.println("End of communication client side.");
+        System.out.println("End of communication server side.");
         return "";
     }
 }

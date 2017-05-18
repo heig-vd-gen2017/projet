@@ -62,7 +62,7 @@ public class ClientConnexion extends Application {
     }
 
     @FXML
-    private void connexion(MouseEvent event) {
-        core.connexion(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
+    private void connection(MouseEvent event) {
+        core.connection(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
     }
 }

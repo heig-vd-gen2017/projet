@@ -123,7 +123,7 @@ public class ServerConfiguration extends Application {
     }
 
     @FXML
-    private void acceptConnexions(MouseEvent event) {
+    private void acceptConnections(MouseEvent event) {
 
         // Change the interface
         choiceBoxIPAddress.setDisable(true);

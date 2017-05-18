@@ -3,11 +3,11 @@ package ch.tofind.reflexia.core;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.UnicastClient;
+import ch.tofind.reflexia.utils.Serialize;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 
 public class Core implements ICore {
@@ -20,6 +20,7 @@ public class Core implements ICore {
 
     //! Unicast client
     private UnicastClient client;
+
 
     private Core() {
 
@@ -41,20 +42,16 @@ public class Core implements ICore {
 
         return instance;
     }
-    /*
 
-    private Core(String multicastAddress, int port, InetAddress interfaceToUse) {
+    public void connection(String playerName, String hostname, String port) {
 
-        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
+        InetAddress address = Serialize.unserialize(hostname, InetAddress.class);
 
-        new Thread(multicast).start();
+        start(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, address);
 
-    }
-     */
 
-    public void connexion(String playerName, String hostname, String port) {
+        sendUnicast(address, ApplicationProtocol.JOIN);
 
-        System.out.println("Coucou");
     }
 
     public String execute(String command, ArrayList<Object> args) {
@@ -85,6 +82,14 @@ public class Core implements ICore {
     @Override
     public void sendMulticast(String message) {
         multicast.send(message);
+    }
+
+    private void start(String multicastAddress, int port, InetAddress interfaceToUse) {
+
+        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
+
+        new Thread(multicast).start();
+
     }
 
     @Override
