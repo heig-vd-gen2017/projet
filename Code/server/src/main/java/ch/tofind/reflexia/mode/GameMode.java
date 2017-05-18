@@ -54,13 +54,8 @@ public class GameMode {
     }
 
     /**
-<<<<<<< HEAD
      * @brief gets the name of a game mode
      * @return the name of the mode
-=======
-     *
-     * @return
->>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      */
     @XmlElement(name = "name")
     public String getName() {

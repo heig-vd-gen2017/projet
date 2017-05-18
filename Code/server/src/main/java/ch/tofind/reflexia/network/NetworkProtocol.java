@@ -2,6 +2,9 @@ package ch.tofind.reflexia.network;
 
 import java.net.InetAddress;
 
+/**
+ * @brief network protocol
+ */
 public final class NetworkProtocol {
 
     public static final InetAddress interfaceToUse = null;
