@@ -117,7 +117,7 @@ public class Core implements ICore {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
 
-        ServerConfiguration.updateNbPlayer();
+        //ServerConfiguration.updateNbPlayer();
 
         System.out.println("Player '" + pseudo + "' has joined the game.");
         System.out.println("Number of players: " + nbPlayers);
@@ -158,8 +158,13 @@ public class Core implements ICore {
 
     @Override
     public void stop() {
-        multicast.stop();
-        server.stop();
+        if (multicast != null) {
+            multicast.stop();
+        }
+
+        if (server != null) {
+            server.stop();
+        }
     }
 
     @Override

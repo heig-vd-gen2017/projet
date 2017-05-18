@@ -41,7 +41,7 @@ public class ServerConfiguration extends Application {
 
     private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
     
-    private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
+    private ObservableList<String> ipAddressesString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
     private ChoiceBox<String> choiceBoxModeName;
@@ -95,7 +95,7 @@ public class ServerConfiguration extends Application {
     private TextField textFieldMulticastPort;
 
     @FXML
-    private static TextField textFieldNbPlayers = new TextField();
+    private TextField textFieldNbPlayers;
 
     /**
      * @brief
@@ -132,7 +132,10 @@ public class ServerConfiguration extends Application {
         // Change the interface
         buttonSaveMode.setDisable(true);
         choiceBoxModeName.setDisable(true);
+
         buttonAcceptConnexions.setDisable(false);
+        textFieldMulticastAddress.setDisable(false);
+        textFieldMulticastPort.setDisable(false);
         choiceBoxIPAddress.setDisable(false);
         textFieldServerPort.setDisable(false);
 
@@ -189,7 +192,9 @@ public class ServerConfiguration extends Application {
     @FXML
     private void initialize() {
 
+        // Set the checkboxes
         choiceBoxModeName.setItems(modesString);
+        choiceBoxIPAddress.setItems(ipAddressesString);
 
         choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -209,17 +214,24 @@ public class ServerConfiguration extends Application {
             }
         });
 
-        choiceBoxModeName.getSelectionModel().selectFirst();
-
-        choiceBoxIPAddress.setItems(ipAddressString);
-        choiceBoxIPAddress.getSelectionModel().selectFirst();
-
         // Set the interface
         choiceBoxModeName.setDisable(false);
+        choiceBoxModeName.getSelectionModel().selectFirst();
+
         buttonSaveMode.setDisable(false);
 
-        choiceBoxIPAddress.setDisable(true);
         textFieldServerPort.setDisable(true);
+        textFieldServerPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+
+        textFieldMulticastAddress.setDisable(true);
+        textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS));
+
+        textFieldMulticastPort.setDisable(true);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
+
+        choiceBoxIPAddress.setDisable(true);
+        choiceBoxIPAddress.getSelectionModel().selectFirst();
+
         buttonAcceptConnexions.setDisable(true);
         buttonBeginGame.setDisable(true);
         buttonStopGame.setDisable(true);
@@ -227,9 +239,13 @@ public class ServerConfiguration extends Application {
         updateNbPlayer();
     }
 
-    public static void updateNbPlayer() {
-
+    public void updateNbPlayer() {
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
+    }
+
+    @Override
+    public void stop() {
+        core.endGame();
     }
 }

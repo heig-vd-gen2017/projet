@@ -8,8 +8,6 @@ import java.util.*;
 
 public class Network {
 
-    public static InetAddress INTERFACE_TO_USE = null;
-
     static public ArrayList<NetworkInterface> getNetworkInterfaces() {
 
         ArrayList<NetworkInterface> networkInterfaces = new ArrayList<>();
@@ -20,6 +18,10 @@ public class Network {
 
                 // We shouldn't care about loopback addresses
                 if (networkInterface.isLoopback())
+                    continue;
+
+                // We shouldn't care about down links
+                if (!networkInterface.isUp())
                     continue;
 
                 networkInterfaces.add(networkInterface);

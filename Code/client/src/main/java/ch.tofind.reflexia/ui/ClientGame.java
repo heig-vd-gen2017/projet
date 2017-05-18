@@ -25,4 +25,11 @@ public class ClientGame extends Application {
         
     }
 
+
+
+    @Override
+    public void stop() {
+        core.stop();
+    }
+
 }

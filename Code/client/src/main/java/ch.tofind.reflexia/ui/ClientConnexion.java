@@ -33,19 +33,20 @@ public class ClientConnexion extends Application {
     TextField textFieldPseudo;
 
     @FXML
-    TextField textFieldIpAddress;
-
-    @FXML
-    TextField textFieldPort;
-
-    @FXML
-    Button  buttonConnect;
-
-    @FXML
     TextField textFieldMulticastAddress;
 
     @FXML
     TextField textFieldMulticastPort;
+
+    @FXML
+    TextField textFieldIpAddress;
+
+    @FXML
+    TextField textFieldUnicastPort;
+
+
+    @FXML
+    Button  buttonConnect;
 
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
@@ -73,11 +74,13 @@ public class ClientConnexion extends Application {
 
     @FXML
     private void connection(MouseEvent event) {
-        core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
+        core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldUnicastPort.getText());
     }
 
     @FXML
     private void initialize() {
+
+        // Set button connect
         buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
@@ -106,5 +109,10 @@ public class ClientConnexion extends Application {
                 stage.show();
             }
         });
+
+        // Set interface
+        textFieldMulticastAddress.setText(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
     }
 }
