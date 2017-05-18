@@ -61,7 +61,7 @@ public class Core implements ICore {
 
     }
 
-    public void setNetworkSettings(String networkInterfaceName, String networkPortString) {
+    public void setNetworkSettings(String networkInterfaceName, String networkPortString, String networkMulticastAddress, String networkMulticastPort) {
 
         System.out.println("Server is started.");
 

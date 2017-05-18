@@ -1,7 +1,6 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
-import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.utils.Network;
@@ -27,6 +26,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+/**
+ * @brief This class defines the configuration and use of the GUI
+ */
 public class ServerConfiguration extends Application {
 
     private static FXMLLoader loader = new FXMLLoader();
@@ -36,7 +38,7 @@ public class ServerConfiguration extends Application {
     private static Core core = Core.getInstance();
 
     private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
-
+    
     private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
@@ -84,6 +86,17 @@ public class ServerConfiguration extends Application {
     @FXML
     private Button buttonStopGame;
 
+    @FXML
+    private TextField textFieldMulticastAddress;
+
+    @FXML
+    private TextField textFieldMulticastPort;
+
+    /**
+     * @brief
+     * @param stage
+     * @throws IOException
+     */
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
@@ -132,7 +145,8 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(false);
 
         // Tells the Core what network settings were set
-        core.setNetworkSettings(choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
+        core.setNetworkSettings(choiceBoxIPAddress.getValue(), textFieldServerPort.getText(),
+                textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
 
     }
 

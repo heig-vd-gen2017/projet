@@ -37,6 +37,12 @@ public class ClientConnexion extends Application {
     @FXML
     Button  buttonConnect;
 
+    @FXML
+    TextField textFieldMulticastAddress;
+
+    @FXML
+    TextField textFieldMulticastPort;
+
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
@@ -63,6 +69,7 @@ public class ClientConnexion extends Application {
 
     @FXML
     private void connection(MouseEvent event) {
-        core.connection(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
+        core.connection(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText(),
+                textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
     }
 }

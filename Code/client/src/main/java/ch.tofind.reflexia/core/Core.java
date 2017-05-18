@@ -43,7 +43,7 @@ public class Core implements ICore {
         return instance;
     }
 
-    public void connection(String playerName, String hostname, String port) {
+    public void connection(String playerName, String hostname, String port, String multicastAddress, String multicastPort) {
 
         InetAddress address = Serialize.unserialize(hostname, InetAddress.class);
 
