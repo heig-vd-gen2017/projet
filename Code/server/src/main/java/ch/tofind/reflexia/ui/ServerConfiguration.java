@@ -28,6 +28,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.*;
 
+/**
+ * @brief This class defines the configuration and use of the GUI
+ */
 public class ServerConfiguration extends Application {
 
     private static FXMLLoader loader = new FXMLLoader();
@@ -37,7 +40,7 @@ public class ServerConfiguration extends Application {
     private static Core core = Core.getInstance();
 
     private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
-
+    
     private ObservableList<String> ipAddressString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
@@ -85,6 +88,20 @@ public class ServerConfiguration extends Application {
     @FXML
     private Button buttonStopGame;
 
+    @FXML
+    private TextField textFieldMulticastAddress;
+
+    @FXML
+    private TextField textFieldMulticastPort;
+
+    @FXML
+    private static TextField textFieldNbPlayers = new TextField();
+
+    /**
+     * @brief
+     * @param stage
+     * @throws IOException
+     */
     public void start(Stage stage) throws IOException {
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
@@ -133,8 +150,7 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(false);
 
         // Tells the Core what network settings were set
-        core.acceptConnections(NetworkProtocol.MULTICAST_ADDRESS, String.valueOf(NetworkProtocol.MULTICAST_PORT), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
-
+        core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
     }
 
     @FXML
@@ -143,6 +159,7 @@ public class ServerConfiguration extends Application {
         // Change interface
         buttonStopGame.setDisable(false);
         buttonBeginGame.setDisable(true);
+        updateNbPlayer();
 
         // Tells the Core that we want to game to start
         core.beginGame();
@@ -206,5 +223,13 @@ public class ServerConfiguration extends Application {
         buttonAcceptConnexions.setDisable(true);
         buttonBeginGame.setDisable(true);
         buttonStopGame.setDisable(true);
+
+        updateNbPlayer();
+    }
+
+    public static void updateNbPlayer() {
+
+        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+        textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }
 }

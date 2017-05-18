@@ -1,11 +1,13 @@
 package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
+import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
 
@@ -105,7 +107,22 @@ public class Core implements ICore {
     }
 
     public String JOIN(ArrayList<Object> args) {
-        System.out.println("Joining message");
+        String pseudo = (String) args.remove(0);
+
+        System.out.println(pseudo);
+
+        Player player = new Player(pseudo, 0);
+
+        GameManager.getInstance().addPlayer(player);
+
+        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+
+        ServerConfiguration.updateNbPlayer();
+
+        System.out.println("Player '" + pseudo + "' has joined the game.");
+        System.out.println("Number of players: " + nbPlayers);
+
+
         return "";
     }
 

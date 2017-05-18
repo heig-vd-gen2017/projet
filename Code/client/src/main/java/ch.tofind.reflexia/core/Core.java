@@ -106,12 +106,4 @@ public class Core implements ICore {
     public void sendMulticast(String message) {
         multicast.send(message);
     }
-
-    private void start(String multicastAddress, int port, InetAddress interfaceToUse) {
-
-        multicast = new MulticastClient(multicastAddress, port, interfaceToUse);
-
-        new Thread(multicast).start();
-
-    }
 }
