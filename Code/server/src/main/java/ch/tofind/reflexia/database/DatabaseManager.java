@@ -55,10 +55,19 @@ public class DatabaseManager {
         return instance;
     }
 
+    /**
+     * @brief gets the session
+     * @return
+     */
     public Session getSession() {
         return session;
     }
 
+    /**
+     * @brief saves an object in the database
+     * @param object
+     * @return
+     */
     public Object save(Object object) {
         Object id = null;
 
@@ -76,6 +85,10 @@ public class DatabaseManager {
         return id;
     }
 
+    /**
+     * @brief deletes an object from the database
+     * @param object
+     */
     public void delete(Object object) {
         try {
             transaction = session.beginTransaction();
@@ -89,6 +102,10 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * @brief updates an object in the database
+     * @param object
+     */
     public void update(Object object) {
         try {
             transaction = session.beginTransaction();
@@ -102,6 +119,9 @@ public class DatabaseManager {
         }
     }
 
+    /**
+     * @brief closes the session
+     */
     public void close() {
         if(instance != null) {
             session.close();
