@@ -44,6 +44,7 @@ public class ClientConnexion extends Application {
     TextField textFieldMulticastPort;
 
     public void start(Stage stage) throws IOException {
+        stageGlobal = stage;
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
         if (fileURL == null) {
@@ -60,12 +61,11 @@ public class ClientConnexion extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("Reflexia");
-        stage.setResizable(false);
-        stage.setScene(scene);
+        stageGlobal.setTitle("Reflexia");
+        stageGlobal.setResizable(false);
+        stageGlobal.setScene(scene);
 
-        stage.show();
-        stageGlobal = stage;
+        stageGlobal.show();
     }
 
     @FXML
@@ -85,6 +85,9 @@ public class ClientConnexion extends Application {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+
+                Stage stage = (Stage) buttonConnect.getScene().getWindow();
+                stage.close();
             }
         });
     }
