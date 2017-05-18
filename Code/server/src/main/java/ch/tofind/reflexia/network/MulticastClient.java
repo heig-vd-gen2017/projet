@@ -18,18 +18,24 @@ import java.util.Objects;
  */
 public class MulticastClient implements Runnable {
 
-    //!
+    //! port number
     private int port;
 
-    //!
+    //! multicast group ip address
     private InetAddress multicastGroup;
 
-    //!
+    //! socket object
     private MulticastSocket socket;
 
-    //!
+    //! state running
     private boolean running;
 
+    /**
+     * @brief multicast client class constructor
+     * @param multicastAddress
+     * @param port
+     * @param interfaceToUse
+     */
     public MulticastClient(String multicastAddress, int port, InetAddress interfaceToUse) {
         this.port = port;
         this.running = false;
@@ -60,6 +66,9 @@ public class MulticastClient implements Runnable {
         }
     }
 
+    /**
+     * @brief run method
+     */
     @Override
     public void run() {
 
@@ -118,11 +127,18 @@ public class MulticastClient implements Runnable {
         }
     }
 
+    /**
+     * @brief stop method
+     */
     public void stop() {
         running = false;
         socket.close();
     }
 
+    /**
+     * sends the message
+     * @param message
+     */
     public void send(String message) {
 
         // Transforms the message in bytes

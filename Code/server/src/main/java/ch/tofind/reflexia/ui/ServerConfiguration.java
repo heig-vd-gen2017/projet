@@ -126,6 +126,10 @@ public class ServerConfiguration extends Application {
         stage.show();
     }
 
+    /**
+     * @brief Tells the Core what mode was selected
+     * @param event
+     */
     @FXML
     private void saveMode(MouseEvent event) {
 
@@ -140,6 +144,10 @@ public class ServerConfiguration extends Application {
         core.setGameMode(buttonSaveMode.getText());
     }
 
+    /**
+     * @brief Tells the Core what network settings were set
+     * @param event
+     */
     @FXML
     private void acceptConnections(MouseEvent event) {
 
@@ -153,6 +161,10 @@ public class ServerConfiguration extends Application {
         core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
     }
 
+    /**
+     * @brief Tells the Core that user wants to start the game
+     * @param event
+     */
     @FXML
     private void beginGame(MouseEvent event) {
 
@@ -166,16 +178,24 @@ public class ServerConfiguration extends Application {
 
     }
 
+    /**
+     * @brief tells the core to stop the game and reset th interface
+     * @param event
+     */
     @FXML
     private void endGame(MouseEvent event) {
 
-        // Tells the Core that we want to start the game
+        // Tells the Core that we want to stop the game
         core.endGame();
 
         // Reset the interface
         initialize();
     }
 
+    /**
+     * @brief tells the core to reset the scores
+     * @param event
+     */
     @FXML
     private void resetScores(MouseEvent event) {
         LocalDate localDate = datePickerResetScores.getValue();
@@ -186,6 +206,9 @@ public class ServerConfiguration extends Application {
         core.resetScores(date);
     }
 
+    /**
+     * @brief resets the interface
+     */
     @FXML
     private void initialize() {
 
@@ -227,6 +250,9 @@ public class ServerConfiguration extends Application {
         updateNbPlayer();
     }
 
+    /**
+     * @brief updates the number of players
+     */
     public static void updateNbPlayer() {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
