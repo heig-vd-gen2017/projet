@@ -90,6 +90,11 @@ public class Core implements ICore {
 
     }
 
+    public String JOIN(ArrayList<Object> args) {
+        System.out.println("Joining message");
+        return "";
+    }
+
     public String execute(String command, ArrayList<Object> args) {
 
         Method method;
@@ -122,10 +127,5 @@ public class Core implements ICore {
     public void stop() {
         multicast.stop();
         server.stop();
-    }
-
-    public String END_OF_COMMUNICATION(ArrayList<Object> args) {
-        System.out.println("End of communication server side.");
-        return "";
     }
 }

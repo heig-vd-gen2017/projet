@@ -21,7 +21,6 @@ public class Core implements ICore {
     //! Unicast client
     private UnicastClient client;
 
-
     private Core() {
 
     }
@@ -47,11 +46,20 @@ public class Core implements ICore {
 
         InetAddress address = Serialize.unserialize(hostname, InetAddress.class);
 
+        int portNumber = Integer.valueOf(port);
+
         start(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, address);
 
+        String command = ApplicationProtocol.JOIN + NetworkProtocol.END_OF_LINE +
+                playerName + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
 
-        sendUnicast(address, ApplicationProtocol.JOIN);
+        sendUnicast(address, portNumber, command);
+    }
 
+    public String END_OF_COMMUNICATION(ArrayList<Object> args) {
+        System.out.println("End of communication client side.");
+        return "";
     }
 
     public String execute(String command, ArrayList<Object> args) {
@@ -73,8 +81,8 @@ public class Core implements ICore {
     }
 
     @Override
-    public void sendUnicast(InetAddress hostname, String message) {
-        client = new UnicastClient(hostname, NetworkProtocol.UNICAST_PORT);
+    public void sendUnicast(InetAddress hostname, int port, String message) {
+        client = new UnicastClient(hostname, port);
         new Thread(client).start();
         client.send(message);
     }
@@ -95,10 +103,5 @@ public class Core implements ICore {
     @Override
     public void stop() {
         multicast.stop();
-    }
-
-    public String END_OF_COMMUNICATION(ArrayList<Object> args) {
-        System.out.println("End of communication client side.");
-        return "";
     }
 }
