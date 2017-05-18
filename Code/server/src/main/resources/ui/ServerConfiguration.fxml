@@ -293,7 +293,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="7">
                             <children>
-                                <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="131.0" prefWidth="300.0" text="Joueurs connectés" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                <Label fx:id="textFieldNbPlayers" alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="131.0" prefWidth="300.0" text="Joueurs connectés" textAlignment="CENTER" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New Bold" size="17.0" />
                                     </font>

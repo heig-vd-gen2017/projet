@@ -1,8 +1,10 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
+import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -92,6 +94,9 @@ public class ServerConfiguration extends Application {
     @FXML
     private TextField textFieldMulticastPort;
 
+    @FXML
+    private static TextField textFieldNbPlayers = new TextField();
+
     /**
      * @brief
      * @param stage
@@ -145,9 +150,7 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(false);
 
         // Tells the Core what network settings were set
-        core.setNetworkSettings(choiceBoxIPAddress.getValue(), textFieldServerPort.getText(),
-                textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
-
+        core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
     }
 
     @FXML
@@ -156,6 +159,7 @@ public class ServerConfiguration extends Application {
         // Change interface
         buttonStopGame.setDisable(false);
         buttonBeginGame.setDisable(true);
+        updateNbPlayer();
 
         // Tells the Core that we want to game to start
         core.beginGame();
@@ -219,5 +223,13 @@ public class ServerConfiguration extends Application {
         buttonAcceptConnexions.setDisable(true);
         buttonBeginGame.setDisable(true);
         buttonStopGame.setDisable(true);
+
+        updateNbPlayer();
+    }
+
+    public static void updateNbPlayer() {
+
+        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+        textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }
 }

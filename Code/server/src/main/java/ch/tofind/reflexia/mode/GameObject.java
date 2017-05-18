@@ -35,7 +35,6 @@ public class GameObject {
      * @param timeout
      */
     public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
-
         super();
         this.type = type;
         this.points = points;
@@ -60,18 +59,20 @@ public class GameObject {
         this.type = type;
     }
 
-    /**
-     * @brief gets the game object current points
-     * @return current points
-     */
     @XmlElement(name = "enabled")
     public Boolean getEnabled() {
         return enabled;
     }
+
+
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     * @brief gets the game object current points
+     * @return current points
+     */
     @XmlElement(name = "points")
     public Integer getPoints() {
         return points;

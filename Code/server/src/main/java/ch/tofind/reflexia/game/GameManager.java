@@ -12,12 +12,6 @@ public class GameManager {
     private static GameManager instance = null;
 
     //!
-    private InetAddress ipAddress;
-
-    //!
-    private int port;
-
-    //!
     private GameMode gameMode;
 
     //!
@@ -47,14 +41,6 @@ public class GameManager {
         return instance;
     }
 
-    public void setIpAddress(InetAddress ipAddress) {
-        this.ipAddress = ipAddress;
-    }
-
-    public void setPort(int port) {
-        this.port = port;
-    }
-
     public void addPlayer(Player player) {
         players.add(player);
     }
@@ -65,20 +51,6 @@ public class GameManager {
 
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
-        System.out.println("The game mode has been set!");
-    }
 
-    public void acceptConnection() {
-        System.out.println("Accepting connexions on IP address " + ipAddress + " and port " + port + " ..." );
-
-    }
-
-    public void start() {
-        System.out.println("Starting game !");
-
-    }
-
-    public void stop() {
-        System.out.println("Stopping game !");
     }
 }
