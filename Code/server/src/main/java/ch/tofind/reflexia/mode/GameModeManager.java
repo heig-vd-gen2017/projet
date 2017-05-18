@@ -12,6 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @brief GameModeManager class definition
+ */
 public class GameModeManager {
 
     //! Where are stored the modes
@@ -87,6 +90,10 @@ public class GameModeManager {
         return instance;
     }
 
+    /**
+     * @brief gets the gameModes attributeof GameModes
+     * @return gameModes attribute
+     */
     public Map<String, GameMode> getGameModes() {
         return gameModes;
     }
