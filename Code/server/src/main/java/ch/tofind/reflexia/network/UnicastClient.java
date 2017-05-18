@@ -26,6 +26,11 @@ public class UnicastClient implements Runnable {
     //! Where to read the input
     private BufferedReader in;
 
+    /**
+     * @brief UnicastClient constructor with IP and Port
+     * @param hostname
+     * @param port
+     */
     public UnicastClient(InetAddress hostname, int port) {
 
         try {
@@ -37,6 +42,10 @@ public class UnicastClient implements Runnable {
         }
     }
 
+    /**
+     * @brief UnicastClient constructor with socket
+     * @param socket
+     */
     public UnicastClient(Socket socket) {
 
         this.socket = socket;
@@ -50,7 +59,7 @@ public class UnicastClient implements Runnable {
     }
 
     /**
-     * @brief Send a message to the server.
+     * @brief Sends a message to the server.
      *
      * @param command
      */
@@ -60,7 +69,7 @@ public class UnicastClient implements Runnable {
     }
 
     /**
-     * Send a file to the server.
+     * Sends a file to the server.
      *
      * @param file
      */
@@ -124,6 +133,9 @@ public class UnicastClient implements Runnable {
         }
     }
 
+    /**
+     * @brief run method
+     */
     @Override
     public void run() {
 

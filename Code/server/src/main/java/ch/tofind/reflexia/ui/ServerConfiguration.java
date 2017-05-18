@@ -21,7 +21,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -71,7 +70,7 @@ public class ServerConfiguration extends Application {
     private CheckBox checkBoxMystery;
 
     @FXML
-    private TextField textFieldServerPort;
+    private TextField textFieldUnicastPort;
 
     @FXML
     private DatePicker datePickerResetScores;
@@ -126,6 +125,10 @@ public class ServerConfiguration extends Application {
         stage.show();
     }
 
+    /**
+     * @brief Tells the Core what mode was selected
+     * @param event
+     */
     @FXML
     private void saveMode(MouseEvent event) {
 
@@ -137,48 +140,69 @@ public class ServerConfiguration extends Application {
         textFieldMulticastAddress.setDisable(false);
         textFieldMulticastPort.setDisable(false);
         choiceBoxIPAddress.setDisable(false);
-        textFieldServerPort.setDisable(false);
+        textFieldUnicastPort.setDisable(false);
+
+        datePickerResetScores.setDisable(true);
 
         // Tells the Core what mode was selected
         core.setGameMode(buttonSaveMode.getText());
     }
 
+    /**
+     * @brief Tells the Core what network settings were set
+     * @param event
+     */
     @FXML
     private void acceptConnections(MouseEvent event) {
 
         // Change the interface
+        textFieldMulticastAddress.setDisable(true);
+        textFieldMulticastPort.setDisable(true);
         choiceBoxIPAddress.setDisable(true);
-        textFieldServerPort.setDisable(true);
+        textFieldUnicastPort.setDisable(true);
+
         buttonAcceptConnexions.setDisable(true);
         buttonBeginGame.setDisable(false);
 
         // Tells the Core what network settings were set
-        core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
+        core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldUnicastPort.getText());
     }
 
+    /**
+     * @brief Tells the Core that user wants to start the game
+     * @param event
+     */
     @FXML
     private void beginGame(MouseEvent event) {
 
         // Change interface
         buttonStopGame.setDisable(false);
         buttonBeginGame.setDisable(true);
-        updateNbPlayer();
+        updateNbPlayers();
 
         // Tells the Core that we want to game to start
         core.beginGame();
 
     }
 
+    /**
+     * @brief tells the core to stop the game and reset th interface
+     * @param event
+     */
     @FXML
     private void endGame(MouseEvent event) {
 
-        // Tells the Core that we want to start the game
+        // Tells the Core that we want to stop the game
         core.endGame();
 
         // Reset the interface
         initialize();
     }
 
+    /**
+     * @brief tells the core to reset the scores
+     * @param event
+     */
     @FXML
     private void resetScores(MouseEvent event) {
         LocalDate localDate = datePickerResetScores.getValue();
@@ -189,6 +213,9 @@ public class ServerConfiguration extends Application {
         core.resetScores(date);
     }
 
+    /**
+     * @brief resets the interface
+     */
     @FXML
     private void initialize() {
 
@@ -220,8 +247,8 @@ public class ServerConfiguration extends Application {
 
         buttonSaveMode.setDisable(false);
 
-        textFieldServerPort.setDisable(true);
-        textFieldServerPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+        textFieldUnicastPort.setDisable(true);
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
 
         textFieldMulticastAddress.setDisable(true);
         textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS));
@@ -236,10 +263,16 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(true);
         buttonStopGame.setDisable(true);
 
-        updateNbPlayer();
+        datePickerResetScores.setDisable(false);
+
+        updateNbPlayers();
     }
 
-    public void updateNbPlayer() {
+    /**
+     * @brief updates the number of players
+     */
+    public void updateNbPlayers() {
+
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }

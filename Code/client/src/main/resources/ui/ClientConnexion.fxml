@@ -131,7 +131,7 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="buttonConnect" alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#connection" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+                                        <Button fx:id="buttonConnect" alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                             <font>
                                                 <Font name="Courier New Bold" size="13.0" />
                                             </font>

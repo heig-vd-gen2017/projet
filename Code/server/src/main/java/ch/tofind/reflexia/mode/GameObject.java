@@ -59,7 +59,6 @@ public class GameObject {
         this.type = type;
     }
 
-
     @XmlElement(name = "enabled")
     public Boolean getEnabled() {
         return enabled;

@@ -1,7 +1,6 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
-import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -14,20 +13,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
-import java.net.InetAddress;
 import java.net.URL;
-import java.util.Map;
 
 public class ClientConnexion extends Application {
 
     private static FXMLLoader loader = new FXMLLoader();
 
     private static final String FXML_FILE = "ui/ClientConnexion.fxml";
-    private static final String FXML_FILE_2 = "ui/ClientGame.fxml";
 
     private static Core core = Core.getInstance();
+
+    private Stage stageGlobal;
 
     @FXML
     TextField textFieldPseudo;
@@ -49,6 +46,7 @@ public class ClientConnexion extends Application {
     Button  buttonConnect;
 
     public void start(Stage stage) throws IOException {
+        stageGlobal = stage;
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
         if (fileURL == null) {
@@ -65,16 +63,11 @@ public class ClientConnexion extends Application {
 
         Scene scene = new Scene(root);
 
-        stage.setTitle("Reflexia");
-        stage.setResizable(false);
-        stage.setScene(scene);
+        stageGlobal.setTitle("Reflexia");
+        stageGlobal.setResizable(false);
+        stageGlobal.setScene(scene);
 
-        stage.show();
-    }
-
-    @FXML
-    private void connection(MouseEvent event) {
-        core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldUnicastPort.getText());
+        stageGlobal.show();
     }
 
     @FXML
@@ -84,29 +77,18 @@ public class ClientConnexion extends Application {
         buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
-                URL fileURL = getClass().getClassLoader().getResource(FXML_FILE_2);
 
-                if (fileURL == null) {
-                    throw new NullPointerException("FXML file not found.");
-                }
+                core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldUnicastPort.getText());
 
-                Parent root = null;
-
+                ClientGame cg = new ClientGame();
                 try {
-                    root = loader.load(fileURL);
+                    cg.start(ClientGame.classStage);
                 } catch (IOException e) {
-                    throw new RuntimeException(e);
+                    e.printStackTrace();
                 }
 
-                Scene scene = new Scene(root);
-
-                Stage stage = new Stage();
-
-                stage.setTitle("Reflexia");
-                stage.setResizable(false);
-                stage.setScene(scene);
-
-                stage.show();
+                Stage stage = (Stage) buttonConnect.getScene().getWindow();
+                stage.close();
             }
         });
 
