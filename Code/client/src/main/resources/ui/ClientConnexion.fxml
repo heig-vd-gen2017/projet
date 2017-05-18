@@ -84,7 +84,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                     <children>
-                                        <TextField fx:id="textFieldPort" layoutX="14.0" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldUnicastPort" layoutX="14.0" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                                     </children>
                                 </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
@@ -131,7 +131,7 @@
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                     <children>
-                                        <Button fx:id="buttonConnect" alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#connection" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
+                                        <Button fx:id="buttonConnect" alignment="CENTER" contentDisplay="CENTER" layoutX="164.0" layoutY="10.0" mnemonicParsing="false" text="Se connecter" textAlignment="CENTER" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="30.0">
                                             <font>
                                                 <Font name="Courier New Bold" size="13.0" />
                                             </font>

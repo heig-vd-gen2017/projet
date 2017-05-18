@@ -1,6 +1,7 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
+import ch.tofind.reflexia.network.NetworkProtocol;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -29,19 +30,20 @@ public class ClientConnexion extends Application {
     TextField textFieldPseudo;
 
     @FXML
-    TextField textFieldIpAddress;
-
-    @FXML
-    TextField textFieldPort;
-
-    @FXML
-    Button  buttonConnect;
-
-    @FXML
     TextField textFieldMulticastAddress;
 
     @FXML
     TextField textFieldMulticastPort;
+
+    @FXML
+    TextField textFieldIpAddress;
+
+    @FXML
+    TextField textFieldUnicastPort;
+
+
+    @FXML
+    Button  buttonConnect;
 
     public void start(Stage stage) throws IOException {
         stageGlobal = stage;
@@ -69,16 +71,15 @@ public class ClientConnexion extends Application {
     }
 
     @FXML
-    private void connection(MouseEvent event) {
-        core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
-        stageGlobal.hide();
-    }
-
-    @FXML
     private void initialize() {
+
+        // Set button connect
         buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
+
+                core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldUnicastPort.getText());
+
                 ClientGame cg = new ClientGame();
                 try {
                     cg.start(ClientGame.classStage);
@@ -90,5 +91,10 @@ public class ClientConnexion extends Application {
                 stage.close();
             }
         });
+
+        // Set interface
+        textFieldMulticastAddress.setText(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
     }
 }

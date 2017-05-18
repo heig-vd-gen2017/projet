@@ -92,7 +92,9 @@ public class Core implements ICore {
 
     @Override
     public void stop() {
-        multicast.stop();
+        if (multicast != null) {
+            multicast.stop();
+        }
     }
 
     @Override

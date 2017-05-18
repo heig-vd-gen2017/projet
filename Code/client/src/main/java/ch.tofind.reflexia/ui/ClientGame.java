@@ -84,4 +84,9 @@ public class ClientGame extends Application {
         paneGame.getChildren().add(iv);
     }
 
+    @Override
+    public void stop() {
+        core.stop();
+    }
+
 }
