@@ -28,17 +28,13 @@ public class GameObject {
 
     }
 
-<<<<<<< HEAD
     /**
      * @brief game object constructor with parameters
      * @param type
      * @param points
      * @param timeout
      */
-    public GameObject(String type, Integer points, Integer timeout) {
-=======
     public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
->>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
         super();
         this.type = type;
         this.points = points;
@@ -63,21 +59,21 @@ public class GameObject {
         this.type = type;
     }
 
-<<<<<<< HEAD
-    /**
-     * @brief gets the game object current points
-     * @return current points
-     */
-=======
+
     @XmlElement(name = "enabled")
     public Boolean getEnabled() {
         return enabled;
     }
+
+
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
->>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
+    /**
+     * @brief gets the game object current points
+     * @return current points
+     */
     @XmlElement(name = "points")
     public Integer getPoints() {
         return points;

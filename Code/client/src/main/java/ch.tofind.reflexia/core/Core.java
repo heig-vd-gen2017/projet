@@ -42,19 +42,21 @@ public class Core implements ICore {
         return instance;
     }
 
-    public void connection(String playerName, String hostname, String port) {
+    public void connection(String pseudo, String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
 
-        InetAddress address = Serialize.unserialize(hostname, InetAddress.class);
+        InetAddress ipAddress = Serialize.unserialize(ipAddressName, InetAddress.class);
 
-        int portNumber = Integer.valueOf(port);
+        int unicastPort = Integer.valueOf(unicastPortString);
 
-        start(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, address);
+        int multicastPort = Integer.valueOf(multicastPortString);
+
+        start(multicastAddress, multicastPort, ipAddress, unicastPort);
 
         String command = ApplicationProtocol.JOIN + NetworkProtocol.END_OF_LINE +
-                playerName + NetworkProtocol.END_OF_LINE +
+                pseudo + NetworkProtocol.END_OF_LINE +
                 NetworkProtocol.END_OF_COMMAND;
 
-        sendUnicast(address, portNumber, command);
+        sendUnicast(ipAddress, unicastPort, command);
     }
 
     public String END_OF_COMMUNICATION(ArrayList<Object> args) {
@@ -62,6 +64,14 @@ public class Core implements ICore {
         return "";
     }
 
+
+    @Override
+    public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
+        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
+        new Thread(multicast).start();
+    }
+
+    @Override
     public String execute(String command, ArrayList<Object> args) {
 
         Method method;
@@ -78,6 +88,11 @@ public class Core implements ICore {
         }
 
         return result;
+    }
+
+    @Override
+    public void stop() {
+        multicast.stop();
     }
 
     @Override
@@ -98,10 +113,5 @@ public class Core implements ICore {
 
         new Thread(multicast).start();
 
-    }
-
-    @Override
-    public void stop() {
-        multicast.stop();
     }
 }

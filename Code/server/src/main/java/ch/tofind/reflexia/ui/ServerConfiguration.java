@@ -4,6 +4,7 @@ import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -132,7 +133,7 @@ public class ServerConfiguration extends Application {
         buttonBeginGame.setDisable(false);
 
         // Tells the Core what network settings were set
-        core.setNetworkSettings(choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
+        core.acceptConnections(NetworkProtocol.MULTICAST_ADDRESS, String.valueOf(NetworkProtocol.MULTICAST_PORT), choiceBoxIPAddress.getValue(), textFieldServerPort.getText());
 
     }
 

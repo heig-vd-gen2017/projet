@@ -1,5 +1,8 @@
 package ch.tofind.reflexia.core;
 
+import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.mode.GameMode;
+import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
@@ -15,7 +18,7 @@ import java.util.Date;
 
 public class Core implements ICore {
 
-    //! Shared instance of the object for all the application
+    //! Shared instance of the object for all the application.
     private static Core instance = null;
 
     //! Multicast client to send commands via multicast.
@@ -24,13 +27,19 @@ public class Core implements ICore {
     //! The server.
     Server server;
 
+    //! The game manager.
+    GameManager gameManager = GameManager.getInstance();
+
+    /**
+     * @brief Core single constructor. Avoid the instantiation.
+     */
     private Core() {
 
     }
 
     /**
-     * @brief Get the object instance
-     * @return The instance of the object
+     * @brief Get the object instance.
+     * @return The instance of the object.
      */
     public static Core getInstance() {
 
@@ -45,42 +54,47 @@ public class Core implements ICore {
         return instance;
     }
 
-    public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
-
-        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
-
-        server = new Server(unicastPort);
-
-        new Thread(multicast).start();
-        new Thread(server).start();
-    }
-
     public void setGameMode(String gameModeName) {
 
-        System.out.println("The mode was set.");
+        GameMode gameMode = GameModeManager.getInstance().getGameModes().get(gameModeName);
+
+        gameManager.setGameMode(gameMode);
+
+        System.out.println("The game mode is set.");
 
     }
 
-    public void setNetworkSettings(String networkInterfaceName, String networkPortString) {
+    public void acceptConnections(String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
+
+        InetAddress ipAddress = Network.getIPv4Interfaces().get(ipAddressName);
+
+        int unicastPort = Integer.valueOf(unicastPortString);
+
+        int multicastPort = Integer.valueOf(multicastPortString);
+
+        start(multicastAddress, multicastPort, ipAddress, unicastPort);
 
         System.out.println("Server is started.");
-
-        InetAddress networkInterface = Network.getIPv4Interfaces().get(networkInterfaceName);
-        int port = Integer.valueOf(networkPortString);
-
-        start(NetworkProtocol.MULTICAST_ADDRESS, NetworkProtocol.MULTICAST_PORT, networkInterface, port);
-
     }
 
     public void beginGame() {
 
         System.out.println("The game begins.");
+
+        // Multicast send BEGIN command
+        // multicast.send();
+
     }
 
     public void endGame() {
 
         System.out.println("The game ends.");
+
+        // Multicast send END_OF_GAME command
+        //multicast.send();
+
         stop();
+        System.out.println("The server is shutdown.");
 
     }
 
@@ -95,6 +109,18 @@ public class Core implements ICore {
         return "";
     }
 
+    @Override
+    public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
+
+        multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);
+
+        server = new Server(unicastPort);
+
+        new Thread(multicast).start();
+        new Thread(server).start();
+    }
+
+    @Override
     public String execute(String command, ArrayList<Object> args) {
 
         Method method;
@@ -105,7 +131,7 @@ public class Core implements ICore {
             method = this.getClass().getMethod( command, ArrayList.class);
             result = (String) method.invoke(this, args);
         } catch (NoSuchMethodException e) {
-            return "Method called: " + command;
+            // Do nothing
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -114,18 +140,18 @@ public class Core implements ICore {
     }
 
     @Override
-    public void sendUnicast(InetAddress hostname, String message) {
+    public void stop() {
+        multicast.stop();
+        server.stop();
+    }
 
+    @Override
+    public void sendUnicast(InetAddress hostname, int port, String message) {
+        // Do nothing
     }
 
     @Override
     public void sendMulticast(String message) {
         multicast.send(message);
-    }
-
-    @Override
-    public void stop() {
-        multicast.stop();
-        server.stop();
     }
 }

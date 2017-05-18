@@ -2,6 +2,7 @@ package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.game.Player;
+import ch.tofind.reflexia.network.NetworkProtocol;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -63,6 +64,6 @@ public class ClientConnexion extends Application {
 
     @FXML
     private void connection(MouseEvent event) {
-        core.connection(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText());
+        core.connection(textFieldPseudo.getText(), NetworkProtocol.MULTICAST_ADDRESS, String.valueOf(NetworkProtocol.MULTICAST_PORT), textFieldIpAddress.getText(), textFieldPort.getText());
     }
 }
