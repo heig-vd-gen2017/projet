@@ -3,6 +3,7 @@ package ch.tofind.reflexia.ui;
 import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.game.Player;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,6 +13,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.URL;
@@ -22,6 +24,7 @@ public class ClientConnexion extends Application {
     private static FXMLLoader loader = new FXMLLoader();
 
     private static final String FXML_FILE = "ui/ClientConnexion.fxml";
+    private static final String FXML_FILE_2 = "ui/ClientGame.fxml";
 
     private static Core core = Core.getInstance();
 
@@ -71,5 +74,37 @@ public class ClientConnexion extends Application {
     private void connection(MouseEvent event) {
         core.connection(textFieldPseudo.getText(), textFieldIpAddress.getText(), textFieldPort.getText(),
                 textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
+    }
+
+    @FXML
+    private void initialize() {
+        buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
+            @Override
+            public void handle(javafx.event.ActionEvent event) {
+                URL fileURL = getClass().getClassLoader().getResource(FXML_FILE_2);
+
+                if (fileURL == null) {
+                    throw new NullPointerException("FXML file not found.");
+                }
+
+                Parent root = null;
+
+                try {
+                    root = loader.load(fileURL);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                Scene scene = new Scene(root);
+
+                Stage stage = new Stage();
+
+                stage.setTitle("Reflexia");
+                stage.setResizable(false);
+                stage.setScene(scene);
+
+                stage.show();
+            }
+        });
     }
 }
