@@ -56,6 +56,10 @@ public class Core implements ICore {
         return instance;
     }
 
+    /**
+     * @brief sets the game mode
+     * @param gameModeName
+     */
     public void setGameMode(String gameModeName) {
 
         GameMode gameMode = GameModeManager.getInstance().getGameModes().get(gameModeName);
@@ -66,6 +70,13 @@ public class Core implements ICore {
 
     }
 
+    /**
+     * @brief accepts a connection
+     * @param multicastAddress
+     * @param multicastPortString
+     * @param ipAddressName
+     * @param unicastPortString
+     */
     public void acceptConnections(String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
 
         InetAddress ipAddress = Network.getIPv4Interfaces().get(ipAddressName);
@@ -79,6 +90,9 @@ public class Core implements ICore {
         System.out.println("Server is started.");
     }
 
+    /**
+     * @brief begins the game
+     */
     public void beginGame() {
 
         System.out.println("The game begins.");
@@ -88,6 +102,9 @@ public class Core implements ICore {
 
     }
 
+    /**
+     * @brief ends the game
+     */
     public void endGame() {
 
         System.out.println("The game ends.");
@@ -100,12 +117,21 @@ public class Core implements ICore {
 
     }
 
+    /**
+     * @brief resets the scores
+     * @param date
+     */
     public void resetScores(Date date) {
 
         System.out.println("The scores are reset.");
 
     }
 
+    /**
+     * @brief makes a player join the game
+     * @param args
+     * @return
+     */
     public String JOIN(ArrayList<Object> args) {
         String pseudo = (String) args.remove(0);
 
@@ -126,6 +152,13 @@ public class Core implements ICore {
         return "";
     }
 
+    /**
+     * @brief Start the server.
+     * @param multicastAddress The multicast address to use for communication.
+     * @param multicastPort The multicast port to use for communication.
+     * @param interfaceToUse The network interface to use for multicast.
+     * @param unicastPort The unicast address to use for communication.
+     */
     @Override
     public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
 
@@ -137,6 +170,11 @@ public class Core implements ICore {
         new Thread(server).start();
     }
 
+    /**
+     * @brief Execute the command on the core.
+     * @param command The command to execute.
+     * @param args The arguments of the command.
+     */
     @Override
     public String execute(String command, ArrayList<Object> args) {
 
@@ -156,6 +194,9 @@ public class Core implements ICore {
         return result;
     }
 
+    /**
+     * @brief Stop the server.
+     */
     @Override
     public void stop() {
         if (multicast != null) {
@@ -167,11 +208,20 @@ public class Core implements ICore {
         }
     }
 
+    /**
+     * @brief Send message to hostname by unicast.
+     * @param hostname Where to send the message.
+     * @param message The message to send.
+     */
     @Override
     public void sendUnicast(InetAddress hostname, int port, String message) {
         // Do nothing
     }
 
+    /**
+     * @brief Send message by multicast.
+     * @param message The message to send.
+     */
     @Override
     public void sendMulticast(String message) {
         multicast.send(message);
