@@ -96,6 +96,9 @@ public class ServerConfiguration extends Application {
     @FXML
     private TextField textFieldNbPlayers;
 
+    @FXML
+    private Label informationLabel;
+
     /**
      * @brief
      * @param stage
@@ -146,6 +149,8 @@ public class ServerConfiguration extends Application {
 
         // Tells the Core what mode was selected
         core.setGameMode(buttonSaveMode.getText());
+
+        informationLabel.setText("Mode saved");
     }
 
     /**
@@ -166,6 +171,8 @@ public class ServerConfiguration extends Application {
 
         // Tells the Core what network settings were set
         core.acceptConnections(textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIPAddress.getValue(), textFieldUnicastPort.getText());
+
+        informationLabel.setText("Connections accepted");
     }
 
     /**
@@ -183,6 +190,7 @@ public class ServerConfiguration extends Application {
         // Tells the Core that we want to game to start
         core.beginGame();
 
+        informationLabel.setText("Game running");
     }
 
     /**
@@ -222,6 +230,8 @@ public class ServerConfiguration extends Application {
         // Set the checkboxes
         choiceBoxModeName.setItems(modesString);
         choiceBoxIPAddress.setItems(ipAddressesString);
+
+        informationLabel.setText("");
 
         choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
