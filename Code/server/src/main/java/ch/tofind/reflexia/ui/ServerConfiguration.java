@@ -96,6 +96,9 @@ public class ServerConfiguration extends Application {
     @FXML
     private TextField textFieldNbPlayers;
 
+    @FXML
+    private Button buttonResetScores;
+
     /**
      * @brief
      * @param stage
@@ -143,6 +146,7 @@ public class ServerConfiguration extends Application {
         textFieldUnicastPort.setDisable(false);
 
         datePickerResetScores.setDisable(true);
+        buttonResetScores.setDisable(true);
 
         // Tells the Core what mode was selected
         core.setGameMode(buttonSaveMode.getText());
@@ -264,6 +268,7 @@ public class ServerConfiguration extends Application {
         buttonStopGame.setDisable(true);
 
         datePickerResetScores.setDisable(false);
+        buttonResetScores.setDisable(false);
 
         updateNbPlayers();
     }
