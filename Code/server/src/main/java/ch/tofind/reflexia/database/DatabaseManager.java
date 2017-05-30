@@ -1,6 +1,7 @@
 package ch.tofind.reflexia.database;
 
 import ch.tofind.reflexia.utils.Logger;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

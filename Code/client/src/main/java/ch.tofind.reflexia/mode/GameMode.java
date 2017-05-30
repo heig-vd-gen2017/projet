@@ -45,25 +45,43 @@ public class GameMode {
     }
 
     /**
-     *
-     * @return
+     * @brief  gets the name of the game mode
+     * @return name
      */
     @XmlElement(name = "name")
     public String getName() {
         return name;
     }
+
+    /**
+     * @brief sets the name of the game mode
+     * @param name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * @brief gets the starting score
+     * @return starting score
+     */
     @XmlElement(name = "startingScore")
     public Integer getStartingScore() {
         return startingScore;
     }
+
+    /**
+     * @brief sets the starting score
+     * @param startingScore
+     */
     public void setStartingScore(Integer startingScore) {
         this.startingScore = startingScore;
     }
 
+    /**
+     * @brief gets the ending score
+     * @return ending score
+     */
     @XmlElement(name = "endingScore")
     public Integer getEndingScore() {
         return endingScore;
@@ -72,21 +90,44 @@ public class GameMode {
         this.endingScore = endingScore;
     }
 
+    /**
+     * @brief gets the round number
+     * @return round
+     */
     @XmlElement(name = "rounds")
     public Integer getRounds() {
         return rounds;
     }
+
+    /**
+     * @brief sets the number of rounds
+     * @param rounds
+     */
     public void setRounds(Integer rounds) {
         this.rounds = rounds;
     }
 
+    /**
+     * @brief gets the game object
+     * @return game object
+     */
     @XmlElement(name = "gameObjects")
     public GameObjects getGameObjects() {
         return gameObjects;
     }
+
+    /**
+     * @brief sets the game object
+     * @param gameObjects
+     */
     public void setGameObjects(GameObjects gameObjects) {
         this.gameObjects = gameObjects;
     }
+
+    /**
+     * 
+     * @param gameObject
+     */
     public void addGameObject(GameObject gameObject) {
         gameObjects.add(gameObject);
     }

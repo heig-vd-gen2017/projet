@@ -1,5 +1,8 @@
 package ch.tofind.reflexia.core;
 
+/**
+ * @brief protocol class
+ */
 public final class ApplicationProtocol {
 
     public static final String SUCCESS = "SUCCESS";
