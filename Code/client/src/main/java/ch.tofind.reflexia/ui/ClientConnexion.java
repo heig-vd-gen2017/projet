@@ -2,6 +2,8 @@ package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.network.NetworkProtocol;
+import ch.tofind.reflexia.game.GameManager;
+
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -41,7 +43,6 @@ public class ClientConnexion extends Application {
     @FXML
     TextField textFieldUnicastPort;
 
-
     @FXML
     Button  buttonConnect;
 
@@ -69,6 +70,7 @@ public class ClientConnexion extends Application {
 
         stageGlobal.show();
     }
+
 
     @FXML
     private void initialize() {

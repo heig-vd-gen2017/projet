@@ -7,6 +7,7 @@ import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -95,7 +96,7 @@ public class ServerConfiguration extends Application {
     private TextField textFieldMulticastPort;
 
     @FXML
-    private static TextField textFieldNbPlayers;
+    private TextField textFieldNbPlayers;
 
     @FXML
     private Button buttonResetScores;
@@ -165,7 +166,7 @@ public class ServerConfiguration extends Application {
     @FXML
     private void acceptConnections(MouseEvent event) {
 
-
+        textFieldNbPlayers.textProperty().bind((GameManager.getInstance().getNumberOfPlayers()).asString());
 
         // Change the interface
         textFieldMulticastAddress.setDisable(true);
@@ -192,7 +193,6 @@ public class ServerConfiguration extends Application {
         // Change interface
         buttonStopGame.setDisable(false);
         buttonBeginGame.setDisable(true);
-        updateNbPlayers();
 
         // Tells the Core that we want to game to start
         core.beginGame();
@@ -287,17 +287,23 @@ public class ServerConfiguration extends Application {
         datePickerResetScores.setDisable(false);
         buttonResetScores.setDisable(false);
 
-        updateNbPlayers();
+        textFieldNbPlayers.setText("0");
+
+
+
     }
 
     /**
      * @brief updates the number of players
      */
-    public static void updateNbPlayers() {
+    /*
+    public void updateNbPlayers() {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }
+    */
+
 
     @Override
     public void stop() {

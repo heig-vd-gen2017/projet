@@ -12,6 +12,7 @@ import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
+import javafx.beans.property.IntegerProperty;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -156,7 +157,7 @@ public class Core implements ICore {
 
         GameManager.getInstance().addPlayer(player);
 
-        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+        IntegerProperty nbPlayers = GameManager.getInstance().getNumberOfPlayers();
 
         //ServerConfiguration.updateNbPlayer();
 
