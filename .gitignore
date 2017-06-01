@@ -3,3 +3,4 @@ target/
 workspace/
 reflexia.db
 reflexia.log
+*.log

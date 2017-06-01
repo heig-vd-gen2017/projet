@@ -4,16 +4,17 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class name="ch.tofind.reflexia.game.Player" table="player">
+    <class name="ch.tofind.reflexia.game.Score" table="score">
         <meta attribute="class-description">
-            This class represents a game player
+            This class represents the scores of all players
         </meta>
         <id name="id" type="int" column="id">
             <generator class="increment"/>
         </id>
         <version name="version" column="version"/>
-        <property name="pseudo" column="title" type="string" length="50" not-null="true"/>
-        <property name="dateAdded" column="date_added" type="timestamp" length="50" not-null="true"/>
-        <property name="datePlayed" column="date_played" type="timestamp" length="50" not-null="false"/>
+        <property name="player" column="player" type="string" length="50" not-null="true"/>
+        <property name="mode" column="mode" type="string" length="50" not-null="true"/>
+        <property name="score" column="score" type="int" not-null="true"/>
+        <property name="date" column="date" type="date" not-null="true"/>
     </class>
 </hibernate-mapping>

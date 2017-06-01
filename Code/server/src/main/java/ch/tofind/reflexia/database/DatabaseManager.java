@@ -1,30 +1,36 @@
 package ch.tofind.reflexia.database;
 
+import ch.tofind.reflexia.utils.Logger;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.query.Query;
 
 /**
- * @brief This class represents the database and allows interaction with the real database
+ * This class represents the database and allows interaction with the real database
  */
 public class DatabaseManager {
 
-    //! Shared instance of the object for all the application
+    //! Logger for debugging.
+    private static final Logger LOG = new Logger(DatabaseManager.class.getSimpleName());
+
+    //! Shared instance of the object for all the application.
     private static DatabaseManager instance = null;
 
-    //! SessionFactory (Hibernate related)
-    private SessionFactory factory = null;
+    //! SessionFactory (Hibernate related).
+    private SessionFactory factory;
 
-    //! Session (Hibernate related)
-    private Session session = null;
+    //! Session (Hibernate related).
+    private Session session;
 
-    //! Transaction (Hibernate related)
-    private Transaction transaction = null;
+    //! Transaction (Hibernate related).
+    private Transaction transaction;
 
     /**
-     * @brief DatabaseManager single constructor. Avoid the instantiation.
+     * DatabaseManager single constructor. Avoid the instantiation.
      */
     private DatabaseManager() {
         try {
@@ -34,13 +40,14 @@ public class DatabaseManager {
             factory = configuration.buildSessionFactory();
             session = factory.openSession();
         } catch (HibernateException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
     }
 
     /**
-     * @brief Get the object instance
-     * @return The instance of the object
+     * Get the object instance.
+     *
+     * @return The instance of the object.
      */
     public static DatabaseManager getInstance() {
 
@@ -56,41 +63,68 @@ public class DatabaseManager {
     }
 
     /**
-     * @brief gets the session
-     * @return
+     * Get the Hibernate session.
+     *
+     * @return The Hibernate session.
      */
     public Session getSession() {
         return session;
     }
 
     /**
-     * @brief saves an object in the database
-     * @param object
-     * @return
+     * Execute the query on the database.
+     *
+     * @param query The query to execute.
      */
-    public Object save(Object object) {
-        Object id = null;
+    public void execute(Query query) {
 
         try {
+            // Wait while transaction is still active.
+            while(transaction != null && transaction.isActive());
+
             transaction = session.beginTransaction();
-            id = session.save(object);
+            query.executeUpdate();
             transaction.commit();
         } catch (HibernateException e) {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            LOG.error(e);
         }
-
-        return id;
     }
 
     /**
-     * @brief deletes an object from the database
-     * @param object
+     * Save the object in the database.
+     *
+     * @param object The object to save.
+     */
+    public void save(Object object) {
+
+        try {
+            // Wait while transaction is still active.
+            while(transaction != null && transaction.isActive());
+
+            transaction = session.beginTransaction();
+            session.saveOrUpdate(object);
+            transaction.commit();
+        } catch (HibernateException e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            LOG.error(e);
+        }
+    }
+
+    /**
+     * Delete the object from the database.
+     *
+     * @param object The object to delete.
      */
     public void delete(Object object) {
         try {
+            // Wait while transaction is still active.
+            while(transaction != null && transaction.isActive());
+
             transaction = session.beginTransaction();
             session.delete(object);
             transaction.commit();
@@ -98,16 +132,20 @@ public class DatabaseManager {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            LOG.error(e);
         }
     }
 
     /**
-     * @brief updates an object in the database
-     * @param object
+     * Update the object from the database.
+     *
+     * @param object The object to update.
      */
     public void update(Object object) {
         try {
+            // Wait while transaction is still active.
+            while(transaction != null && transaction.isActive());
+
             transaction = session.beginTransaction();
             session.update(object);
             transaction.commit();
@@ -115,17 +153,21 @@ public class DatabaseManager {
             if (transaction != null) {
                 transaction.rollback();
             }
-            e.printStackTrace();
+            LOG.error(e);
         }
     }
 
     /**
-     * @brief closes the session
+     * Close the database connection.
      */
     public void close() {
+
         if(instance != null) {
             session.close();
             factory.close();
+
+            instance = null;
         }
+
     }
 }

@@ -88,5 +88,4 @@ public class ClientGame extends Application {
     public void stop() {
         core.stop();
     }
-
 }

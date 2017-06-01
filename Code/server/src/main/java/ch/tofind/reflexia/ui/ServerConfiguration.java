@@ -97,6 +97,9 @@ public class ServerConfiguration extends Application {
     private TextField textFieldNbPlayers;
 
     @FXML
+    private Button buttonResetScores;
+
+    @FXML
     private Label informationLabel;
 
     /**
@@ -146,6 +149,7 @@ public class ServerConfiguration extends Application {
         textFieldUnicastPort.setDisable(false);
 
         datePickerResetScores.setDisable(true);
+        buttonResetScores.setDisable(true);
 
         // Tells the Core what mode was selected
         core.setGameMode(buttonSaveMode.getText());
@@ -205,6 +209,8 @@ public class ServerConfiguration extends Application {
 
         // Reset the interface
         initialize();
+
+        informationLabel.setText("End of game");
     }
 
     /**
@@ -220,7 +226,7 @@ public class ServerConfiguration extends Application {
         // Tells the Core that we want to reset the scores
         core.resetScores(date);
 
-        informationLabel.setText("");
+        informationLabel.setText("Score resetted");
     }
 
     /**
@@ -276,6 +282,7 @@ public class ServerConfiguration extends Application {
         buttonStopGame.setDisable(true);
 
         datePickerResetScores.setDisable(false);
+        buttonResetScores.setDisable(false);
 
         updateNbPlayers();
     }

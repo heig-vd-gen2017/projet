@@ -10,7 +10,7 @@ import java.util.*;
  * @brief the purpose of this helper class is to collect the network interfaces of a machine
  */
 public class Network {
-    
+
     /**
      * @brief gets the list of network interfaces
      * @return an ArrayList of network interface
@@ -76,6 +76,4 @@ public class Network {
         Enumeration<InetAddress> addresses = networkInterface.getInetAddresses();
         return Collections.list(addresses);
     }
-
-
 }

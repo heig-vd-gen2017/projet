@@ -1,5 +1,6 @@
 package ch.tofind.reflexia.core;
 
+import ch.tofind.reflexia.database.DatabaseManager;
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameMode;
@@ -8,8 +9,11 @@ import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
 import ch.tofind.reflexia.ui.ServerConfiguration;
+import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -19,6 +23,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class Core implements ICore {
+
+    //! Logger for debugging.
+    private static final Logger LOG = new Logger(Core.class.getSimpleName());
 
     //! Shared instance of the object for all the application.
     private static Core instance = null;
@@ -66,7 +73,7 @@ public class Core implements ICore {
 
         gameManager.setGameMode(gameMode);
 
-        System.out.println("The game mode is set.");
+        LOG.info("The game mode is set.");
 
     }
 
@@ -87,7 +94,7 @@ public class Core implements ICore {
 
         start(multicastAddress, multicastPort, ipAddress, unicastPort);
 
-        System.out.println("Server is started.");
+        LOG.info("Server is started.");
     }
 
     /**
@@ -95,7 +102,7 @@ public class Core implements ICore {
      */
     public void beginGame() {
 
-        System.out.println("The game begins.");
+        LOG.info("The game begins.");
 
         // Multicast send BEGIN command
         // multicast.send();
@@ -107,13 +114,13 @@ public class Core implements ICore {
      */
     public void endGame() {
 
-        System.out.println("The game ends.");
+        LOG.info("The game ends.");
 
         // Multicast send END_OF_GAME command
         //multicast.send();
 
         stop();
-        System.out.println("The server is shutdown.");
+        LOG.info("The server is shutdown.");
 
     }
 
@@ -123,7 +130,15 @@ public class Core implements ICore {
      */
     public void resetScores(Date date) {
 
-        System.out.println("The scores are reset.");
+        Session session = DatabaseManager.getInstance().getSession();
+
+
+        Query deleteScoresBeforeDate = session.createQuery("DELETE Score WHERE date < :date");
+        deleteScoresBeforeDate.setParameter("date", date);
+
+        DatabaseManager.getInstance().execute(deleteScoresBeforeDate);
+
+        LOG.info("The scores are reset.");
 
     }
 
@@ -135,7 +150,7 @@ public class Core implements ICore {
     public String JOIN(ArrayList<Object> args) {
         String pseudo = (String) args.remove(0);
 
-        System.out.println(pseudo);
+        LOG.info(pseudo);
 
         Player player = new Player(pseudo, 0);
 
@@ -145,8 +160,8 @@ public class Core implements ICore {
 
         //ServerConfiguration.updateNbPlayer();
 
-        System.out.println("Player '" + pseudo + "' has joined the game.");
-        System.out.println("Number of players: " + nbPlayers);
+        LOG.info("Player '" + pseudo + "' has joined the game.");
+        LOG.info("Number of players: " + nbPlayers);
 
 
         return "";
