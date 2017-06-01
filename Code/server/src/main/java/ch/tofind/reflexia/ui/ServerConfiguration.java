@@ -166,7 +166,7 @@ public class ServerConfiguration extends Application {
     @FXML
     private void acceptConnections(MouseEvent event) {
 
-        textFieldNbPlayers.textProperty().bind((GameManager.getInstance().getNumberOfPlayers()).asString());
+        //textFieldNbPlayers.textProperty().bind((GameManager.getInstance().getNumberOfPlayers()).asString());
 
         // Change the interface
         textFieldMulticastAddress.setDisable(true);
@@ -269,13 +269,13 @@ public class ServerConfiguration extends Application {
         buttonSaveMode.setDisable(false);
 
         textFieldUnicastPort.setDisable(true);
-        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
 
         textFieldMulticastAddress.setDisable(true);
-        textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS));
+        textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.MULTICAST_ADDRESS));
 
         textFieldMulticastPort.setDisable(true);
-        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
 
         choiceBoxIPAddress.setDisable(true);
         choiceBoxIPAddress.getSelectionModel().selectFirst();
@@ -296,13 +296,11 @@ public class ServerConfiguration extends Application {
     /**
      * @brief updates the number of players
      */
-    /*
     public void updateNbPlayers() {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }
-    */
 
 
     @Override

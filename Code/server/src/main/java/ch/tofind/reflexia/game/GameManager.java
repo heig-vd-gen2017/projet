@@ -26,7 +26,7 @@ public class GameManager {
     private List<Player> players;
 
     //! number of players connected
-    private static IntegerProperty nbPlayers;
+    private int nbPlayers;
 
     /**
      * @brief GameManager single constructor. Avoid the instantiation.
@@ -58,14 +58,14 @@ public class GameManager {
      */
     public void addPlayer(Player player) {
         players.add(player);
-        nbPlayers.set(players.size());
+        //ServerConfiguration.updateNbPlayers();
     }
 
     /**
      * gets the number of players
      * @return the number of players
      */
-    public IntegerProperty getNumberOfPlayers() {
+    public int getNumberOfPlayers() {
         return nbPlayers;
     }
 
