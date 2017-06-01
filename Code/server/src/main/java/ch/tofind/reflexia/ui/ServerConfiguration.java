@@ -95,7 +95,7 @@ public class ServerConfiguration extends Application {
     private TextField textFieldMulticastPort;
 
     @FXML
-    private static TextField textFieldNbPlayers;
+    private TextField textFieldNbPlayers;
 
     @FXML
     private Button buttonResetScores;
@@ -293,7 +293,7 @@ public class ServerConfiguration extends Application {
     /**
      * @brief updates the number of players
      */
-    public static void updateNbPlayers() {
+    public void updateNbPlayers() {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));

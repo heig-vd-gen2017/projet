@@ -93,8 +93,8 @@ public class ClientConnexion extends Application {
         });
 
         // Set interface
-        textFieldMulticastAddress.setText(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS);
-        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
-        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+        textFieldMulticastAddress.setText(NetworkProtocol.MULTICAST_ADDRESS);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
     }
 }

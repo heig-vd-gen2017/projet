@@ -51,7 +51,7 @@ public class GameManager {
      */
     public void addPlayer(Player player) {
         players.add(player);
-        ServerConfiguration.updateNbPlayers();
+        //ServerConfiguration.updateNbPlayers();
     }
 
     /**
