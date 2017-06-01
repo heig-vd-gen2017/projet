@@ -266,13 +266,13 @@ public class ServerConfiguration extends Application {
         buttonSaveMode.setDisable(false);
 
         textFieldUnicastPort.setDisable(true);
-        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
 
         textFieldMulticastAddress.setDisable(true);
-        textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS));
+        textFieldMulticastAddress.setText(String.valueOf(NetworkProtocol.MULTICAST_ADDRESS));
 
         textFieldMulticastPort.setDisable(true);
-        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
 
         choiceBoxIPAddress.setDisable(true);
         choiceBoxIPAddress.getSelectionModel().selectFirst();
