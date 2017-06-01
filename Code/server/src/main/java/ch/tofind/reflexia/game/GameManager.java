@@ -1,6 +1,7 @@
 package ch.tofind.reflexia.game;
 
 import ch.tofind.reflexia.mode.GameMode;
+import ch.tofind.reflexia.ui.ServerConfiguration;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -50,6 +51,7 @@ public class GameManager {
      */
     public void addPlayer(Player player) {
         players.add(player);
+        ServerConfiguration.updateNbPlayers();
     }
 
     /**

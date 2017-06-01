@@ -11,6 +11,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -94,7 +95,7 @@ public class ServerConfiguration extends Application {
     private TextField textFieldMulticastPort;
 
     @FXML
-    private TextField textFieldNbPlayers;
+    private static TextField textFieldNbPlayers;
 
     @FXML
     private Button buttonResetScores;
@@ -163,6 +164,8 @@ public class ServerConfiguration extends Application {
      */
     @FXML
     private void acceptConnections(MouseEvent event) {
+
+
 
         // Change the interface
         textFieldMulticastAddress.setDisable(true);
@@ -290,7 +293,7 @@ public class ServerConfiguration extends Application {
     /**
      * @brief updates the number of players
      */
-    public void updateNbPlayers() {
+    public static void updateNbPlayers() {
 
         int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
