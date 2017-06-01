@@ -3,6 +3,7 @@ package ch.tofind.reflexia.core;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.UnicastClient;
+import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
 
 import java.lang.reflect.InvocationTargetException;
@@ -44,7 +45,7 @@ public class Core implements ICore {
 
     public void connection(String pseudo, String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
 
-        InetAddress ipAddress = Serialize.unserialize(ipAddressName, InetAddress.class);
+        InetAddress ipAddress = Network.getIPv4Interfaces().get(ipAddressName);
 
         int unicastPort = Integer.valueOf(unicastPortString);
 

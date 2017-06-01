@@ -4,6 +4,7 @@ import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import javafx.beans.InvalidationListener;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 
@@ -26,7 +27,7 @@ public class GameManager {
     private List<Player> players;
 
     //! number of players connected
-    private int nbPlayers;
+    private IntegerProperty nbPlayers = new SimpleIntegerProperty(0);
 
     /**
      * @brief GameManager single constructor. Avoid the instantiation.
@@ -58,14 +59,14 @@ public class GameManager {
      */
     public void addPlayer(Player player) {
         players.add(player);
-        //ServerConfiguration.updateNbPlayers();
+        nbPlayers.setValue(players.size());
     }
 
     /**
      * gets the number of players
      * @return the number of players
      */
-    public int getNumberOfPlayers() {
+    public IntegerProperty getNumberOfPlayers() {
         return nbPlayers;
     }
 

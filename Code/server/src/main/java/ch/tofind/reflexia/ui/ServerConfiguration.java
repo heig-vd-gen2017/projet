@@ -9,6 +9,7 @@ import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,6 +44,7 @@ public class ServerConfiguration extends Application {
     private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
     
     private ObservableList<String> ipAddressesString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
+
 
     @FXML
     private ChoiceBox<String> choiceBoxModeName;
@@ -166,8 +168,6 @@ public class ServerConfiguration extends Application {
     @FXML
     private void acceptConnections(MouseEvent event) {
 
-        //textFieldNbPlayers.textProperty().bind((GameManager.getInstance().getNumberOfPlayers()).asString());
-
         // Change the interface
         textFieldMulticastAddress.setDisable(true);
         textFieldMulticastPort.setDisable(true);
@@ -287,10 +287,7 @@ public class ServerConfiguration extends Application {
         datePickerResetScores.setDisable(false);
         buttonResetScores.setDisable(false);
 
-        textFieldNbPlayers.setText("0");
-
-
-
+        textFieldNbPlayers.textProperty().bind(GameManager.getInstance().getNumberOfPlayers().asString());
     }
 
     /**
@@ -298,7 +295,7 @@ public class ServerConfiguration extends Application {
      */
     public void updateNbPlayers() {
 
-        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+        IntegerProperty nbPlayers = GameManager.getInstance().getNumberOfPlayers();
         textFieldNbPlayers.setText(String.valueOf(nbPlayers));
     }
 
