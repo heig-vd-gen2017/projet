@@ -4,7 +4,6 @@ import ch.tofind.reflexia.database.DatabaseManager;
 import ch.tofind.reflexia.game.Score;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Configuration;
-
 import javafx.application.Application;
 
 import java.io.File;
