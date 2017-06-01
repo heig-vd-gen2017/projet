@@ -1,40 +1,41 @@
 package ch.tofind.reflexia.network;
 
 import ch.tofind.reflexia.core.Core;
+import ch.tofind.reflexia.utils.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.SocketException;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
 /**
- * @brief This class receives data from the server by multicast.
+ * This class a multicast client.
  */
 public class MulticastClient implements Runnable {
 
-    //! port number
+    //! Logger for debugging.
+    private static final Logger LOG = new Logger(MulticastClient.class.getSimpleName());
+
+    //! Port to use.
     private int port;
 
-    //! multicast group ip address
+    //! Multicast address.
     private InetAddress multicastGroup;
 
-    //! socket object
+    //! Socket to use.
     private MulticastSocket socket;
 
-    //! state running
+    //! Tells if the client is running.
     private boolean running;
 
     /**
-     * @brief multicast client class constructor
-     * @param multicastAddress
-     * @param port
-     * @param interfaceToUse
+     * MulticastClient constructor.
+     *
+     * @param multicastAddress Multicast address to use.
+     * @param port Port to use for the communication.
+     * @param interfaceToUse Network interface to use.
      */
     public MulticastClient(String multicastAddress, int port, InetAddress interfaceToUse) {
         this.port = port;
@@ -43,32 +44,58 @@ public class MulticastClient implements Runnable {
         try {
             socket = new MulticastSocket(port);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         try {
             socket.setInterface(interfaceToUse);
             socket.setLoopbackMode(false);
         } catch (SocketException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         try {
             multicastGroup = InetAddress.getByName(multicastAddress);
         } catch (UnknownHostException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
 
         try {
             socket.joinGroup(multicastGroup);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error(e);
         }
     }
 
     /**
-     * @brief run method
+     * Stop the multicast client.
      */
+    public void stop() {
+        running = false;
+        socket.close();
+    }
+
+    /**
+     * Send a message by multicast.
+     *
+     * @param message The message to send.
+     */
+    public void send(String message) {
+
+        // Transforms the message in bytes
+        byte[] messageBytes = message.getBytes();
+
+        // Prepare the packet
+        DatagramPacket out = new DatagramPacket(messageBytes, messageBytes.length, multicastGroup, port);
+
+        // Send the packet
+        try {
+            socket.send(out);
+        } catch (IOException e) {
+            LOG.error(e);
+        }
+    }
+
     @Override
     public void run() {
 
@@ -109,7 +136,7 @@ public class MulticastClient implements Runnable {
                 // Do nothing and continue
                 continue;
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(e);
             }
 
             // Get the requested command
@@ -124,34 +151,6 @@ public class MulticastClient implements Runnable {
             if (!Objects.equals(result, "")) {
                 send(result + NetworkProtocol.END_OF_LINE);
             }
-        }
-    }
-
-    /**
-     * @brief stop method
-     */
-    public void stop() {
-        running = false;
-        socket.close();
-    }
-
-    /**
-     * sends the message
-     * @param message
-     */
-    public void send(String message) {
-
-        // Transforms the message in bytes
-        byte[] messageBytes = message.getBytes();
-
-        // Prepare the packet
-        DatagramPacket out = new DatagramPacket(messageBytes, messageBytes.length, multicastGroup, port);
-
-        // Send the packet
-        try {
-            socket.send(out);
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }

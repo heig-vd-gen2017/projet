@@ -3,6 +3,7 @@ package ch.tofind.reflexia.core;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.UnicastClient;
+import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
 
 import java.lang.reflect.InvocationTargetException;
@@ -44,7 +45,7 @@ public class Core implements ICore {
 
     public void connection(String pseudo, String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
 
-        InetAddress ipAddress = Serialize.unserialize(ipAddressName, InetAddress.class);
+        InetAddress ipAddress = Network.getIPv4Interfaces().get(ipAddressName);
 
         int unicastPort = Integer.valueOf(unicastPortString);
 
@@ -64,6 +65,23 @@ public class Core implements ICore {
         return "";
     }
 
+    public String JOINED(ArrayList<Object> args) {
+        System.out.println("You joined the game.");
+
+        return NetworkProtocol.END_OF_COMMUNICATION + NetworkProtocol.END_OF_LINE +
+                1000 + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
+    }
+
+    public String BEGIN_GAME(ArrayList<Object> args) {
+        System.out.println("The game begins!");
+        return "";
+    }
+
+    public String END_GAME(ArrayList<Object> args) {
+        System.out.println("The game ends, sadly...");
+        return "";
+    }
 
     @Override
     public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
@@ -82,7 +100,7 @@ public class Core implements ICore {
             method = this.getClass().getMethod( command, ArrayList.class);
             result = (String) method.invoke(this, args);
         } catch (NoSuchMethodException e) {
-            // Do nothing
+            System.out.println("Not implemented.");
         } catch (IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
@@ -94,6 +112,7 @@ public class Core implements ICore {
     public void stop() {
         if (multicast != null) {
             multicast.stop();
+            multicast = null;
         }
     }
 

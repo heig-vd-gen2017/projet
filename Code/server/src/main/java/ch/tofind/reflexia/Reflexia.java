@@ -35,7 +35,7 @@ public class Reflexia {
         Random randomGenerator = new Random();
 
         for (int i = 0; i < 30; i++) {
-            int randomScore = randomGenerator.nextInt(100);
+            int randomScore = randomGenerator.nextInt(1500);
             Score score = new Score(UUID.randomUUID().toString(), UUID.randomUUID().toString(), randomScore);
             DatabaseManager.getInstance().save(score);
         }

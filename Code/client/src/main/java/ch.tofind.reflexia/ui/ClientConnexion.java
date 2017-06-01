@@ -2,19 +2,26 @@ package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.network.NetworkProtocol;
+import ch.tofind.reflexia.game.GameManager;
+
+import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class ClientConnexion extends Application {
 
@@ -26,6 +33,8 @@ public class ClientConnexion extends Application {
 
     private Stage stageGlobal;
 
+    private ObservableList<String> ipAddressesString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
+
     @FXML
     TextField textFieldPseudo;
 
@@ -36,11 +45,10 @@ public class ClientConnexion extends Application {
     TextField textFieldMulticastPort;
 
     @FXML
-    TextField textFieldIpAddress;
+    ChoiceBox<String> choiceBoxIpAddress;
 
     @FXML
     TextField textFieldUnicastPort;
-
 
     @FXML
     Button  buttonConnect;
@@ -70,15 +78,19 @@ public class ClientConnexion extends Application {
         stageGlobal.show();
     }
 
+
     @FXML
     private void initialize() {
+
+        choiceBoxIpAddress.setItems(ipAddressesString);
+        choiceBoxIpAddress.getSelectionModel().selectFirst();
 
         // Set button connect
         buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
 
-                core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), textFieldIpAddress.getText(), textFieldUnicastPort.getText());
+                core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIpAddress.getValue(), textFieldUnicastPort.getText());
 
                 ClientGame cg = new ClientGame();
                 try {
@@ -93,8 +105,8 @@ public class ClientConnexion extends Application {
         });
 
         // Set interface
-        textFieldMulticastAddress.setText(NetworkProtocol.DEFAULT_MULTICAST_ADDRESS);
-        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_MULTICAST_PORT));
-        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.DEFAULT_UNICAST_PORT));
+        textFieldMulticastAddress.setText(NetworkProtocol.MULTICAST_ADDRESS);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
     }
 }

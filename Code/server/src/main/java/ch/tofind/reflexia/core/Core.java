@@ -12,6 +12,7 @@ import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
+import javafx.beans.property.IntegerProperty;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -105,7 +106,7 @@ public class Core implements ICore {
         LOG.info("The game begins.");
 
         // Multicast send BEGIN command
-        // multicast.send();
+        multicast.send(ApplicationProtocol.BEGIN_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
 
     }
 
@@ -116,8 +117,9 @@ public class Core implements ICore {
 
         LOG.info("The game ends.");
 
-        // Multicast send END_OF_GAME command
-        //multicast.send();
+        if (multicast != null) {
+            multicast.send(ApplicationProtocol.END_OF_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
+        }
 
         stop();
         LOG.info("The server is shutdown.");
@@ -132,8 +134,8 @@ public class Core implements ICore {
 
         Session session = DatabaseManager.getInstance().getSession();
 
+        Query deleteScoresBeforeDate = session.createQuery("DELETE Score WHERE date <= :date");
 
-        Query deleteScoresBeforeDate = session.createQuery("DELETE Score WHERE date < :date");
         deleteScoresBeforeDate.setParameter("date", date);
 
         DatabaseManager.getInstance().execute(deleteScoresBeforeDate);
@@ -148,6 +150,9 @@ public class Core implements ICore {
      * @return
      */
     public String JOIN(ArrayList<Object> args) {
+
+        args.remove(0); // Remove the socket as we don't need it
+
         String pseudo = (String) args.remove(0);
 
         LOG.info(pseudo);
@@ -156,7 +161,7 @@ public class Core implements ICore {
 
         GameManager.getInstance().addPlayer(player);
 
-        int nbPlayers = GameManager.getInstance().getNumberOfPlayers();
+        IntegerProperty nbPlayers = GameManager.getInstance().getNumberOfPlayers();
 
         //ServerConfiguration.updateNbPlayer();
 
@@ -164,7 +169,9 @@ public class Core implements ICore {
         LOG.info("Number of players: " + nbPlayers);
 
 
-        return "";
+        return ApplicationProtocol.JOINED + NetworkProtocol.END_OF_LINE +
+                100 + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
     }
 
     /**
@@ -216,10 +223,12 @@ public class Core implements ICore {
     public void stop() {
         if (multicast != null) {
             multicast.stop();
+            multicast = null;
         }
 
         if (server != null) {
             server.stop();
+            server = null;
         }
     }
 
