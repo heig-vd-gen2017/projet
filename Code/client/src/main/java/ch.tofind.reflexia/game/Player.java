@@ -1,5 +1,7 @@
 package ch.tofind.reflexia.game;
 
+import java.util.Objects;
+
 /**
  * @brief This class represents a player
  */
@@ -37,10 +39,30 @@ public class Player {
     }
 
     @Override
+    public boolean equals(Object object) {
+
+        if (object == this) {
+            return true;
+        }
+
+        if (!(object instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) object;
+
+        return Objects.equals(pseudo, player.pseudo);
+    }
+
+    /**
+     * @brief toString method for player class
+     * @return a string representation of a player
+     */
+    @Override
     public String toString() {
 
         return "Player"                      + '\n' + '\t' +
-                "Pseudo..........: " + pseudo + '\n' + '\t' +
-                "Score...........: " + score  + '\n';
+               "Pseudo..........: " + pseudo + '\n' + '\t' +
+               "Score...........: " + score  + '\n';
     }
 }

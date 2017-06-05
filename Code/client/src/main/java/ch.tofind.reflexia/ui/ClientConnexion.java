@@ -2,7 +2,6 @@ package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
 import ch.tofind.reflexia.network.NetworkProtocol;
-import ch.tofind.reflexia.game.GameManager;
 
 import ch.tofind.reflexia.utils.Network;
 import javafx.application.Application;
@@ -16,7 +15,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,10 +31,19 @@ public class ClientConnexion extends Application {
 
     private Stage stageGlobal;
 
-    private ObservableList<String> ipAddressesString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
+    private ObservableList<String> networkInterfaces = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
 
     @FXML
     TextField textFieldPseudo;
+
+    @FXML
+    TextField textFieldServerIP;
+
+    @FXML
+    TextField textFieldUnicastPort;
+
+    @FXML
+    ChoiceBox<String> choiceBoxNetworkInterface;
 
     @FXML
     TextField textFieldMulticastAddress;
@@ -45,13 +52,7 @@ public class ClientConnexion extends Application {
     TextField textFieldMulticastPort;
 
     @FXML
-    ChoiceBox<String> choiceBoxIpAddress;
-
-    @FXML
-    TextField textFieldUnicastPort;
-
-    @FXML
-    Button  buttonConnect;
+    Button buttonConnect;
 
     public void start(Stage stage) throws IOException {
         stageGlobal = stage;
@@ -82,15 +83,24 @@ public class ClientConnexion extends Application {
     @FXML
     private void initialize() {
 
-        choiceBoxIpAddress.setItems(ipAddressesString);
-        choiceBoxIpAddress.getSelectionModel().selectFirst();
+        choiceBoxNetworkInterface.setItems(networkInterfaces);
+        choiceBoxNetworkInterface.getSelectionModel().selectFirst();
+
+        // Temporaire, à supprimer !!
+        textFieldPseudo.setText("test");
+        textFieldServerIP.setText("localhost");
+
+        // Set interface
+        textFieldMulticastAddress.setText(NetworkProtocol.MULTICAST_ADDRESS);
+        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
+        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
 
         // Set button connect
         buttonConnect.setOnAction(new EventHandler<javafx.event.ActionEvent>() {
             @Override
             public void handle(javafx.event.ActionEvent event) {
 
-                core.connection(textFieldPseudo.getText(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText(), choiceBoxIpAddress.getValue(), textFieldUnicastPort.getText());
+                core.connection(textFieldPseudo.getText(), textFieldServerIP.getText(), textFieldUnicastPort.getText(), choiceBoxNetworkInterface.getValue(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
 
                 ClientGame cg = new ClientGame();
                 try {
@@ -103,10 +113,10 @@ public class ClientConnexion extends Application {
                 stage.close();
             }
         });
+    }
 
-        // Set interface
-        textFieldMulticastAddress.setText(NetworkProtocol.MULTICAST_ADDRESS);
-        textFieldMulticastPort.setText(String.valueOf(NetworkProtocol.MULTICAST_PORT));
-        textFieldUnicastPort.setText(String.valueOf(NetworkProtocol.UNICAST_PORT));
+    @Override
+    public void stop() {
+        core.stop();
     }
 }

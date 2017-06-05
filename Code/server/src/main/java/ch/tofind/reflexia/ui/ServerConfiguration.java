@@ -6,14 +6,13 @@ import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.utils.Network;
+
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableIntegerValue;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -44,7 +43,6 @@ public class ServerConfiguration extends Application {
     private ObservableList<String> modesString = FXCollections.observableArrayList(new ArrayList<>(GameModeManager.getInstance().getGameModes().keySet()));
     
     private ObservableList<String> ipAddressesString = FXCollections.observableArrayList(new ArrayList<>(Network.getIPv4Interfaces().keySet()));
-
 
     @FXML
     private ChoiceBox<String> choiceBoxModeName;
@@ -156,7 +154,7 @@ public class ServerConfiguration extends Application {
         buttonResetScores.setDisable(true);
 
         // Tells the Core what mode was selected
-        core.setGameMode(buttonSaveMode.getText());
+        core.setGameMode(choiceBoxModeName.getValue());
 
         informationLabel.setText("Mode saved");
     }
@@ -244,22 +242,19 @@ public class ServerConfiguration extends Application {
 
         informationLabel.setText("");
 
-        choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+        choiceBoxModeName.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
 
-                // Change the interface
-                textFieldModeName.setText(newValue);
-                textFieldInitialScore.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getStartingScore()));
-                textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
-                textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
+            // Change the interface
+            textFieldModeName.setText(newValue);
+            textFieldInitialScore.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getStartingScore()));
+            textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
+            textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
 
-                List<GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects().getGameObjects();
+            List<GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects().getGameObjects();
 
-                checkBoxBonus.setSelected(gameObjects.get(0).getEnabled());
-                checkBoxMalus.setSelected(gameObjects.get(1).getEnabled());
-                checkBoxMystery.setSelected(gameObjects.get(2).getEnabled());
-            }
+            checkBoxBonus.setSelected(gameObjects.get(0).getEnabled());
+            checkBoxMalus.setSelected(gameObjects.get(1).getEnabled());
+            checkBoxMystery.setSelected(gameObjects.get(2).getEnabled());
         });
 
         // Set the interface

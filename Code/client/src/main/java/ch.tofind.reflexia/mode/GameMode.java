@@ -4,11 +4,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * @brief Game Mode class
+ */
 @XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects"})
 @XmlRootElement(name = "mode")
 public class GameMode {
 
-    //! Game mode name
+    //! Game Mode name
     private String name;
 
     //! BestScore to start with
@@ -23,13 +26,19 @@ public class GameMode {
     //! Objects composed by the mode
     private GameObjects gameObjects;
 
+     //! @brief GameMode parameterless constructor
     protected GameMode() {
 
     }
 
     /**
+<<<<<<< HEAD
+     * @brief Game Mode constructor with parameters
+     * @param name name of the mode
+=======
      * @brief Create a game mode
      * @param name Name of the mode
+>>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      * @param startingScore Starting score
      * @param endingScore Ending score
      * @param rounds Number of rounds
@@ -45,8 +54,8 @@ public class GameMode {
     }
 
     /**
-     * @brief  gets the name of the game mode
-     * @return name
+     * @brief gets the name of a game mode
+     * @return the name of the mode
      */
     @XmlElement(name = "name")
     public String getName() {
@@ -54,16 +63,16 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the name of the game mode
-     * @param name
+     * @brief sets the name of a game mode
+     * @param name of a game mode
      */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
-     * @brief gets the starting score
-     * @return starting score
+     * @brief gets the starting score of a game mode
+     * @return the starting score
      */
     @XmlElement(name = "startingScore")
     public Integer getStartingScore() {
@@ -71,28 +80,32 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the starting score
-     * @param startingScore
+     * @brief sets the starting score of a game mode
      */
     public void setStartingScore(Integer startingScore) {
         this.startingScore = startingScore;
     }
 
     /**
-     * @brief gets the ending score
-     * @return ending score
+     * @brief gets the ending score of a game mode
+     * @return the ending score
      */
     @XmlElement(name = "endingScore")
     public Integer getEndingScore() {
         return endingScore;
     }
+
+    /**
+     * @brief gets the ending score of a game mode
+     * @return the ending score
+     */
     public void setEndingScore(Integer endingScore) {
         this.endingScore = endingScore;
     }
 
     /**
-     * @brief gets the round number
-     * @return round
+     * @brief gets the number of rounds of a game mode
+     * @return the number of rounds
      */
     @XmlElement(name = "rounds")
     public Integer getRounds() {
@@ -100,16 +113,16 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the number of rounds
-     * @param rounds
+     * @brief sets the rounds of a game mode
+     * @param rounds of a game mode
      */
     public void setRounds(Integer rounds) {
         this.rounds = rounds;
     }
 
     /**
-     * @brief gets the game object
-     * @return game object
+     * @brief gets the gameObjects attributes of game mode
+     * @return the objects composed by the game mode
      */
     @XmlElement(name = "gameObjects")
     public GameObjects getGameObjects() {
@@ -117,7 +130,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the game object
+     * @brief sets the gameObjects attributes of game mode
      * @param gameObjects
      */
     public void setGameObjects(GameObjects gameObjects) {
@@ -125,13 +138,17 @@ public class GameMode {
     }
 
     /**
-     * 
+     * @brief adds a gameObject to the gameObjects of a game mode
      * @param gameObject
      */
     public void addGameObject(GameObject gameObject) {
         gameObjects.add(gameObject);
     }
 
+    /**
+     * @brief toString overloaded method for game mode
+     * @return a string representation of the game mode
+     */
     @Override
     public String toString() {
         return "GameMode"                           + '\n' + '\t' +

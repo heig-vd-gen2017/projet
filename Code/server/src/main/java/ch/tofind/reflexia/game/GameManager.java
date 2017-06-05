@@ -1,5 +1,7 @@
 package ch.tofind.reflexia.game;
 
+import ch.tofind.reflexia.errors.LobbyClosed;
+import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import javafx.beans.InvalidationListener;
@@ -26,6 +28,9 @@ public class GameManager {
     //! list of players
     private List<Player> players;
 
+    //! Accept or not new players
+    private boolean acceptPlayers;
+
     //! number of players connected
     private IntegerProperty nbPlayers = new SimpleIntegerProperty(0);
 
@@ -34,6 +39,7 @@ public class GameManager {
      */
     private GameManager() {
         this.players = new ArrayList<>();
+        this.acceptPlayers = false;
     }
 
     /**
@@ -53,12 +59,36 @@ public class GameManager {
         return instance;
     }
 
+    public void acceptPlayers() {
+        acceptPlayers = true;
+    }
+
+    public void refusePlayers() {
+        acceptPlayers = false;
+    }
+
+    public void reset() {
+        players.clear();
+    }
+
     /**
      * @brief adds a player
      * @param player
      */
-    public void addPlayer(Player player) {
+    public void addPlayer(String pseudo) throws LobbyClosed, UsernameTaken {
+
+        if (!acceptPlayers) {
+            throw new LobbyClosed("No more players can be accepted");
+        }
+
+        Player player = new Player(pseudo, 0);
+
+        if (players.contains(player)) {
+            throw new UsernameTaken("Username already taken");
+        }
+
         players.add(player);
+
         nbPlayers.setValue(players.size());
     }
 
@@ -68,6 +98,13 @@ public class GameManager {
      */
     public IntegerProperty getNumberOfPlayers() {
         return nbPlayers;
+    }
+
+    /**
+     * @brief gets the game mode
+     */
+    public GameMode getGameMode() {
+        return gameMode;
     }
 
     /**

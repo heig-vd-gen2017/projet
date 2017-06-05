@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="295.0" maxWidth="500.0" minHeight="295.0" minWidth="500.0" prefHeight="295.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.tofind.reflexia.ui.ClientConnexion">
+<AnchorPane maxHeight="295.0" maxWidth="500.0" minHeight="295.0" minWidth="500.0" prefHeight="295.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.tofind.reflexia.ui.ClientConnexion">
     <children>
         <GridPane prefHeight="350.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <columnConstraints>
@@ -20,7 +20,7 @@
                 <RowConstraints maxHeight="75.0" minHeight="75.0" prefHeight="75.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="150.0" minHeight="150.0" prefHeight="150.0" vgrow="SOMETIMES" />
                 <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -43,8 +43,9 @@
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             </rowConstraints>
                             <children>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0">
@@ -63,7 +64,7 @@
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1">
                                     <children>
-                                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="Adresse IP" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                        <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="Serveur" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                             <font>
                                                 <Font name="Courier New Bold" size="17.0" />
                                             </font>
@@ -71,9 +72,9 @@
                                     </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                           <children>
-                              <ChoiceBox fx:id="choiceBoxIpAddress" layoutX="77.0" layoutY="2.0" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                           </children>
+                                    <children>
+                                        <TextField fx:id="textFieldServerIP" layoutX="14.0" layoutY="12.0" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                    </children>
                                 </AnchorPane>
                                 <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="2">
                                     <children>
@@ -91,37 +92,51 @@
                                 </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                            <children>
-                              <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="250.0" text="Adresse multicast" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                              <Label alignment="CENTER_RIGHT" contentDisplay="CENTER" prefHeight="39.0" prefWidth="250.0" text="Interface réseau" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
                                  <font>
                                     <Font name="Courier New Bold" size="17.0" />
                                  </font>
                               </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                            <children>
-                              <Label alignment="CENTER_RIGHT" layoutX="128.0" layoutY="13.0" text="Port multicast" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
-                                 <font>
-                                    <Font name="Courier New Bold" size="17.0" />
-                                 </font>
-                              </Label>
+                                        <ChoiceBox fx:id="choiceBoxNetworkInterface" prefWidth="150.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                           </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="4">
+                                    <children>
+                                        <Label alignment="CENTER_RIGHT" layoutX="128.0" layoutY="13.0" text="Port multicast" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                            <font>
+                                                <Font name="Courier New Bold" size="17.0" />
+                                            </font>
+                                        </Label>
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <children>
+                                        <TextField fx:id="textFieldMulticastPort" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                    </children>
+                                </AnchorPane>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="5">
+                           <children>
+                                        <Label alignment="CENTER_RIGHT" prefHeight="39.0" prefWidth="250.0" text="Adresse multicast" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                            <font>
+                                                <Font name="Courier New Bold" size="17.0" />
+                                            </font>
+                                        </Label>
                            </children>
                         </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                            <children>
-                              <TextField fx:id="textFieldMulticastAddress" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                           <children>
-                              <TextField fx:id="textFieldMulticastPort" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                        <TextField fx:id="textFieldMulticastAddress" prefHeight="39.0" prefWidth="252.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                            </children>
                         </AnchorPane>
                             </children>
                         </GridPane>
                     </children>
                 </AnchorPane>
-                <AnchorPane maxHeight="35.0" maxWidth="300.0" minHeight="35.0" minWidth="300.0" prefHeight="35.0" prefWidth="300.0" GridPane.rowIndex="2">
+                <AnchorPane maxHeight="35.0" minHeight="35.0" prefHeight="35.0" GridPane.rowIndex="2">
                     <children>
                         <GridPane prefHeight="35.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-200.0" AnchorPane.topAnchor="0.0">
                             <columnConstraints>
@@ -144,15 +159,15 @@
                         </GridPane>
                     </children>
                 </AnchorPane>
-            <AnchorPane maxHeight="35.0" maxWidth="500.0" minHeight="35.0" minWidth="500.0" prefHeight="35.0" prefWidth="500.0" GridPane.rowIndex="3">
-               <children>
-                  <Label fx:id="labelInformation" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="9.0" text="Information" textFill="RED" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="9.0">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-               </children>
-            </AnchorPane>
+                <AnchorPane maxHeight="35.0" maxWidth="500.0" minHeight="35.0" minWidth="500.0" prefHeight="35.0" prefWidth="500.0" GridPane.rowIndex="3">
+                    <children>
+                        <Label fx:id="labelInformation" alignment="CENTER" contentDisplay="CENTER" layoutX="216.0" layoutY="9.0" text="Information" textFill="RED" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="216.0" AnchorPane.rightAnchor="216.0" AnchorPane.topAnchor="9.0">
+                            <font>
+                                <Font name="System Bold" size="12.0" />
+                            </font>
+                        </Label>
+                    </children>
+                </AnchorPane>
             </children>
         </GridPane>
     </children>

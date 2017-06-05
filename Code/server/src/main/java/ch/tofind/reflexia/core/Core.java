@@ -1,6 +1,8 @@
 package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.database.DatabaseManager;
+import ch.tofind.reflexia.errors.LobbyClosed;
+import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameMode;
@@ -8,6 +10,7 @@ import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
+import ch.tofind.reflexia.network.UnicastClient;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
@@ -19,6 +22,7 @@ import org.hibernate.query.Query;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
+import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,13 +36,19 @@ public class Core implements ICore {
     private static Core instance = null;
 
     //! Multicast client to send commands via multicast.
-    MulticastClient multicast;
+    private MulticastClient multicast;
+
+    //! Unicast client to send commands via unicast.
+    private UnicastClient client;
 
     //! The server.
-    Server server;
+    private Server server;
 
     //! The game manager.
-    GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager = GameManager.getInstance();
+
+    //! Porte used for unicast
+    private int unicastPort;
 
     /**
      * @brief Core single constructor. Avoid the instantiation.
@@ -89,13 +99,15 @@ public class Core implements ICore {
 
         InetAddress ipAddress = Network.getIPv4Interfaces().get(ipAddressName);
 
-        int unicastPort = Integer.valueOf(unicastPortString);
+        unicastPort = Integer.valueOf(unicastPortString);
 
         int multicastPort = Integer.valueOf(multicastPortString);
 
         start(multicastAddress, multicastPort, ipAddress, unicastPort);
 
         LOG.info("Server is started.");
+
+        gameManager.acceptPlayers();
     }
 
     /**
@@ -124,6 +136,8 @@ public class Core implements ICore {
         stop();
         LOG.info("The server is shutdown.");
 
+        gameManager.reset();
+        gameManager.refusePlayers();
     }
 
     /**
@@ -141,12 +155,11 @@ public class Core implements ICore {
         DatabaseManager.getInstance().execute(deleteScoresBeforeDate);
 
         LOG.info("The scores are reset.");
-
     }
 
     /**
      * @brief makes a player join the game
-     * @param args
+     * @param args Arguments of the command.
      * @return
      */
     public String JOIN(ArrayList<Object> args) {
@@ -155,23 +168,36 @@ public class Core implements ICore {
 
         String pseudo = (String) args.remove(0);
 
-        LOG.info(pseudo);
+        try {
+            GameManager.getInstance().addPlayer(pseudo);
+        } catch (LobbyClosed e) {
+            return ApplicationProtocol.GAME_FULL + NetworkProtocol.END_OF_LINE +
+                    NetworkProtocol.END_OF_COMMAND;
+        } catch (UsernameTaken e) {
+            return ApplicationProtocol.USERNAME_USED + NetworkProtocol.END_OF_LINE +
+                    NetworkProtocol.END_OF_COMMAND;
+        }
 
-        Player player = new Player(pseudo, 0);
+        GameMode gameMode = gameManager.getGameMode();
 
-        GameManager.getInstance().addPlayer(player);
-
-        IntegerProperty nbPlayers = GameManager.getInstance().getNumberOfPlayers();
-
-        //ServerConfiguration.updateNbPlayer();
-
-        LOG.info("Player '" + pseudo + "' has joined the game.");
-        LOG.info("Number of players: " + nbPlayers);
-
+        String gameModeJson = Serialize.serialize(gameMode);
 
         return ApplicationProtocol.JOINED + NetworkProtocol.END_OF_LINE +
-                100 + NetworkProtocol.END_OF_LINE +
+                gameModeJson + NetworkProtocol.END_OF_LINE +
                 NetworkProtocol.END_OF_COMMAND;
+    }
+
+    /**
+     * @brief Get the player who touched the object, the object and its time.
+     * @param args Arguments of the command.
+     * @return The result of the command.
+     */
+    public String OBJECT_TOUCHED(ArrayList<Object> args) {
+
+        String pseudo = (String) args.remove(0);
+
+
+        return "";
     }
 
     /**
@@ -195,7 +221,7 @@ public class Core implements ICore {
     /**
      * @brief Execute the command on the core.
      * @param command The command to execute.
-     * @param args The arguments of the command.
+     * @param args Arguments of the command. The arguments of the command.
      */
     @Override
     public String execute(String command, ArrayList<Object> args) {

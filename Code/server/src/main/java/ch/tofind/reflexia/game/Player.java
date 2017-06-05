@@ -1,5 +1,7 @@
 package ch.tofind.reflexia.game;
 
+import java.util.Objects;
+
 /**
  * @brief This class represents a player
  */
@@ -34,6 +36,22 @@ public class Player {
      */
     public Integer getScore() {
         return score;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+
+        if (object == this) {
+            return true;
+        }
+
+        if (!(object instanceof Player)) {
+            return false;
+        }
+
+        Player player = (Player) object;
+
+        return Objects.equals(pseudo, player.pseudo);
     }
 
     /**
