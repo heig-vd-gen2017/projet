@@ -92,9 +92,11 @@ public class ObjectRandomizer implements Runnable {
                 e.printStackTrace();
             }
 
-            multicastClient.send(ApplicationProtocol.SEND_OBJECT + NetworkProtocol.END_OF_LINE +
-            randomObjectJson + NetworkProtocol.END_OF_LINE +
-            NetworkProtocol.END_OF_COMMAND);
+            if (multicastClient != null) {
+                multicastClient.send(ApplicationProtocol.SEND_OBJECT + NetworkProtocol.END_OF_LINE +
+                        randomObjectJson + NetworkProtocol.END_OF_LINE +
+                        NetworkProtocol.END_OF_COMMAND);
+            }
         }
     }
 }

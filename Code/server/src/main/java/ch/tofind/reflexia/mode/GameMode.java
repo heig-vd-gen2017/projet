@@ -27,7 +27,7 @@ public class GameMode {
     private GameObjects gameObjects;
 
      //! @brief GameMode parameterless constructor
-    protected GameMode() {
+    private GameMode() {
 
     }
 
