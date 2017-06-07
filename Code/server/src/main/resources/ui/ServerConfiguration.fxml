@@ -30,8 +30,8 @@
             <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
          <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
         </rowConstraints>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0">
-            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="90.0" maxWidth="600.0" minHeight="90.0" minWidth="600.0" prefHeight="90.0" prefWidth="600.0" text="Reflexia" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane maxHeight="75.0" maxWidth="600.0" minHeight="75.0" minWidth="600.0" prefHeight="75.0" prefWidth="600.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="75.0" maxWidth="600.0" minHeight="75.0" minWidth="600.0" prefHeight="75.0" prefWidth="600.0" text="Reflexia" textAlignment="CENTER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                 <font>
                     <Font name="Courier New Bold" size="63.0" />
                 </font>
@@ -165,7 +165,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                             <children>
-                                <ChoiceBox fx:id="choiceBoxModeName" layoutX="57.0" layoutY="1.0" onInputMethodTextChanged="#modeSelected" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
+                                <ChoiceBox fx:id="choiceBoxModeName" layoutX="57.0" layoutY="1.0" prefHeight="28.0" prefWidth="356.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0" />
                             </children>
                         </AnchorPane>
                     </children>
