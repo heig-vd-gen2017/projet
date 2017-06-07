@@ -155,7 +155,7 @@ public class Core implements ICore {
 
         Session session = DatabaseManager.getInstance().getSession();
 
-        Query deleteScoresBeforeDate = session.createQuery("DELETE Score WHERE date <= :date");
+        Query deleteScoresBeforeDate = session.createQuery("DELETE PlayersScores WHERE date <= :date");
 
         deleteScoresBeforeDate.setParameter("date", date);
 

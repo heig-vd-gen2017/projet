@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.game;
+package ch.tofind.reflexia.database;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * This class represents an audio track.
  */
-public class Score implements Serializable {
+public class PlayersScores implements Serializable {
 
     //! ID of the record in the database
     private Integer id;
@@ -31,7 +31,7 @@ public class Score implements Serializable {
     /**
      * Empty constructor for Hibernate.
      */
-    protected Score() {
+    protected PlayersScores() {
 
     }
 
@@ -42,7 +42,7 @@ public class Score implements Serializable {
      * @param mode The mode.
      * @param score The score.
      */
-    public Score(String player, String mode, Integer score) {
+    public PlayersScores(String player, String mode, Integer score) {
         this.player = player;
         this.mode = mode;
         this.score = score;
@@ -56,16 +56,16 @@ public class Score implements Serializable {
             return true;
         }
 
-        if (!(object instanceof Score)) {
+        if (!(object instanceof PlayersScores)) {
             return false;
         }
 
-        Score score = (Score) object;
+        PlayersScores playersScores = (PlayersScores) object;
 
-        return Objects.equals(id, score.id)          &&
-                Objects.equals(player, score.player) &&
-                Objects.equals(mode, score.mode)     &&
-                Objects.equals(score, score.score);
+        return Objects.equals(id, playersScores.id)          &&
+                Objects.equals(player, playersScores.player) &&
+                Objects.equals(mode, playersScores.mode)     &&
+                Objects.equals(playersScores, playersScores.score);
     }
 
     @Override
@@ -80,10 +80,10 @@ public class Score implements Serializable {
 
         String dateAddedString = date == null ? "N/A" : dateFormat.format(date);
 
-        return "Score"                  + '\n' + '\t' +
+        return "PlayersScores"                  + '\n' + '\t' +
                "Player.....: " + player + '\n' + '\t' +
                "Mode.......: " + mode   + '\n' + '\t' +
-               "Score......: " + score  + '\n' + '\t' +
+               "PlayersScores......: " + score  + '\n' + '\t' +
                "Date.......: " + date   + '\n';
     }
 }

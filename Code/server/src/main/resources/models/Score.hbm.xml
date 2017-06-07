@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class name="ch.tofind.reflexia.game.Score" table="score">
+    <class name="ch.tofind.reflexia.database.PlayersScores" table="playersScores">
         <meta attribute="class-description">
             This class represents the scores of all players
         </meta>
@@ -14,7 +14,7 @@
         <version name="version" column="version"/>
         <property name="player" column="player" type="string" length="50" not-null="true"/>
         <property name="mode" column="mode" type="string" length="50" not-null="true"/>
-        <property name="score" column="score" type="int" not-null="true"/>
+        <property name="playersScores" column="playersScores" type="int" not-null="true"/>
         <property name="date" column="date" type="date" not-null="true"/>
     </class>
 </hibernate-mapping>
