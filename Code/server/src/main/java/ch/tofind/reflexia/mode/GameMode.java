@@ -32,13 +32,8 @@ public class GameMode {
     }
 
     /**
-<<<<<<< HEAD
-     * @brief Game Mode constructor with parameters
-     * @param name name of the mode
-=======
      * @brief Create a game mode
      * @param name Name of the mode
->>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      * @param startingScore Starting score
      * @param endingScore Ending score
      * @param rounds Number of rounds

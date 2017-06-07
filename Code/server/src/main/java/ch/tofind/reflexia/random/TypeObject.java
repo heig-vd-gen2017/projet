@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.utils;
+package ch.tofind.reflexia.random;
 
 /**
  * This enumeration represents the type of game object of the application.
@@ -11,10 +11,6 @@ public enum TypeObject {
     MYSTERY;
 
     public String toString() {
-        StringBuilder str = new StringBuilder();
-
-        str.append(name().charAt(0)).append(name().substring(1).toLowerCase());
-
-        return str.toString();
+        return name().toLowerCase().toString();
     }
 }

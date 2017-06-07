@@ -1,4 +1,6 @@
-package ch.tofind.reflexia.utils;
+package ch.tofind.reflexia.random;
+
+import ch.tofind.reflexia.random.Point;
 
 /**
  * This class represents an random game object to send to the client.
@@ -16,21 +18,16 @@ public class RandomObject {
     //! current point of the game object
     private Point point;
 
-    //! game object timeout
-    private Integer timeout;
-
     /**
      * Initialisation constructor.
      *
      * @param type    type of the game object
      * @param point   position point of the game object
-     * @param timeout timeout of the game object
      */
-    public RandomObject(Integer id, String type, Point point, Integer timeout) {
+    public RandomObject(Integer id, String type, Point point) {
         this.id      = id;
         this.type    = type;
         this.point   = point;
-        this.timeout = timeout;
     }
 
     /**
@@ -61,15 +58,6 @@ public class RandomObject {
     }
 
     /**
-     * Getter.
-     *
-     * @return the timeout of the game object
-     */
-    public Integer getTimeout() {
-        return timeout;
-    }
-
-    /**
      * Setter.
      *
      * @param type the type of the game object
@@ -85,14 +73,5 @@ public class RandomObject {
      */
     public void setPoint(Point point) {
         this.point = point;
-    }
-
-    /**
-     * Setter.
-     *
-     * @param timeout the timeout of the game object
-     */
-    public void setTimeout(Integer timeout) {
-        this.timeout = timeout;
     }
 }

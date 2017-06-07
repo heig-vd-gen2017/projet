@@ -72,8 +72,8 @@ public class GameManager {
     }
 
     /**
-     * @brief adds a player
-     * @param player
+     * @brief Adds a player to the game.
+     * @param pseudo Player's name.
      */
     public void addPlayer(String pseudo) throws LobbyClosed, UsernameTaken {
 

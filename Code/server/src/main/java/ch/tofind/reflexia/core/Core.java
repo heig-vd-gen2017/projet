@@ -11,6 +11,8 @@ import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
 import ch.tofind.reflexia.network.UnicastClient;
+import ch.tofind.reflexia.random.ObjectRandomizer;
+import ch.tofind.reflexia.random.RandomObject;
 import ch.tofind.reflexia.ui.ServerConfiguration;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
@@ -45,7 +47,9 @@ public class Core implements ICore {
     private Server server;
 
     //! The game manager.
-    private GameManager gameManager = GameManager.getInstance();
+    private GameManager gameManager;
+
+    private ObjectRandomizer objectRandomizer;
 
     //! Porte used for unicast
     private int unicastPort;
@@ -54,7 +58,7 @@ public class Core implements ICore {
      * @brief Core single constructor. Avoid the instantiation.
      */
     private Core() {
-
+        gameManager = GameManager.getInstance();
     }
 
     /**
@@ -120,6 +124,9 @@ public class Core implements ICore {
         // Multicast send BEGIN command
         multicast.send(ApplicationProtocol.BEGIN_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
 
+        objectRandomizer = new ObjectRandomizer(multicast);
+
+        new Thread(objectRandomizer).start();
     }
 
     /**
@@ -169,7 +176,7 @@ public class Core implements ICore {
         String pseudo = (String) args.remove(0);
 
         try {
-            GameManager.getInstance().addPlayer(pseudo);
+            gameManager.addPlayer(pseudo);
         } catch (LobbyClosed e) {
             return ApplicationProtocol.GAME_FULL + NetworkProtocol.END_OF_LINE +
                     NetworkProtocol.END_OF_COMMAND;
@@ -250,6 +257,10 @@ public class Core implements ICore {
         if (multicast != null) {
             multicast.stop();
             multicast = null;
+        }
+
+        if (objectRandomizer != null) {
+            objectRandomizer.stop();
         }
 
         if (server != null) {

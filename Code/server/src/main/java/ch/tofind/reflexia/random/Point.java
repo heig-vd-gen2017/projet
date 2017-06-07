@@ -1,15 +1,14 @@
-package ch.tofind.reflexia.utils;
+package ch.tofind.reflexia.random;
 
 import java.util.Random;
 
-/**
- * @author Luca Sivillica
- */
+
 public class Point {
-    //!
+
+    //! X position of the point
     private Integer x;
 
-    //!
+    //! Y position of the point
     private Integer y;
 
     Point(Integer x, Integer y) {
