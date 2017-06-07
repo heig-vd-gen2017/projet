@@ -14,6 +14,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 
@@ -70,7 +71,7 @@ public class ClientGame extends Application {
 
     @FXML
     public void newObject(MouseEvent event) {
-        addObject(-20, 0);
+        addObject("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png", -20, 0);
     }
 
     /**
@@ -78,8 +79,10 @@ public class ClientGame extends Application {
      * @param posX maxPosX = 250, minPosX = -20
      * @param posY maxPosY = 230, minPosY = 0
      */
-    public void addObject(int posX, int posY) {
-        ImageView iv = new ImageView(new Image("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png"));
+    public void addObject(String uri, int posX, int posY) {
+        File file = new File(uri);
+        Image image = new Image(file.toURI().toString());
+        ImageView iv = new ImageView(image);
         iv.relocate(posX, posY);
         paneGame.getChildren().add(iv);
     }
