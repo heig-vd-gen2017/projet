@@ -2,6 +2,7 @@ package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -37,6 +38,9 @@ public class ClientGame extends Application {
     @FXML
     TableView<String> tableViewScores;
 
+    @FXML
+    Button newImageButton;
+
     public void start(Stage stage) throws IOException {
         classStage = stage;
 
@@ -71,7 +75,9 @@ public class ClientGame extends Application {
 
     @FXML
     public void newObject(MouseEvent event) {
-        addObject("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png", -20, 0);
+        // Pour exemple
+        addObject("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png", 50, 50);
+        System.out.print("Adding new object!");
     }
 
     /**
@@ -80,11 +86,16 @@ public class ClientGame extends Application {
      * @param posY maxPosY = 230, minPosY = 0
      */
     public void addObject(String uri, int posX, int posY) {
-        File file = new File(uri);
-        Image image = new Image(file.toURI().toString());
-        ImageView iv = new ImageView(image);
+        ImageView iv = new ImageView(uri);
         iv.relocate(posX, posY);
         paneGame.getChildren().add(iv);
+
+        iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                paneGame.getChildren().remove(iv);
+            }
+        });
     }
 
     @Override
