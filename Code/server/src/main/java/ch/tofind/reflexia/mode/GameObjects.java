@@ -25,8 +25,7 @@ public class GameObjects {
      * games objetcs constructor with parameters
      * @param gameObjects list of game object
      */
-    public GameObjects(List<GameObject> gameObjects){
-        super();
+    public GameObjects(List<GameObject> gameObjects) {
         this.gameObjects = gameObjects;
     }
 

@@ -25,7 +25,6 @@ public class InterfaceObject {
      * @param timeout Time to show on the interface.
      */
     public InterfaceObject(String type, Integer timeout) {
-        super();
         this.type = type;
         this.timeout = timeout;
     }

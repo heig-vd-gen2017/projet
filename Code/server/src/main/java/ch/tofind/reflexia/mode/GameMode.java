@@ -54,7 +54,6 @@ public class GameMode {
      * @param gameObjects Objects composed by the game mode
      */
     public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
-        super();
         this.name = name;
         this.startingScore = startingScore;
         this.endingScore = endingScore;

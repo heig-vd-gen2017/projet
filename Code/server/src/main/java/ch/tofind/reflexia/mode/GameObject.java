@@ -35,11 +35,10 @@ public class GameObject {
      * @param timeout
      */
     public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
-        super();
         this.type = type;
+        this.enabled = enabled;
         this.points = points;
         this.timeout = timeout;
-        this.enabled = enabled;
     }
 
     /**
