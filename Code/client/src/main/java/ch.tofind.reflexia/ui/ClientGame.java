@@ -1,10 +1,18 @@
 package ch.tofind.reflexia.ui;
 
 import ch.tofind.reflexia.core.Core;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,18 +22,15 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-
-public class ClientGame extends Application {
-
-    private static Core core = Core.getInstance();
+public class ClientGame extends Application implements Initializable {
 
     private static FXMLLoader loader = new FXMLLoader();
 
-    private static final String FXML_FILE_2 = "ui/ClientGame.fxml";
+    private static final String FXML_FILE = "ui/ClientGame.fxml";
+
+    private static Core core = Core.getInstance();
 
     static Stage classStage = new Stage();
 
@@ -38,19 +43,23 @@ public class ClientGame extends Application {
     @FXML
     TableView<String> tableViewScores;
 
-    @FXML
-    Button newImageButton;
+    /**
+     * Returns the controller for the current interface.
+     *
+     * @return The controller for the current interface.
+     */
+    public static ClientGame getController() {
+        return loader.getController();
+    }
 
     public void start(Stage stage) throws IOException {
-        classStage = stage;
-
-        URL fileURL = getClass().getClassLoader().getResource(FXML_FILE_2);
+        URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
 
         if (fileURL == null) {
             throw new NullPointerException("FXML file not found.");
         }
 
-        Parent root = null;
+        Parent root;
 
         try {
             root = loader.load(fileURL);
@@ -60,11 +69,16 @@ public class ClientGame extends Application {
 
         Scene scene = new Scene(root);
 
-        classStage.setTitle("Reflexia");
-        classStage.setResizable(false);
-        classStage.setScene(scene);
+        stage.setTitle("Reflexia");
+        stage.setResizable(false);
+        stage.setScene(scene);
 
-        classStage.show();
+        stage.show();
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loader.setController(this);
     }
 
     @FXML
@@ -73,28 +87,32 @@ public class ClientGame extends Application {
         stage.close();
     }
 
-    @FXML
-    public void newObject(MouseEvent event) {
-        // Pour exemple
-        addObject("http://icons.iconarchive.com/icons/kidaubis-design/cool-heroes/128/Ironman-icon.png", 50, 50);
-        System.out.print("Adding new object!");
-    }
-
     /**
-     *
-     * @param posX maxPosX = 250, minPosX = -20
-     * @param posY maxPosY = 230, minPosY = 0
+     * Add an object to the surface
      */
-    public void addObject(String uri, int posX, int posY) {
-        ImageView iv = new ImageView(uri);
-        iv.relocate(posX, posY);
-        paneGame.getChildren().add(iv);
+    public void addObject(Integer id, String imagePath, Integer imagePosX, Integer imagePosY, Integer timeToShow) {
 
-        iv.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                paneGame.getChildren().remove(iv);
-            }
+        File imageFile = new File(imagePath);
+
+        String imageUri = imageFile.toURI().toString();
+        Image img = new Image(imageUri);
+        ImageView gameObject = new ImageView(img);
+
+        gameObject.relocate(imagePosX, imagePosY);
+
+        /*
+        PauseTransition delay = new PauseTransition(Duration.millis(timeToShow));
+
+        delay.setOnFinished(event -> {
+            paneGame.getChildren().remove(gameObject);
+        });
+        */
+        paneGame.getChildren().add(gameObject);
+
+        //delay.play();
+
+        gameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            paneGame.getChildren().remove(gameObject);
         });
     }
 

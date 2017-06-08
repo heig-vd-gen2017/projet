@@ -2,12 +2,21 @@ package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameMode;
+import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.mode.RandomGameObject;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.UnicastClient;
+import ch.tofind.reflexia.ui.ClientGame;
+import ch.tofind.reflexia.utils.Configuration;
 import ch.tofind.reflexia.utils.Network;
+import ch.tofind.reflexia.utils.Point;
 import ch.tofind.reflexia.utils.Serialize;
+import javafx.application.Platform;
+import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
+import java.io.File;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.ConnectException;
@@ -137,7 +146,41 @@ public class Core implements ICore {
     }
 
     public String SHOW_OBJECT(ArrayList<Object> args) {
-        System.out.println("Object received: " + args.get(0));
+
+        String randomGameObjectJson = (String) args.get(0);
+
+        GameMode gameMode = gameManager.getGameMode();
+
+        ClientGame clientGame = ClientGame.getController();
+
+        RandomGameObject randomGameObject = Serialize.unserialize(randomGameObjectJson, RandomGameObject.class);
+
+        String type = randomGameObject.getType();
+
+        Point position = randomGameObject.getPoint();
+
+        GameObject gameObject = null;
+        for(GameObject gameObjectData : gameMode.getGameObjects().getGameObjects()) {
+            if (gameObjectData.getType().equals(type)) {
+                gameObject = gameObjectData;
+                break;
+            }
+        }
+
+        String gameObjectImagePath = System.getProperty("user.dir") + File.separator + Configuration.getInstance().get("MODES_PATH") + File.separator +
+                gameMode.getName() + File.separator +
+                type + ".png";
+
+        Integer gameObjectId = randomGameObject.getId();
+        Integer gameObjectPosX = position.getX();
+        Integer gameObjectPosY = position.getY();
+        Integer gameObjectTimeout = gameObject.getTimeout();
+
+        // Delegate work to JavaFX thread.
+        Platform.runLater(() -> {
+            clientGame.addObject(gameObjectId, gameObjectImagePath, gameObjectPosX, gameObjectPosY, gameObjectTimeout);
+        });
+
         return "";
     }
 

@@ -19,16 +19,16 @@ public class GameObjectRandomizer implements Runnable {
     public final static Integer SIZE_OBJECT  = 64;
 
     //! minimum position of the coordinate of x
-    public final static Integer MIN_POS_X = -20 + SIZE_OBJECT / 2;
+    public final static Integer MIN_POS_X = 0;
 
     //! maximum position of the coordinate of x
-    public final static Integer MAX_POS_X = 250 - SIZE_OBJECT / 2;
+    public final static Integer MAX_POS_X = 360 - SIZE_OBJECT;
 
     //! minimum position of the coordinate of y
-    public final static Integer MIN_POS_Y = 0 + SIZE_OBJECT / 2;
+    public final static Integer MIN_POS_Y = 0;
 
     //! maximum position of the coordinate of y
-    public final static Integer MAX_POS_Y = 230 - SIZE_OBJECT / 2;
+    public final static Integer MAX_POS_Y = 360 - SIZE_OBJECT;
 
     //! Mode currently used to play
     private GameMode gameMode;

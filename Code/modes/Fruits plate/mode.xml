@@ -19,6 +19,6 @@
             <enabled>true</enabled>
         </gameObject>
     </gameObjects>
-    <minTimeToSpawn>500</minTimeToSpawn>
-    <maxTimeToSpawn>2500</maxTimeToSpawn>
+    <minTimeToSpawn>300</minTimeToSpawn>
+    <maxTimeToSpawn>1500</maxTimeToSpawn>
 </mode>

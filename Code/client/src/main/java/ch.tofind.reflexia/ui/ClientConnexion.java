@@ -54,6 +54,15 @@ public class ClientConnexion extends Application {
     @FXML
     Button buttonConnect;
 
+    /**
+     * Returns the controller for the current interface.
+     *
+     * @return The controller for the current interface.
+     */
+    public static ClientConnexion getController() {
+        return loader.getController();
+    }
+
     public void start(Stage stage) throws IOException {
         stageGlobal = stage;
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);
@@ -102,9 +111,10 @@ public class ClientConnexion extends Application {
 
                 core.connection(textFieldPseudo.getText(), textFieldServerIP.getText(), textFieldUnicastPort.getText(), choiceBoxNetworkInterface.getValue(), textFieldMulticastAddress.getText(), textFieldMulticastPort.getText());
 
-                ClientGame cg = new ClientGame();
+                ClientGame clientGame = new ClientGame();
+
                 try {
-                    cg.start(ClientGame.classStage);
+                    clientGame.start(ClientGame.classStage);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -4,8 +4,6 @@ import java.util.Random;
 
 public class Point {
 
-    private static Random random = new Random();
-
     //! X position of the point
     private Integer x;
 
@@ -34,6 +32,7 @@ public class Point {
     }
 
     public static Point getRandonPointBetween(Integer minX, Integer maxX, Integer minY, Integer maxY) {
+        Random random = new Random();
 
         Integer x = random.nextInt(maxX - minX + 1) + minX;
         Integer y = random.nextInt(maxY - minY + 1) + minY;

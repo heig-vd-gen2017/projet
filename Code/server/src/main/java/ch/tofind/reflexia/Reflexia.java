@@ -24,12 +24,6 @@ public class Reflexia {
 
     public static void main(String[] args) throws IOException {
 
-        try {
-            Configuration.getInstance().load("reflexia.properties");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         dropDatabase();
 
         Random randomGenerator = new Random();

@@ -9,21 +9,33 @@ import java.util.Properties;
  */
 public class Configuration {
 
-    //! Shared instance of the object for all the application
+    //! Logger for debugging.
+    private static final Logger LOG = new Logger(Configuration.class.getSimpleName());
+
+    //! The configuration file to use.
+    private static final String CONFIG_FILE = "reflexia.properties";
+
+    //! Shared instance of the object for all the application.
     private static Configuration instance = null;
 
     //! Property object to load property from configuration file
     private Properties configuration = null;
 
     /**
-     * @brief Configuration single constructor. Avoid the instantiation.
+     * Configuration single constructor. Avoid the instantiation.
      */
     private Configuration() {
         configuration = new Properties();
+
+        try {
+            configuration.load(new FileInputStream(CONFIG_FILE));
+        } catch (IOException e) {
+            LOG.error(e);
+        }
     }
 
     /**
-     * @brief Get the object instance
+     * Get the object instance
      * @return The instance of the object
      */
     public static Configuration getInstance() {
@@ -40,14 +52,7 @@ public class Configuration {
     }
 
     /**
-     * @brief Load the configuration file to use
-     */
-    public void load(String fileName) throws IOException {
-        configuration.load(new FileInputStream(fileName));
-    }
-
-    /**
-     * @brief Get the property from the configuration file
+     * Get the property from the configuration file
      * @return The property
      */
     public String get(String property) {
