@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @brief Game Mode class
+ * Game Mode class
  */
 @XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects"})
 @XmlRootElement(name = "mode")
@@ -14,25 +14,31 @@ public class GameMode {
     //! Game Mode name
     private String name;
 
-    //! BestScore to start with
+    //! Score to start with
     private Integer startingScore;
 
-    //! BestScore to end with
+    //! Score to end with
     private Integer endingScore;
 
     //! Number of rounds
     private Integer rounds;
 
-    //! Objects composed by the mode
+    //! Game objects composed by the mode
     private GameObjects gameObjects;
 
-     //! @brief GameMode parameterless constructor
+    //! Interface objects composed by the mode
+    private InterfaceObjects interfaceObjects;
+
+    /**
+     * GameMode parameterless constructor
+     */
     private GameMode() {
 
     }
 
     /**
-     * @brief Create a game mode
+     * Create a game mode
+     *
      * @param name Name of the mode
      * @param startingScore Starting score
      * @param endingScore Ending score
@@ -46,10 +52,11 @@ public class GameMode {
         this.endingScore = endingScore;
         this.rounds = rounds;
         this.gameObjects = gameObjects;
+        this.interfaceObjects = new InterfaceObjects();
     }
 
     /**
-     * @brief gets the name of a game mode
+     * gets the name of a game mode
      * @return the name of the mode
      */
     @XmlElement(name = "name")
@@ -58,7 +65,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the name of a game mode
+     * sets the name of a game mode
      * @param name of a game mode
      */
     public void setName(String name) {
@@ -66,7 +73,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the starting score of a game mode
+     * gets the starting score of a game mode
      * @return the starting score
      */
     @XmlElement(name = "startingScore")
@@ -75,14 +82,14 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the starting score of a game mode
+     * sets the starting score of a game mode
      */
     public void setStartingScore(Integer startingScore) {
         this.startingScore = startingScore;
     }
 
     /**
-     * @brief gets the ending score of a game mode
+     * gets the ending score of a game mode
      * @return the ending score
      */
     @XmlElement(name = "endingScore")
@@ -91,7 +98,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the ending score of a game mode
+     * gets the ending score of a game mode
      * @return the ending score
      */
     public void setEndingScore(Integer endingScore) {
@@ -99,7 +106,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the number of rounds of a game mode
+     * gets the number of rounds of a game mode
      * @return the number of rounds
      */
     @XmlElement(name = "rounds")
@@ -108,7 +115,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the rounds of a game mode
+     * sets the rounds of a game mode
      * @param rounds of a game mode
      */
     public void setRounds(Integer rounds) {
@@ -116,7 +123,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the gameObjects attributes of game mode
+     * gets the gameObjects attributes of game mode
      * @return the objects composed by the game mode
      */
     @XmlElement(name = "gameObjects")
@@ -125,7 +132,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the gameObjects attributes of game mode
+     * sets the gameObjects attributes of game mode
      * @param gameObjects
      */
     public void setGameObjects(GameObjects gameObjects) {
@@ -133,7 +140,7 @@ public class GameMode {
     }
 
     /**
-     * @brief adds a gameObject to the gameObjects of a game mode
+     * adds a gameObject to the gameObjects of a game mode
      * @param gameObject
      */
     public void addGameObject(GameObject gameObject) {
@@ -141,7 +148,36 @@ public class GameMode {
     }
 
     /**
-     * @brief toString overloaded method for game mode
+     * gets the gameObjects attributes of game mode
+     * @return the objects composed by the game mode
+     */
+    public InterfaceObjects getInterfaceObjects() {
+        return interfaceObjects;
+    }
+
+    /**
+     * adds a gameObject to the gameObjects of a game mode
+     * @param interfaceObject
+     */
+    public void addInterfaceObject(InterfaceObject interfaceObject) {
+        interfaceObjects.add(interfaceObject);
+    }
+
+    /**
+     * Remove disabled objects from the mode
+     */
+    public void removeDisabledObjects() {
+
+        for (GameObject gameObject : gameObjects.getGameObjects()) {
+
+            if (!gameObject.getEnabled()) {
+                gameObjects.remove(gameObject);
+            }
+        }
+    }
+
+    /**
+     * toString overloaded method for game mode
      * @return a string representation of the game mode
      */
     @Override

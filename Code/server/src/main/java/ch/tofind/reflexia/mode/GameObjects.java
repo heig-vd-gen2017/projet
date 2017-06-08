@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 import java.util.List;
 
 /**
- * @brief game objects class , a list of game object
+ * game objects class , a list of game object
  */
 @XmlType(propOrder = { "gameObjects"})
 @XmlRootElement(name = "gameObjects")
@@ -21,7 +21,7 @@ public class GameObjects {
     }
 
     /**
-     * @brief games objetcs constructor with parameters
+     * games objetcs constructor with parameters
      * @param gameObjects list of game object
      */
     public GameObjects(List<GameObject> gameObjects){
@@ -30,7 +30,7 @@ public class GameObjects {
     }
 
     /**
-     * @brief adds a game object to the game objects parameter
+     * adds a game object to the game objects parameter
      * @param gameObject is a game object
      */
     public void add(GameObject gameObject) {
@@ -38,7 +38,15 @@ public class GameObjects {
     }
 
     /**
-     * @brief gets the list of game objects
+     * Remove a game object from the game objects
+     * @param gameObject The game object to remove.
+     */
+    public void remove(GameObject gameObject) {
+        gameObjects.remove(gameObject);
+    }
+
+    /**
+     * gets the list of game objects
      * @return a list of game objects
      */
     @XmlElement(name = "gameObject")
@@ -47,7 +55,7 @@ public class GameObjects {
     }
 
     /**
-     * @brief sets the list of game objects
+     * sets the list of game objects
      * @param gameObjects the list of game objects
      */
     public void setGameObjects(List<GameObject> gameObjects) {
@@ -55,7 +63,7 @@ public class GameObjects {
     }
 
     /**
-     * @brief toString method for a list of game objects
+     * toString method for a list of game objects
      * @return a string representation of a list of game objects
      */
     @Override

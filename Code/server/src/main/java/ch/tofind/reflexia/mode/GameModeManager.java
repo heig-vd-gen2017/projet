@@ -51,20 +51,23 @@ public class GameModeManager {
 
             for (File gameModeFile : gameModesFiles) {
 
-                GameMode gameGameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
+                GameMode gameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
+                //gameMode.removeDisabledObjects();
 
-                gameGameMode.addGameObject(new GameObject("waiting", true, null, 3000));
-                gameGameMode.addGameObject(new GameObject("starting_in_3", true, null, 2000));
-                gameGameMode.addGameObject(new GameObject("starting_in_2", true, null, 2000));
-                gameGameMode.addGameObject(new GameObject("starting_in_1", true, null, 2000));
-                gameGameMode.addGameObject(new GameObject("start", true, null, 2000));
-                gameGameMode.addGameObject(new GameObject("winner", true, null, null));
-                gameGameMode.addGameObject(new GameObject("loser", true, null, null));
-                gameGameMode.addGameObject(new GameObject("end_of_game", true, null, null));
-                gameGameMode.addGameObject(new GameObject("end_of_round", true, null, null));
-                gameGameMode.addGameObject(new GameObject("background", true, null, null));
+                /*
+                gameMode.addInterfaceObject(new InterfaceObject("waiting", null));
+                gameMode.addInterfaceObject(new InterfaceObject("starting_in_3", 1000));
+                gameMode.addInterfaceObject(new InterfaceObject("starting_in_2", 1000));
+                gameMode.addInterfaceObject(new InterfaceObject("starting_in_1", 1000));
+                gameMode.addInterfaceObject(new InterfaceObject("start", 500));
+                gameMode.addInterfaceObject(new InterfaceObject("winner", null));
+                gameMode.addInterfaceObject(new InterfaceObject("loser", null));
+                gameMode.addInterfaceObject(new InterfaceObject("end_of_game", null));
+                gameMode.addInterfaceObject(new InterfaceObject("end_of_round", null));
+                gameMode.addInterfaceObject(new InterfaceObject("background", null));
+                */
 
-                gameModes.put(gameGameMode.getName(), gameGameMode);
+                gameModes.put(gameMode.getName(), gameMode);
 
             }
 
