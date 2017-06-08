@@ -136,6 +136,11 @@ public class Core implements ICore {
         return "";
     }
 
+    public String SHOW_OBJECT(ArrayList<Object> args) {
+        System.out.println("Object received: " + args.get(0));
+        return "";
+    }
+
     @Override
     public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {
         multicast = new MulticastClient(multicastAddress, multicastPort, interfaceToUse);

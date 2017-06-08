@@ -9,8 +9,6 @@ import ch.tofind.reflexia.utils.Network;
 
 import javafx.application.Application;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

@@ -174,7 +174,7 @@
         </AnchorPane>
         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
             <children>
-                <Button fx:id="buttonSaveMode" layoutX="21.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#saveMode" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le gameMode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="5.0">
+                <Button fx:id="buttonSaveMode" layoutX="21.0" layoutY="5.0" mnemonicParsing="false" onMouseClicked="#saveMode" prefHeight="50.0" prefWidth="600.0" text="Enregistrer le mode de jeu" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="19.0" AnchorPane.topAnchor="5.0">
                     <font>
                         <Font name="Courier New Bold" size="13.0" />
                     </font>
