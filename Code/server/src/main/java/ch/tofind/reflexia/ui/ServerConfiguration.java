@@ -248,11 +248,11 @@ public class ServerConfiguration extends Application {
             textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
             textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
 
-            List<GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects().getGameObjects();
+            Map<String, GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects();
 
-            checkBoxBonus.setSelected(gameObjects.get(0).getEnabled());
-            checkBoxMalus.setSelected(gameObjects.get(1).getEnabled());
-            checkBoxMystery.setSelected(gameObjects.get(2).getEnabled());
+            checkBoxBonus.setSelected(gameObjects.get("bonus").getEnabled());
+            checkBoxMalus.setSelected(gameObjects.get("malus").getEnabled());
+            checkBoxMystery.setSelected(gameObjects.get("mystery").getEnabled());
         });
 
         // Set the interface

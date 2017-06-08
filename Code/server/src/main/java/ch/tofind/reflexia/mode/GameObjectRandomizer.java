@@ -6,9 +6,7 @@ import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.utils.Point;
 import ch.tofind.reflexia.utils.Serialize;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 /**
  * This class represents an object randomizer that allows to generate random game objects to send to the client.
@@ -16,25 +14,28 @@ import java.util.Set;
 public class GameObjectRandomizer implements Runnable {
 
     //! size of the sprite
-    public final static Integer SIZE_OBJECT  = 64;
+    private final static Integer OBJECT_IMAGE_SIZE = 64;
 
     //! minimum position of the coordinate of x
-    public final static Integer MIN_POS_X = 0;
+    private final static Integer MIN_POS_X = 0;
 
     //! maximum position of the coordinate of x
-    public final static Integer MAX_POS_X = 360 - SIZE_OBJECT;
+    private final static Integer MAX_POS_X = 360 - OBJECT_IMAGE_SIZE;
 
     //! minimum position of the coordinate of y
-    public final static Integer MIN_POS_Y = 0;
+    private final static Integer MIN_POS_Y = 0;
 
     //! maximum position of the coordinate of y
-    public final static Integer MAX_POS_Y = 360 - SIZE_OBJECT;
-
-    //! Mode currently used to play
-    private GameMode gameMode;
+    private final static Integer MAX_POS_Y = 360 - OBJECT_IMAGE_SIZE;
 
     //! Multicast where to send the random object
     private MulticastClient multicastClient;
+
+    private Integer minTimeToSpawn;
+
+    private Integer maxTimeToSpawn;
+
+    private List<String> availableGameObjectTypes;
 
     private Set<RandomGameObject> generatedRandomGameObjects;
 
@@ -48,15 +49,26 @@ public class GameObjectRandomizer implements Runnable {
      * Initialisation constructor.
      */
     public GameObjectRandomizer(GameMode gameMode, MulticastClient multicastClient) {
-        this.gameMode = gameMode;
+
+        this.minTimeToSpawn = gameMode.getMinTimeToSpawn();
+        this.maxTimeToSpawn = gameMode.getMaxTimeToSpawn();
         this.multicastClient = multicastClient;
         this.random = new Random();
+        this.availableGameObjectTypes = new ArrayList<>();
         this.generatedRandomGameObjects = new HashSet<>();
         this.running = false;
-    }
 
-    public boolean contains(Integer randomGameObjectId) {
-        return generatedRandomGameObjects.contains(randomGameObjectId);
+        Map<String, GameObject> gameObjects = gameMode.getGameObjects();
+
+        for (Map.Entry<String, GameObject> entry : gameObjects.entrySet()) {
+
+            String gameObjectType = entry.getKey();
+            GameObject gameObject = entry.getValue();
+
+            if (gameObject.getEnabled()) {
+                availableGameObjectTypes.add(gameObjectType);
+            }
+        }
     }
 
     public void stop() {
@@ -73,7 +85,7 @@ public class GameObjectRandomizer implements Runnable {
             RandomGameObject randomGameObject = new RandomGameObject();
             generatedRandomGameObjects.add(randomGameObject);
 
-            Integer timeout = random.nextInt(gameMode.getMaxTimeToSpawn() - gameMode.getMinTimeToSpawn() + 1) + gameMode.getMinTimeToSpawn();
+            Integer timeout = random.nextInt(maxTimeToSpawn - minTimeToSpawn + 1) + minTimeToSpawn;
 
             try {
                 Thread.sleep(timeout);
@@ -102,7 +114,7 @@ public class GameObjectRandomizer implements Runnable {
 
         RandomGameObject() {
             this.id = random.nextInt(Integer.MAX_VALUE);
-            this.type = gameMode.getRandomGameObject().getType();
+            this.type = getRandomGameObject();
             this.point = Point.getRandonPointBetween(MIN_POS_X, MAX_POS_X, MIN_POS_Y, MAX_POS_Y);
         }
 
@@ -116,6 +128,11 @@ public class GameObjectRandomizer implements Runnable {
 
         String getType() {
             return type;
+        }
+
+        public String getRandomGameObject() {
+            int index = random.nextInt(availableGameObjectTypes.size());
+            return availableGameObjectTypes.get(index);
         }
     }
 }

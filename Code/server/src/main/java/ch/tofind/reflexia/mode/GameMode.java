@@ -3,6 +3,8 @@ package ch.tofind.reflexia.mode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -25,7 +27,7 @@ public class GameMode {
     private Integer rounds;
 
     //! Game objects composed by the mode
-    private GameObjects gameObjects;
+    private Map<String, GameObject> gameObjects;
 
     //! Time beetween every object spawn
     private Integer minTimeToSpawn;
@@ -34,14 +36,14 @@ public class GameMode {
     private Integer maxTimeToSpawn;
 
     //! Interface objects composed by the mode
-    private InterfaceObjects interfaceObjects;
+    private Map<String, InterfaceObject> interfaceObjects;
 
     /**
      * GameMode parameterless constructor
      */
     private GameMode() {
-        this.gameObjects = new GameObjects();
-        this.interfaceObjects = new InterfaceObjects();
+        this.gameObjects = new HashMap<>();
+        this.interfaceObjects = new HashMap<>();
     }
 
     /**
@@ -51,18 +53,15 @@ public class GameMode {
      * @param startingScore Starting score
      * @param endingScore Ending score
      * @param rounds Number of rounds
-     * @param gameObjects Objects composed by the game mode
      */
-    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
+    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
         this.name = name;
         this.startingScore = startingScore;
         this.endingScore = endingScore;
         this.rounds = rounds;
-        this.gameObjects = gameObjects;
         this.minTimeToSpawn = minTimeToSpawn;
         this.maxTimeToSpawn = maxTimeToSpawn;
-
-        this.interfaceObjects = new InterfaceObjects();
+        this.interfaceObjects = new HashMap<>();
     }
 
     /**
@@ -137,7 +136,7 @@ public class GameMode {
      * @return the objects composed by the game mode
      */
     @XmlElement(name = "gameObjects")
-    public GameObjects getGameObjects() {
+    public Map<String, GameObject> getGameObjects() {
         return gameObjects;
     }
 
@@ -145,16 +144,8 @@ public class GameMode {
      * sets the gameObjects attributes of game mode
      * @param gameObjects
      */
-    public void setGameObjects(GameObjects gameObjects) {
+    public void setGameObjects(Map<String, GameObject> gameObjects) {
         this.gameObjects = gameObjects;
-    }
-
-    /**
-     * adds a gameObject to the gameObjects of a game mode
-     * @param gameObject
-     */
-    public void addGameObject(GameObject gameObject) {
-        gameObjects.add(gameObject);
     }
 
     /**
@@ -195,7 +186,7 @@ public class GameMode {
      * gets the gameObjects attributes of game mode
      * @return the objects composed by the game mode
      */
-    public InterfaceObjects getInterfaceObjects() {
+    public Map<String, InterfaceObject> getInterfaceObjects() {
         return interfaceObjects;
     }
 
@@ -204,25 +195,7 @@ public class GameMode {
      * @param interfaceObject
      */
     public void addInterfaceObject(InterfaceObject interfaceObject) {
-        interfaceObjects.add(interfaceObject);
-    }
-
-    public GameObject getRandomGameObject() {
-
-        Random random = new Random();
-
-        GameObjects availableGameObjects = new GameObjects();
-
-        for (GameObject gameObject : gameObjects.getGameObjects()) {
-
-            if (gameObject.getEnabled()) {
-                availableGameObjects.add(gameObject);
-            }
-        }
-
-        Integer randomGameObject = random.nextInt(availableGameObjects.getGameObjects().size());
-
-        return availableGameObjects.getGameObjects().get(randomGameObject);
+        interfaceObjects.put(interfaceObject.getType(), interfaceObject);
     }
 
     /**

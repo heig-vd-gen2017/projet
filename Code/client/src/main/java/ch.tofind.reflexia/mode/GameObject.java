@@ -1,27 +1,24 @@
 package ch.tofind.reflexia.mode;
 
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * @brief game object class definition
  */
+@XmlType(propOrder = {"enabled", "points", "timeout"})
 @XmlRootElement(name = "gameObject")
 public class GameObject {
 
-    //! game Object type
-    private String type;
+    //!
+    private Boolean enabled;
 
     //! game Object current points
     private Integer points;
 
     //! game Object timeout
     private Integer timeout;
-
-    //!
-    private Boolean enabled;
-
 
     //! game Object constructor
     protected GameObject() {
@@ -30,33 +27,13 @@ public class GameObject {
 
     /**
      * @brief game object constructor with parameters
-     * @param type
      * @param points
      * @param timeout
      */
-    public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
-        super();
-        this.type = type;
+    public GameObject(Boolean enabled, Integer points, Integer timeout) {
+        this.enabled = enabled;
         this.points = points;
         this.timeout = timeout;
-        this.enabled = enabled;
-    }
-
-    /**
-     * @brief gets the type of a game object
-     * @return the type of a game object
-     */
-    @XmlAttribute(name = "type")
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @brief sets the type of a game object
-     * @param type of a game object
-     */
-    public void setType(String type) {
-        this.type = type;
     }
 
     @XmlElement(name = "enabled")
@@ -111,7 +88,6 @@ public class GameObject {
     public String toString() {
 
         return "Game object"                   + '\n' + '\t' +
-                "Type............: " + type    + '\n' + '\t' +
                 "Points..........: " + points  + '\n' + '\t' +
                 "Enabled.........: " + enabled + '\n' + '\t' +
                 "Timeout.........: " + timeout + '\n';

@@ -5,19 +5,31 @@
     <endingScore>500</endingScore>
     <rounds>10</rounds>
 	<gameObjects>
-        <gameObject type="bonus">
-            <points>50</points>
-            <timeout>1500</timeout>
-            <enabled>true</enabled>
-        </gameObject>
-        <gameObject type="malus">
-            <points>-75</points>
-            <timeout>1500</timeout>
-            <enabled>true</enabled>
-        </gameObject>
-        <gameObject type="mystery">
-            <enabled>true</enabled>
-        </gameObject>
+        <entry>
+            <key>bonus</key>
+            <value>
+                <type>test</type>
+                <points>50</points>
+                <timeout>1500</timeout>
+                <enabled>true</enabled>
+            </value>
+        </entry>
+        <entry>
+            <key>malus</key>
+            <value>
+                <type>test</type>
+                <points>-50</points>
+                <timeout>1500</timeout>
+                <enabled>true</enabled>
+            </value>
+        </entry>
+        <entry>
+            <key>mystery</key>
+            <value>
+                <type>test</type>
+                <enabled>true</enabled>
+            </value>
+        </entry>
     </gameObjects>
     <minTimeToSpawn>300</minTimeToSpawn>
     <maxTimeToSpawn>1500</maxTimeToSpawn>

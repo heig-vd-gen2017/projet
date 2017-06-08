@@ -13,13 +13,10 @@ import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Point;
 import ch.tofind.reflexia.utils.Serialize;
 import javafx.application.Platform;
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 
 import java.io.File;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.ConnectException;
 import java.net.InetAddress;
 import java.util.ArrayList;
 
@@ -159,13 +156,7 @@ public class Core implements ICore {
 
         Point position = randomGameObject.getPoint();
 
-        GameObject gameObject = null;
-        for(GameObject gameObjectData : gameMode.getGameObjects().getGameObjects()) {
-            if (gameObjectData.getType().equals(type)) {
-                gameObject = gameObjectData;
-                break;
-            }
-        }
+        GameObject gameObject = gameMode.getGameObjects().get(type);
 
         String gameObjectImagePath = System.getProperty("user.dir") + File.separator + Configuration.getInstance().get("MODES_PATH") + File.separator +
                 gameMode.getName() + File.separator +

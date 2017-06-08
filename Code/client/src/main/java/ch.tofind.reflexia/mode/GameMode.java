@@ -3,58 +3,68 @@ package ch.tofind.reflexia.mode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * @brief Game Mode class
+ * Game Mode class
  */
-@XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects"})
+@XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects", "minTimeToSpawn", "maxTimeToSpawn"})
 @XmlRootElement(name = "mode")
 public class GameMode {
 
     //! Game Mode name
     private String name;
 
-    //! BestScore to start with
+    //! Score to start with
     private Integer startingScore;
 
-    //! BestScore to end with
+    //! Score to end with
     private Integer endingScore;
 
     //! Number of rounds
     private Integer rounds;
 
-    //! Objects composed by the mode
-    private GameObjects gameObjects;
+    //! Game objects composed by the mode
+    private Map<String, GameObject> gameObjects;
 
-     //! @brief GameMode parameterless constructor
-    protected GameMode() {
+    //! Time beetween every object spawn
+    private Integer minTimeToSpawn;
 
+    //! Time beetween every object spawn
+    private Integer maxTimeToSpawn;
+
+    //! Interface objects composed by the mode
+    private Map<String, InterfaceObject> interfaceObjects;
+
+    /**
+     * GameMode parameterless constructor
+     */
+    private GameMode() {
+        this.gameObjects = new HashMap<>();
+        this.interfaceObjects = new HashMap<>();
     }
 
     /**
-<<<<<<< HEAD
-     * @brief Game Mode constructor with parameters
-     * @param name name of the mode
-=======
-     * @brief Create a game mode
+     * Create a game mode
+     *
      * @param name Name of the mode
->>>>>>> fb4d782ef1807475c7c4f4c773d248cf4dcbf9cc
      * @param startingScore Starting score
      * @param endingScore Ending score
      * @param rounds Number of rounds
-     * @param gameObjects Objects composed by the game mode
      */
-    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects) {
-        super();
+    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
         this.name = name;
         this.startingScore = startingScore;
         this.endingScore = endingScore;
         this.rounds = rounds;
-        this.gameObjects = gameObjects;
+        this.minTimeToSpawn = minTimeToSpawn;
+        this.maxTimeToSpawn = maxTimeToSpawn;
+        this.interfaceObjects = new HashMap<>();
     }
 
     /**
-     * @brief gets the name of a game mode
+     * gets the name of a game mode
      * @return the name of the mode
      */
     @XmlElement(name = "name")
@@ -63,7 +73,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the name of a game mode
+     * sets the name of a game mode
      * @param name of a game mode
      */
     public void setName(String name) {
@@ -71,7 +81,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the starting score of a game mode
+     * gets the starting score of a game mode
      * @return the starting score
      */
     @XmlElement(name = "startingScore")
@@ -80,14 +90,14 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the starting score of a game mode
+     * sets the starting score of a game mode
      */
     public void setStartingScore(Integer startingScore) {
         this.startingScore = startingScore;
     }
 
     /**
-     * @brief gets the ending score of a game mode
+     * gets the ending score of a game mode
      * @return the ending score
      */
     @XmlElement(name = "endingScore")
@@ -96,7 +106,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the ending score of a game mode
+     * gets the ending score of a game mode
      * @return the ending score
      */
     public void setEndingScore(Integer endingScore) {
@@ -104,7 +114,7 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the number of rounds of a game mode
+     * gets the number of rounds of a game mode
      * @return the number of rounds
      */
     @XmlElement(name = "rounds")
@@ -113,7 +123,7 @@ public class GameMode {
     }
 
     /**
-     * @brief sets the rounds of a game mode
+     * sets the rounds of a game mode
      * @param rounds of a game mode
      */
     public void setRounds(Integer rounds) {
@@ -121,32 +131,74 @@ public class GameMode {
     }
 
     /**
-     * @brief gets the gameObjects attributes of game mode
+     * gets the gameObjects attributes of game mode
      * @return the objects composed by the game mode
      */
     @XmlElement(name = "gameObjects")
-    public GameObjects getGameObjects() {
+    public Map<String, GameObject> getGameObjects() {
         return gameObjects;
     }
 
     /**
-     * @brief sets the gameObjects attributes of game mode
+     * sets the gameObjects attributes of game mode
      * @param gameObjects
      */
-    public void setGameObjects(GameObjects gameObjects) {
+    public void setGameObjects(Map<String, GameObject> gameObjects) {
         this.gameObjects = gameObjects;
     }
 
     /**
-     * @brief adds a gameObject to the gameObjects of a game mode
-     * @param gameObject
+     * Get the min time to spawn
+     * @return The min time to spawn
      */
-    public void addGameObject(GameObject gameObject) {
-        gameObjects.add(gameObject);
+    @XmlElement(name = "minTimeToSpawn")
+    public Integer getMinTimeToSpawn() {
+        return minTimeToSpawn;
     }
 
     /**
-     * @brief toString overloaded method for game mode
+     * Set the min time to spawn
+     * @param minTimeToSpawn The min time to spawn
+     */
+    public void setMinTimeToSpawn(Integer minTimeToSpawn) {
+        this.minTimeToSpawn = minTimeToSpawn;
+    }
+
+    /**
+     * Get the max time to spawn
+     * @return The max time to spawn
+     */
+    @XmlElement(name = "maxTimeToSpawn")
+    public Integer getMaxTimeToSpawn() {
+        return maxTimeToSpawn;
+    }
+
+    /**
+     * Set the max time to spawn
+     * @param maxTimeToSpawn The min time to spawn
+     */
+    public void setMaxTimeToSpawn(Integer maxTimeToSpawn) {
+        this.maxTimeToSpawn = maxTimeToSpawn;
+    }
+
+    /**
+     * gets the gameObjects attributes of game mode
+     * @return the objects composed by the game mode
+     */
+    public Map<String, InterfaceObject> getInterfaceObjects() {
+        return interfaceObjects;
+    }
+
+    /**
+     * adds a gameObject to the gameObjects of a game mode
+     * @param interfaceObject
+     */
+    public void addInterfaceObject(InterfaceObject interfaceObject) {
+        interfaceObjects.put(interfaceObject.getType(), interfaceObject);
+    }
+
+    /**
+     * toString overloaded method for game mode
      * @return a string representation of the game mode
      */
     @Override
