@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Core implements ICore {
 
@@ -156,11 +157,20 @@ public class Core implements ICore {
 
         Point position = randomGameObject.getPoint();
 
-        GameObject gameObject = gameMode.getGameObjects().get(type);
-
         String gameObjectImagePath = System.getProperty("user.dir") + File.separator + Configuration.getInstance().get("MODES_PATH") + File.separator +
                 gameMode.getName() + File.separator +
                 type + ".png";
+
+
+        if (type.equals("mystery")) {
+            Random random = new Random();
+            String[] types = {"bonus", "malus"};
+
+            type = types[random.nextInt(types.length)];
+
+        }
+
+        GameObject gameObject = gameMode.getGameObjects().get(type);
 
         Integer gameObjectId = randomGameObject.getId();
         Integer gameObjectPosX = position.getX();

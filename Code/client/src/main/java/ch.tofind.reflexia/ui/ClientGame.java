@@ -100,16 +100,16 @@ public class ClientGame extends Application implements Initializable {
 
         gameObject.relocate(imagePosX, imagePosY);
 
-        /*
+
         PauseTransition delay = new PauseTransition(Duration.millis(timeToShow));
 
         delay.setOnFinished(event -> {
             paneGame.getChildren().remove(gameObject);
         });
-        */
-        paneGame.getChildren().add(gameObject);
 
-        //delay.play();
+        delay.play();
+
+        paneGame.getChildren().add(gameObject);
 
         gameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             paneGame.getChildren().remove(gameObject);

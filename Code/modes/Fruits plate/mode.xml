@@ -8,25 +8,22 @@
         <entry>
             <key>bonus</key>
             <value>
-                <type>test</type>
                 <points>50</points>
-                <timeout>1500</timeout>
+                <timeout>3000</timeout>
                 <enabled>true</enabled>
             </value>
         </entry>
         <entry>
             <key>malus</key>
             <value>
-                <type>test</type>
                 <points>-50</points>
-                <timeout>1500</timeout>
+                <timeout>3000</timeout>
                 <enabled>true</enabled>
             </value>
         </entry>
         <entry>
             <key>mystery</key>
             <value>
-                <type>test</type>
                 <enabled>true</enabled>
             </value>
         </entry>
