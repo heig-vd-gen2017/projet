@@ -128,31 +128,51 @@ header-includes:
 
 
 # Introduction
+Durant la deuxième moitié du quatrième semestre des sections IE, IL et TS de l'HEIG-VD, nous devons effectuer un projet de Génie Logiciel par groupes de quatre personnes. Le but est de mettre en oeuvre les connaissances que nous avons acquises à propos de la méthodologie UP durant la première moitié du semestre à travers un projet complet. Nous devons prendre conscience des difficultés de planification d'un projet sur plusieurs itérations. Au terme du semestre, nous devons rendre un programme complet et fonctionnel, avec une documentaton adéquate et être capables de le présenter et le défendre.
+
+Le projet dure huit semaines et toutes les séances de laboratoire du jeudi ainsi que certaines séances de cours théoriques seront destinées à compléter ce projet.
+
+Dans le cadre du projet, l'équipe de programmation est composée du chef de projet Ludovic Delafontaine et des membres Luca Sivillica, Abass Ali Madhavi et Denise Gemesio.
+
+Dans ce rapport, nous allons expliquer notre planification de travail à travers l'analyse, la conception du projet, l'implémentation du projet, la gestion du projet, l'état des lieux et faire une auto-critique de notre travail.
+
+La dernière semaine de cours aura lieu un oral durant lequel nous aurons l'opportunité de présenter et défendre notre projet.
 
 
-# Analyse
+# Analyse (Denise)
 
 ## Règles du jeu
+Le but du jeu est de cliquer le plus vite possible sur des images qui apparaîtront à la suite dans la surface interactive de jeu. 
+Plusieurs modes de jeu à choix seront disponibles 
+Les images seront des bonus, des malus ou des images mystère (certaines fois bonus, certaines fois malus). Les images rapportent ou font perdre le même nombre de points.
 
 ## Partage de responsabilités
+** A COPIER **
 
 ### Serveur
+** A COPIER fonctionnalités **
 
 ### Client
+** A COPIER fonctionnalités **
 
-### Diagramme d'activité
+## Diagramme d'activité (Denise)
 
 ## Cas d'utilisation
+** A COPIER **
 
-### Diagramme général
+### Diagramme général de contexte
+** IMAGE A COPIER **
 
-### Description des acteurs
+### Description des acteurs (Luca)
 
 ### Scénarios par cas d'utilisation
+** A COPIER depuis Trello **
 
-### Scénarios alternatifs significatifs
+### Scénarios alternatifs significatifs (Denise)
+(Pseudo déjà utilisé ou jeu plein)
 
-## Modèle de domaine
+## Modèle de domaine (Ludo)
+** A COPIER + modifier **
 
 ### Client
 
@@ -160,7 +180,8 @@ header-includes:
 
 ## Base de données
 
-### Modèle conceptuel
+### Modèle conceptuel ou structure (XML, Json)
+** A COPIER **
 
 #### Commentaires
 
@@ -168,63 +189,63 @@ header-includes:
 # Conception
 
 ## Protocole d'échange
+** A COPIER **
 
-## Diagrammes de classes
-
-### Serveur
-
-#### Commentaires
-
-### Client
+### Serveur (Denise)
 
 #### Commentaires
 
-## Base de données
+### Client (Denise)
 
-### Modèle conceptuel
+#### Commentaires
 
-### Modèle relationnel
+## Base de données (Denise)
+
+### Modèle conceptuel (Denise)
+(une table sans types)
+SCORES
+id autogénéré int
+player : String
+mode : String
+score : int
+date : Date
 
 
-# Implémentation 
-
-## Technologies utilisées
-
-### Technologies spéciales
+# implémentation (Luca)
 
 ## Problèmes rencontrés
-
-### Solutions 
 
 
 # Gestion du projet
 
 ## Rôle des membres du groupe de développement
+** A COPIER **
 
 ## Plan d'itérations initial
+** A COPIER depuis Trello **
 Pour chaque itération :
-
 - Objectifs
 - Durée, dates
 - Qui fait quoi
 - Charge de travail estimée, en heures
 
 ## Suivi du projet
+** A COPIER depuis Trello **
 Pour chaque itération :
-
 - Bilan
 - Problèmes rencontrés
 - Replanifications
 
-### Synthèse Trello
+### Synthèse Trello (Denise)
 
-## Stratégie de tests
-(Tableau spécifiant qui a fait les tests, avec quels outils, utilisation JUnit, résultats des tests)
+## Stratégie de tests (Ludo/Denise)
 
-## Stratégie d'intégration du code de chaque participant (Git)
+### Résultats des tests (Ludo/Denise)
+
+## Stratégie d'intégration du code de chaque participant (Git) (Denise)
 
 
-# Etat des lieux
+# Etat des lieux (Ludo/Denise)
 
 ## Ce qui fonctionne
 (résultats des tests)
@@ -233,7 +254,7 @@ Pour chaque itération :
 (proposer une planification)
 
 
-# Auto-critique
+# Auto-critique (Ludo/Denise/Luca)
 
 ## Implémentation
 
@@ -244,9 +265,4 @@ Pour chaque itération :
 ## Améliorations possibles
 
 
-# Conclusion
-
-
-# Annexes
-
-- Manuel utilisateur
+# Conclusion (Ludo/Denise/Luca)
