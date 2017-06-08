@@ -23,7 +23,7 @@ public final class ApplicationProtocol {
 
     public static final String BEGIN_GAME = "BEGIN_GAME";
 
-    public static final String SEND_OBJECT = "SEND_OBJECT";
+    public static final String SHOW_OBJECT = "SHOW_OBJECT";
 
     public static final String OBJECT_TOUCHED = "OBJECT_TOUCHED";
 

@@ -8,15 +8,17 @@
         <gameObject type="bonus">
             <points>50</points>
             <timeout>1500</timeout>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
         </gameObject>
         <gameObject type="malus">
             <points>-75</points>
             <timeout>1500</timeout>
-            <enabled>false</enabled>
+            <enabled>true</enabled>
         </gameObject>
         <gameObject type="mystery">
             <enabled>true</enabled>
         </gameObject>
     </gameObjects>
+    <minTimeToSpawn>500</minTimeToSpawn>
+    <maxTimeToSpawn>2500</maxTimeToSpawn>
 </mode>

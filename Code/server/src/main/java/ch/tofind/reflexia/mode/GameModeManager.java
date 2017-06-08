@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @brief GameModeManager class definition
+ * GameModeManager class definition
  */
 public class GameModeManager {
 
@@ -27,7 +27,7 @@ public class GameModeManager {
     private Map<String, GameMode> gameModes;
 
     /**
-     * @brief GameModeManager single constructor. Avoid the instantiation.
+     * GameModeManager single constructor. Avoid the instantiation.
      */
     private GameModeManager() {
 
@@ -52,9 +52,7 @@ public class GameModeManager {
             for (File gameModeFile : gameModesFiles) {
 
                 GameMode gameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
-                //gameMode.removeDisabledObjects();
 
-                /*
                 gameMode.addInterfaceObject(new InterfaceObject("waiting", null));
                 gameMode.addInterfaceObject(new InterfaceObject("starting_in_3", 1000));
                 gameMode.addInterfaceObject(new InterfaceObject("starting_in_2", 1000));
@@ -65,7 +63,6 @@ public class GameModeManager {
                 gameMode.addInterfaceObject(new InterfaceObject("end_of_game", null));
                 gameMode.addInterfaceObject(new InterfaceObject("end_of_round", null));
                 gameMode.addInterfaceObject(new InterfaceObject("background", null));
-                */
 
                 gameModes.put(gameMode.getName(), gameMode);
 
@@ -77,7 +74,7 @@ public class GameModeManager {
     }
 
     /**
-     * @brief Get the object instance
+     * Get the object instance
      * @return The instance of the object
      */
     public static GameModeManager getInstance() {
@@ -94,7 +91,7 @@ public class GameModeManager {
     }
 
     /**
-     * @brief gets the gameModes attributeof GameModes
+     * gets the gameModes attributeof GameModes
      * @return gameModes attribute
      */
     public Map<String, GameMode> getGameModes() {

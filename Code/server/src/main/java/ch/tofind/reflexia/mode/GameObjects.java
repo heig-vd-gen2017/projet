@@ -3,6 +3,7 @@ package ch.tofind.reflexia.mode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,8 +17,8 @@ public class GameObjects {
     private List<GameObject> gameObjects;
 
     //! game objects parameterless constructor
-    protected GameObjects() {
-
+    public GameObjects() {
+        this.gameObjects = new ArrayList<>();
     }
 
     /**
@@ -35,14 +36,6 @@ public class GameObjects {
      */
     public void add(GameObject gameObject) {
         gameObjects.add(gameObject);
-    }
-
-    /**
-     * Remove a game object from the game objects
-     * @param gameObject The game object to remove.
-     */
-    public void remove(GameObject gameObject) {
-        gameObjects.remove(gameObject);
     }
 
     /**

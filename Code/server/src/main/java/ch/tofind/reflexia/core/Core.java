@@ -4,28 +4,22 @@ import ch.tofind.reflexia.database.DatabaseManager;
 import ch.tofind.reflexia.errors.LobbyClosed;
 import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.game.GameManager;
-import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
 import ch.tofind.reflexia.network.UnicastClient;
-import ch.tofind.reflexia.random.ObjectRandomizer;
-import ch.tofind.reflexia.random.RandomObject;
-import ch.tofind.reflexia.ui.ServerConfiguration;
+import ch.tofind.reflexia.mode.GameObjectRandomizer;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
-import javafx.beans.property.IntegerProperty;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -49,7 +43,7 @@ public class Core implements ICore {
     //! The game manager.
     private GameManager gameManager;
 
-    private ObjectRandomizer objectRandomizer;
+    private GameObjectRandomizer gameObjectRandomizer;
 
     //! Porte used for unicast
     private int unicastPort;
@@ -124,9 +118,14 @@ public class Core implements ICore {
         // Multicast send BEGIN command
         multicast.send(ApplicationProtocol.BEGIN_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
 
-        objectRandomizer = new ObjectRandomizer(multicast);
 
-        new Thread(objectRandomizer).start();
+
+
+        GameMode gameMode = gameManager.getGameMode();
+
+        gameObjectRandomizer = new GameObjectRandomizer(gameMode, multicast);
+
+        new Thread(gameObjectRandomizer).start();
     }
 
     /**
@@ -138,6 +137,7 @@ public class Core implements ICore {
 
         if (multicast != null) {
             multicast.send(ApplicationProtocol.END_OF_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
+            multicast = null;
         }
 
         stop();
@@ -259,8 +259,8 @@ public class Core implements ICore {
             multicast = null;
         }
 
-        if (objectRandomizer != null) {
-            objectRandomizer.stop();
+        if (gameObjectRandomizer != null) {
+            gameObjectRandomizer.stop();
         }
 
         if (server != null) {

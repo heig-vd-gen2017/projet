@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.random;
+package ch.tofind.reflexia.utils;
 
 import java.util.Random;
 

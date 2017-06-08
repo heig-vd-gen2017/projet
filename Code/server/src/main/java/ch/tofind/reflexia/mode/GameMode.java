@@ -3,11 +3,12 @@ package ch.tofind.reflexia.mode;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import java.util.Random;
 
 /**
  * Game Mode class
  */
-@XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects"})
+@XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects", "minTimeToSpawn", "maxTimeToSpawn"})
 @XmlRootElement(name = "mode")
 public class GameMode {
 
@@ -26,6 +27,12 @@ public class GameMode {
     //! Game objects composed by the mode
     private GameObjects gameObjects;
 
+    //! Time beetween every object spawn
+    private Integer minTimeToSpawn;
+
+    //! Time beetween every object spawn
+    private Integer maxTimeToSpawn;
+
     //! Interface objects composed by the mode
     private InterfaceObjects interfaceObjects;
 
@@ -33,7 +40,8 @@ public class GameMode {
      * GameMode parameterless constructor
      */
     private GameMode() {
-
+        this.gameObjects = new GameObjects();
+        this.interfaceObjects = new InterfaceObjects();
     }
 
     /**
@@ -45,13 +53,16 @@ public class GameMode {
      * @param rounds Number of rounds
      * @param gameObjects Objects composed by the game mode
      */
-    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects) {
+    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, GameObjects gameObjects, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
         super();
         this.name = name;
         this.startingScore = startingScore;
         this.endingScore = endingScore;
         this.rounds = rounds;
         this.gameObjects = gameObjects;
+        this.minTimeToSpawn = minTimeToSpawn;
+        this.maxTimeToSpawn = maxTimeToSpawn;
+
         this.interfaceObjects = new InterfaceObjects();
     }
 
@@ -148,6 +159,40 @@ public class GameMode {
     }
 
     /**
+     * Get the min time to spawn
+     * @return The min time to spawn
+     */
+    @XmlElement(name = "minTimeToSpawn")
+    public Integer getMinTimeToSpawn() {
+        return minTimeToSpawn;
+    }
+
+    /**
+     * Set the min time to spawn
+     * @param minTimeToSpawn The min time to spawn
+     */
+    public void setMinTimeToSpawn(Integer minTimeToSpawn) {
+        this.minTimeToSpawn = minTimeToSpawn;
+    }
+
+    /**
+     * Get the max time to spawn
+     * @return The max time to spawn
+     */
+    @XmlElement(name = "maxTimeToSpawn")
+    public Integer getMaxTimeToSpawn() {
+        return maxTimeToSpawn;
+    }
+
+    /**
+     * Set the max time to spawn
+     * @param maxTimeToSpawn The min time to spawn
+     */
+    public void setMaxTimeToSpawn(Integer maxTimeToSpawn) {
+        this.maxTimeToSpawn = maxTimeToSpawn;
+    }
+
+    /**
      * gets the gameObjects attributes of game mode
      * @return the objects composed by the game mode
      */
@@ -163,17 +208,22 @@ public class GameMode {
         interfaceObjects.add(interfaceObject);
     }
 
-    /**
-     * Remove disabled objects from the mode
-     */
-    public void removeDisabledObjects() {
+    public GameObject getRandomGameObject() {
+
+        Random random = new Random();
+
+        GameObjects availableGameObjects = new GameObjects();
 
         for (GameObject gameObject : gameObjects.getGameObjects()) {
 
-            if (!gameObject.getEnabled()) {
-                gameObjects.remove(gameObject);
+            if (gameObject.getEnabled()) {
+                availableGameObjects.add(gameObject);
             }
         }
+
+        Integer randomGameObject = random.nextInt(availableGameObjects.getGameObjects().size());
+
+        return availableGameObjects.getGameObjects().get(randomGameObject);
     }
 
     /**
