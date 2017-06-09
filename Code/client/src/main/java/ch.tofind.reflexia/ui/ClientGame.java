@@ -90,7 +90,7 @@ public class ClientGame extends Application implements Initializable {
     /**
      * Add an object to the surface
      */
-    public void addObject(Integer id, String imagePath, Integer imagePosX, Integer imagePosY, Integer timeToShow) {
+    public void addObject(Integer objectId, String imagePath, Integer imagePosX, Integer imagePosY, Integer timeToShow) {
 
         File imageFile = new File(imagePath);
 
@@ -113,6 +113,7 @@ public class ClientGame extends Application implements Initializable {
 
         gameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             paneGame.getChildren().remove(gameObject);
+            core.objectTouched(objectId);
         });
     }
 

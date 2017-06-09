@@ -97,6 +97,15 @@ public class Core implements ICore {
 
     }
 
+    public void objectTouched(Integer objectId) {
+        String command = ApplicationProtocol.OBJECT_TOUCHED + NetworkProtocol.END_OF_LINE +
+                pseudo + NetworkProtocol.END_OF_LINE +
+                objectId + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
+
+        sendUnicast(serverIpAddress, unicastPort, command);
+    }
+
     public String END_OF_COMMUNICATION(ArrayList<Object> args) {
         System.out.println("End of communication client side.");
         return "";
@@ -153,7 +162,7 @@ public class Core implements ICore {
 
         RandomGameObject randomGameObject = Serialize.unserialize(randomGameObjectJson, RandomGameObject.class);
 
-        String type = randomGameObject.getType();
+        String type = randomGameObject.getGameObject().getType();
 
         Point position = randomGameObject.getPoint();
 

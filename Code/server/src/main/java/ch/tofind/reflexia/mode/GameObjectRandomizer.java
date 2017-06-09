@@ -35,9 +35,9 @@ public class GameObjectRandomizer implements Runnable {
 
     private Integer maxTimeToSpawn;
 
-    private List<String> availableGameObjectTypes;
+    private List<GameObject> availableGameObjects;
 
-    private Set<RandomGameObject> generatedRandomGameObjects;
+    private Map<Integer, GameObject> generatedGameObjects;
 
     //! random generator
     private Random random;
@@ -54,19 +54,16 @@ public class GameObjectRandomizer implements Runnable {
         this.maxTimeToSpawn = gameMode.getMaxTimeToSpawn();
         this.multicastClient = multicastClient;
         this.random = new Random();
-        this.availableGameObjectTypes = new ArrayList<>();
-        this.generatedRandomGameObjects = new HashSet<>();
+        this.availableGameObjects = new ArrayList<>();
+        this.generatedGameObjects = new HashMap<>();
         this.running = false;
 
         Map<String, GameObject> gameObjects = gameMode.getGameObjects();
 
-        for (Map.Entry<String, GameObject> entry : gameObjects.entrySet()) {
-
-            String gameObjectType = entry.getKey();
-            GameObject gameObject = entry.getValue();
+        for (GameObject gameObject : gameObjects.values()) {
 
             if (gameObject.getEnabled()) {
-                availableGameObjectTypes.add(gameObjectType);
+                availableGameObjects.add(gameObject);
             }
         }
     }
@@ -83,7 +80,8 @@ public class GameObjectRandomizer implements Runnable {
         while (running) {
 
             RandomGameObject randomGameObject = new RandomGameObject();
-            generatedRandomGameObjects.add(randomGameObject);
+
+            generatedGameObjects.put(randomGameObject.getId(), randomGameObject.getGameObject());
 
             Integer timeout = random.nextInt(maxTimeToSpawn - minTimeToSpawn + 1) + minTimeToSpawn;
 
@@ -108,13 +106,13 @@ public class GameObjectRandomizer implements Runnable {
 
         private Integer id;
 
-        private Point point;
+        private GameObject gameObject;
 
-        private String type;
+        private Point point;
 
         RandomGameObject() {
             this.id = random.nextInt(Integer.MAX_VALUE);
-            this.type = getRandomGameObject();
+            this.gameObject = getRandomGameObject();
             this.point = Point.getRandonPointBetween(MIN_POS_X, MAX_POS_X, MIN_POS_Y, MAX_POS_Y);
         }
 
@@ -122,17 +120,17 @@ public class GameObjectRandomizer implements Runnable {
             return id;
         }
 
+        GameObject getGameObject() {
+            return gameObject;
+        }
+
         Point getPoint() {
             return point;
         }
 
-        String getType() {
-            return type;
-        }
-
-        public String getRandomGameObject() {
-            int index = random.nextInt(availableGameObjectTypes.size());
-            return availableGameObjectTypes.get(index);
+        public GameObject getRandomGameObject() {
+            int index = random.nextInt(availableGameObjects.size());
+            return availableGameObjects.get(index);
         }
     }
 }

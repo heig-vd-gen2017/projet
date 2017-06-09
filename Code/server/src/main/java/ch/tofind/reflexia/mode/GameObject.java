@@ -6,35 +6,53 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @brief game object class definition
+ * game object class definition
  */
-@XmlType(propOrder = {"enabled", "points", "timeout"})
+@XmlType(propOrder = {"type", "enabled", "points", "timeout"})
 @XmlRootElement(name = "gameObject")
 public class GameObject {
 
-    //!
+    //! Type of the object
+    private String type;
+
+    //! Tells if the object is enabled or not
     private Boolean enabled;
 
-    //! game Object current points
+    //! Points that give the object on click
     private Integer points;
 
-    //! game Object timeout
+    //! Time to show on the surface
     private Integer timeout;
 
-    //! game Object constructor
-    protected GameObject() {
+    /**
+     * Private empty constructor
+     */
+    private GameObject() {
 
     }
 
     /**
-     * @brief game object constructor with parameters
-     * @param points
-     * @param timeout
+     * Create a game object
+     *
+     * @param type Type of the object
+     * @param enabled Enabled or disabled
+     * @param points Points of the game object
+     * @param timeout Time to show on surface
      */
-    public GameObject(Boolean enabled, Integer points, Integer timeout) {
+    public GameObject(String type, Boolean enabled, Integer points, Integer timeout) {
+        this.type = type;
         this.enabled = enabled;
         this.points = points;
         this.timeout = timeout;
+    }
+
+    @XmlElement(name = "type")
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     @XmlElement(name = "enabled")
@@ -42,55 +60,35 @@ public class GameObject {
         return enabled;
     }
 
-
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
     }
 
-    /**
-     * @brief gets the game object current points
-     * @return current points
-     */
     @XmlElement(name = "points")
     public Integer getPoints() {
         return points;
     }
 
-    /**
-     * @brief sets game object current points
-     * @param points
-     */
     public void setPoints(Integer points) {
         this.points = points;
     }
 
-    /**
-     * @brief gets game object time out
-     * @return game object time out
-     */
     @XmlElement(name = "timeout")
     public Integer getTimeout() {
         return timeout;
     }
 
-    /**
-     * @brief sets game object timeout
-     * @param timeout
-     */
     public void setTimeout(Integer timeout) {
         this.timeout = timeout;
     }
 
-    /**
-     * @brief toString function for a game object
-     * @return a string representation of a game object
-     */
     @Override
     public String toString() {
 
         return "Game object"                   + '\n' + '\t' +
-                "Points..........: " + points  + '\n' + '\t' +
+                "Type............: " + type    + '\n' + '\t' +
                 "Enabled.........: " + enabled + '\n' + '\t' +
+                "Points..........: " + points  + '\n' + '\t' +
                 "Timeout.........: " + timeout + '\n';
     }
 }

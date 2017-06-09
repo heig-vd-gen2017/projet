@@ -6,11 +6,11 @@ public class RandomGameObject {
 
     private Integer id;
 
+    private GameObject gameObject;
+
     private Point point;
 
-    private String type;
-
-    RandomGameObject() {
+    public RandomGameObject() {
 
     }
 
@@ -18,11 +18,11 @@ public class RandomGameObject {
         return id;
     }
 
-    public Point getPoint() {
-        return point;
+    public GameObject getGameObject() {
+        return gameObject;
     }
 
-    public String getType() {
-        return type;
+    public Point getPoint() {
+        return point;
     }
 }

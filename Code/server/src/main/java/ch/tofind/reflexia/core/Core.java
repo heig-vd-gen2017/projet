@@ -201,8 +201,11 @@ public class Core implements ICore {
      */
     public String OBJECT_TOUCHED(ArrayList<Object> args) {
 
+        args.remove(0); // We remove the socket as we don't need it.
         String pseudo = (String) args.remove(0);
+        Integer objectId = Integer.valueOf((String) args.remove(0));
 
+        LOG.info(pseudo + " clicked on object " + objectId);
 
         return "";
     }

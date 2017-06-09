@@ -81,7 +81,7 @@ public class GameManager {
             throw new LobbyClosed("No more players can be accepted");
         }
 
-        Player player = new Player(pseudo, 0);
+        Player player = new Player(pseudo, gameMode.getStartingScore());
 
         if (players.contains(player)) {
             throw new UsernameTaken("Username already taken");
