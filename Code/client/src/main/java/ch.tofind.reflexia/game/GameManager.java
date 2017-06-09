@@ -4,6 +4,7 @@ import ch.tofind.reflexia.errors.LobbyClosed;
 import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.mode.GameMode;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class GameManager {
     private boolean acceptPlayers;
 
     //! number of players connected
-    private IntegerProperty nbPlayers = new SimpleIntegerProperty(0);
+    private IntegerProperty nbPlayers;
+
 
     /**
      * @brief GameManager single constructor. Avoid the instantiation.
@@ -35,6 +37,7 @@ public class GameManager {
     private GameManager() {
         this.players = new ArrayList<>();
         this.acceptPlayers = false;
+        this.nbPlayers = new SimpleIntegerProperty(0);
     }
 
     /**

@@ -12,7 +12,9 @@ import javafx.beans.value.ObservableValue;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @brief game management class
@@ -26,7 +28,7 @@ public class GameManager {
     private GameMode gameMode;
 
     //! list of players
-    private List<Player> players;
+    private Map<String, Player> players;
 
     //! Accept or not new players
     private boolean acceptPlayers;
@@ -38,7 +40,7 @@ public class GameManager {
      * @brief GameManager single constructor. Avoid the instantiation.
      */
     private GameManager() {
-        this.players = new ArrayList<>();
+        this.players = new HashMap<>();
         this.acceptPlayers = false;
     }
 
@@ -71,10 +73,6 @@ public class GameManager {
         players.clear();
     }
 
-    /**
-     * @brief Adds a player to the game.
-     * @param pseudo Player's name.
-     */
     public void addPlayer(String pseudo) throws LobbyClosed, UsernameTaken {
 
         if (!acceptPlayers) {
@@ -83,39 +81,47 @@ public class GameManager {
 
         Player player = new Player(pseudo, gameMode.getStartingScore());
 
-        if (players.contains(player)) {
+        if (players.containsKey(player)) {
             throw new UsernameTaken("Username already taken");
         }
 
-        players.add(player);
+        players.put(player.getPseudo(), player);
 
         nbPlayers.setValue(players.size());
     }
 
-    /**
-     * gets the number of players
-     * @return the number of players
-     */
+    public Map<String, Player> getPlayers() {
+        return players;
+    }
+
+    public void updateScore(String playerPseudo, Integer gameObjectPoints) {
+
+        Player player = players.get(playerPseudo);
+
+        Integer actualScore = player.getScore();
+
+        player.setScore(actualScore + gameObjectPoints);
+    }
+
+    public boolean isWinner(String playerPseudo) {
+
+        Player player = players.get(playerPseudo);
+
+        Integer actualScore = player.getScore();
+
+        return actualScore >= gameMode.getEndingScore();
+    }
+
     public IntegerProperty getNumberOfPlayers() {
         return nbPlayers;
     }
 
-    /**
-     * @brief gets the game mode
-     */
     public GameMode getGameMode() {
         return gameMode;
     }
 
-    /**
-     * @brief sets the game mode
-     * @param gameMode
-     */
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
 
     }
-
-
-
 }

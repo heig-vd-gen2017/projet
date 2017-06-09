@@ -19,6 +19,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Random;
 
 public class Core implements ICore {
@@ -170,7 +171,6 @@ public class Core implements ICore {
                 gameMode.getName() + File.separator +
                 type + ".png";
 
-
         if (type.equals("mystery")) {
             Random random = new Random();
             String[] types = {"bonus", "malus"};
@@ -193,6 +193,28 @@ public class Core implements ICore {
 
         return "";
     }
+
+    public String WINNER(ArrayList<Object> args) {
+
+        System.out.println("WE HAVE A WINNER !!");
+
+        // We stop the game
+        stop();
+
+        return "";
+    }
+
+    public String SCORES_UPDATE(ArrayList<Object> args) {
+
+        String playsersJson = (String) args.remove(0);
+
+        Map<String,Object> result = Serialize.unserialize(playsersJson, Map.class);
+
+        System.out.println("Scores: " + result);
+
+        return "";
+    }
+
 
     @Override
     public void start(String multicastAddress, int multicastPort, InetAddress interfaceToUse, int unicastPort) {

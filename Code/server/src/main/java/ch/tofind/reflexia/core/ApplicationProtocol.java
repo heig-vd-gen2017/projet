@@ -31,4 +31,8 @@ public final class ApplicationProtocol {
 
     public static final String END_OF_GAME = "END_OF_GAME";
 
+    public static final String WINNER = "WINNER";
+
+    public static final String SCORES_UPDATE = "SCORES_UPDATE";
+
 }

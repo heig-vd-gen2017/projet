@@ -68,6 +68,10 @@ public class GameObjectRandomizer implements Runnable {
         }
     }
 
+    public Map<Integer, GameObject> getGeneratedGameObjects() {
+        return generatedGameObjects;
+    }
+
     public void stop() {
         running = false;
     }
@@ -110,21 +114,21 @@ public class GameObjectRandomizer implements Runnable {
 
         private Point point;
 
-        RandomGameObject() {
+        public RandomGameObject() {
             this.id = random.nextInt(Integer.MAX_VALUE);
             this.gameObject = getRandomGameObject();
             this.point = Point.getRandonPointBetween(MIN_POS_X, MAX_POS_X, MIN_POS_Y, MAX_POS_Y);
         }
 
-        Integer getId() {
+        public Integer getId() {
             return id;
         }
 
-        GameObject getGameObject() {
+        public GameObject getGameObject() {
             return gameObject;
         }
 
-        Point getPoint() {
+        public Point getPoint() {
             return point;
         }
 

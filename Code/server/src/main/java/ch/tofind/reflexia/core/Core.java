@@ -6,6 +6,7 @@ import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameModeManager;
+import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.network.MulticastClient;
 import ch.tofind.reflexia.network.NetworkProtocol;
 import ch.tofind.reflexia.network.Server;
@@ -22,6 +23,9 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class Core implements ICore {
 
@@ -44,6 +48,8 @@ public class Core implements ICore {
     private GameManager gameManager;
 
     private GameObjectRandomizer gameObjectRandomizer;
+
+    private ScheduledExecutorService sendScoresOnSchedule;
 
     //! Porte used for unicast
     private int unicastPort;
@@ -118,14 +124,29 @@ public class Core implements ICore {
         // Multicast send BEGIN command
         multicast.send(ApplicationProtocol.BEGIN_GAME + NetworkProtocol.END_OF_LINE + NetworkProtocol.END_OF_COMMAND);
 
-
-
-
         GameMode gameMode = gameManager.getGameMode();
 
         gameObjectRandomizer = new GameObjectRandomizer(gameMode, multicast);
 
         new Thread(gameObjectRandomizer).start();
+
+        // Crée un thread qui nettoie les sessions toutes les N secondes
+        sendScoresOnSchedule = Executors.newScheduledThreadPool(1);
+
+        sendScoresOnSchedule.scheduleAtFixedRate(this::refreshScores, 0, 1, TimeUnit.SECONDS);
+    }
+
+    private void refreshScores() {
+
+        String playersJson = Serialize.serialize(gameManager.getPlayers());
+
+        String command = ApplicationProtocol.SCORES_UPDATE + NetworkProtocol.END_OF_LINE +
+                playersJson + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
+
+        if (multicast != null) {
+            multicast.send(command);
+        }
     }
 
     /**
@@ -202,12 +223,25 @@ public class Core implements ICore {
     public String OBJECT_TOUCHED(ArrayList<Object> args) {
 
         args.remove(0); // We remove the socket as we don't need it.
-        String pseudo = (String) args.remove(0);
+        String playerPseudo = (String) args.remove(0);
         Integer objectId = Integer.valueOf((String) args.remove(0));
 
-        LOG.info(pseudo + " clicked on object " + objectId);
+        GameObject gameObjet = gameObjectRandomizer.getGeneratedGameObjects().get(objectId);
 
-        return "";
+        gameManager.updateScore(playerPseudo, gameObjet.getPoints());
+
+        if (gameManager.isWinner(playerPseudo)) {
+            String command = ApplicationProtocol.WINNER + NetworkProtocol.END_OF_LINE +
+                    playerPseudo + NetworkProtocol.END_OF_LINE +
+                    NetworkProtocol.END_OF_COMMAND;
+
+            if (multicast != null) {
+                multicast.send(command);
+            }
+        }
+
+        return NetworkProtocol.END_OF_COMMUNICATION + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
     }
 
     /**
