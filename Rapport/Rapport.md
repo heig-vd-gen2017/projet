@@ -180,8 +180,7 @@ Afin de gagner, le joueur devra obtenir le nombre de points à atteindre défini
 * Quitter la partie (note: la partie en cours n'est pas interrompue, le joueur est considéré comme ayant perdu)
 
 ## Diagramme d'activité (Denise)
-
-
+![Diagramme d'activité](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/DiagrammeDActivite.puml)
 
 ## Cas d'utilisation
 
