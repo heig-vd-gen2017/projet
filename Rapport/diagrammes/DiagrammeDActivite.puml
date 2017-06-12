@@ -1,1 +1,23 @@
 @startuml
+partition Serveur {
+(*) --> "Configuration de la partie"
+"Configuration de la partie" --> "Accepter les connexions"
+--> === S1 ===
+--> "Affichage du nombre
+ de joueurs connectés"
+}
+
+partition Client {
+=== S1 === --> "Connexion"
+"Connexion" --> === S2 ===
+if "Pseudo déjà pris?" then
+->[true] "Choisir un autre pseudo"
+else
+->[false] === S3 ===
+endif
+}
+
+partition Serveur {
+
+}
+@enduml

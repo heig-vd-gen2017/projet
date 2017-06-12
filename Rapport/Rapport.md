@@ -139,37 +139,151 @@ Dans ce rapport, nous allons expliquer notre planification de travail à travers
 La dernière semaine de cours aura lieu un oral durant lequel nous aurons l'opportunité de présenter et défendre notre projet.
 
 
-# Analyse (Denise)
+# Analyse
 
 ## Règles du jeu
-Le but du jeu est de cliquer le plus vite possible sur des images qui apparaîtront à la suite dans la surface interactive de jeu. 
-Plusieurs modes de jeu à choix seront disponibles 
-Les images seront des bonus, des malus ou des images mystère (certaines fois bonus, certaines fois malus). Les images rapportent ou font perdre le même nombre de points.
+Le but du jeu est de cliquer le plus vite possible sur des images qui apparaîtront à la suite dans la surface interactive de jeu.
+L'adminitrateur du jeu a le choix entre plusieurs modes de jeu, qui sont composés d'images bonus, malus et mystère (certaines fois bonus, certaines fois malus).
+
+Les modes et leurs détails se trouvent dans le fichier `mode.xml` au sein de chaque dossier présent dans le dossier `modes` qui se trouve à la racine.
+Ce qui suit peut être modifiable par l'administrateur :
+
+- Le nom du mode
+- Le nombre de points attribués à chaque image : bonus, malus et mystère
+- Le nombre de points initiaux ainsi que le nombre de points à atteindre pour gagner
+- L'activation ou désactivation des images bonus, malus et mystère
+- Le temps, en millisecondes, qu'une image restera active
+- Le temps maximum et minimum en millisecondes que l'image mettra pour apparaître, le temps final étant sélectionné aléatoirement
+
+Concernant les joueurs, chaque joueur peut choisir un pseudo qui lui appartiendra uniquement lors de la partie en cours de lancement. L'identification est en effet inspirée des jeux d'arcade pour lesquels des personnes différentes peuvent choisir le même pseudo lors de parties différentes. Chaque joueur doit se connecter au serveur correspondant aux adresses que l'administrateur lui aura donné.
+
+Afin de gagner, le joueur devra obtenir le nombre de points à atteindre défini par le mode de jeu. Dès qu'un joueur gagne, la partie se termine.
 
 ## Partage de responsabilités
-** A COPIER **
 
 ### Serveur
-** A COPIER fonctionnalités **
+
+* Configuration des modes de jeu
+* Lancer la partie
+* Attente de connexion des joueurs
+* Visualiser le nombre de joueurs connectés afin que l'adminitrateur lance la partie dès qu'il le considère suffisant
+* Enregistrer et permettre à chaque utilisateur de visualiser son propre score
+* Mettre fin à la partie prématurément
+* Dans la base de données, remise des scores des joueurs à zéro
+* Modes de jeu tel qu'expliqué dans les règles du jeu
 
 ### Client
-** A COPIER fonctionnalités **
+
+* Spécifier son pseudo
+* Rejoindre une partie
+* Jouer la partie
+* Quitter la partie (note: la partie en cours n'est pas interrompue, le joueur est considéré comme ayant perdu)
 
 ## Diagramme d'activité (Denise)
 
+
+
 ## Cas d'utilisation
-** A COPIER **
 
 ### Diagramme général de contexte
-** IMAGE A COPIER **
+![Cas d'utilisation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/UseCases.puml)
 
 ### Description des acteurs (Luca)
 
 ### Scénarios par cas d'utilisation
-** A COPIER depuis Trello **
 
-### Scénarios alternatifs significatifs (Denise)
-(Pseudo déjà utilisé ou jeu plein)
+#### Configuration d'une partie
+
+**Résumé**
+Le serveur permet la configuration de la partie selon plusieurs options et envies. Différentes options sont disponibles et permettent d'activer ou désactiver des comportement de jeu. Une fois la configuration appliquée, les joueurs peuvent rejoindre la partie.
+
+**Prérequis**
+Le serveur doit être atteignable au sein du réseau local.
+
+1. Le programme serveur est démarré et l'interface de configuration s'affiche
+2. L'administrateur configure la partie
+3. Une fois la configuration définie, l'administrateur autorise les joueurs à rejoindre la partie
+
+#### Joindre une partie
+
+**Résumé**
+Permet de rejoindre la partie créée par le serveur. Les différents joueurs saisissent l'adresse IP ainsi que le port à utiliser et se connectent au serveur.
+
+**Prérequis**
+Un port doit être défini.
+
+1. Ils saisissent le pseudo qu'ils souhaitent utiliser pour les identifier, l'adresse IP, le port du serveur et se connectent au serveur.
+
+2. Le serveur envoie la configuration de la partie (règles du jeu et sprites) aux clients ainsi que le nombre de joueurs et leur pseudo
+
+#### Lancement d'une partie
+
+**Résumé**
+Une fois le nombre de joueurs souhaité, l'administrateur lance la partie. La connexion de la part de futurs joueurs est bloquée jusqu'à la fin de la partie. Les joueurs sont notifiés du début de la partie.
+
+**Prérequis**
+Les joueurs doivent être prêts au début de la partie.
+
+1. Le nombre de joueurs qui se connectent sont affichés sur la fenêtre de configuration de partie de l'administrateur
+2. Quand l'administrateur considère le nombre de joueurs suffisant, il lance la partie. Cela clot les connexions et désactive l'interface de configuration.
+3. Le serveur avertit les joueurs que la partie débute.
+
+#### Jouer une partie
+
+**Résumé**
+Les manches démarrent successivement: le serveur envoie les différents objets aux joueurs qui doivent cliquer le plus rapidement sur les objets. Certains apportent des points, d'autres en retirent et d'autres sont mystères. Les scores se mettent à jour à chaque fin de manche pour tous les joueurs.
+
+1. Après un temps aléatoire, un objet apparaît exactement au même moment et au même endroit de la mappe chez chaque joueur.
+2. Dès qu'un joueur a cliqué sur l'objet, le serveur est notifié. Le joueur ayant été le plus rapide gagne (ou perd selon si c'est un objet malus) le point et les autres joueurs sont notifiés des nouveaux scores de chacun.
+3. Le classement est modifié.
+4. La partie de déroule jusqu'à ce qu'un des joueurs ait atteint le score défini par l'administrateur.
+5. Une fois la partie terminée, les joueurs sont invités à rejouer une partie tout en pouvant voir les scores des autres joueurs et le meilleur score associés à leur pseudo pour le mode de jeu en cours.
+
+#### Mettre fin à une partie
+
+**Résumé**
+Si l'administrateur souhaite abréger une partie avant sa fin, il peut décider de mettre fin à la partie. Le jeu se termine et les joueurs sont invités à recommencer une partie.
+
+**Prérequis**
+Une partie doit être en cours.
+
+1. L'administrateur arrête la partie depuis la fenêtre de configuration.
+2. Les joueurs sont notifiés de la fin de la partie.
+3. Un résumé des scores s'affiche.
+4. La fenêtre de configuration d'une partie redevient active et l'administrateur peut recommencer une partie.
+
+#### Réinitialisation des scores
+
+**Résumé**
+Lorsque l'administrateur le souhaite, il peut décider d'effacer les scores stockés dans la base de données pour remettre à zéro les meilleurs scores. Il est possible de spécifier quels sont les scores à réinitialiser (selon une date).
+
+1. Le programme serveur est démarré et l'interface de configuration s'affiche
+2. L'administrateur accède à l'interface de réinitialisation des scores
+3. L'administrateur décide quelles sont les données à effacer (plage de dates, joueurs, etc.)
+4. L'administrateur valide sa requête et le serveur nettoie sa base de données
+5. Un message permet de valider le bon déroulement de l'action
+
+### Scénarios alternatifs significatifs
+
+#### Pseudo déjà utilisé
+
+**Résumé**
+Le joueur remplit la fenêtre de connexion mais son pseudo a déjà été choisi par un autre joueur.
+
+1. Le joueur entre un pseudo déjà entré par un autre joueur
+2. Une fenêtre d'avertissement apparaît annonçant que le pseudo existe déjà
+3. Le joueur ne peut pas joindre la partie
+4. Le joueur peut relancer une connexion et se connecter avec un autre pseudo
+
+#### Partie pleine
+
+**Résumé**
+Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
+
+1. Le joueur remplit la fenêtre de connexion et appuie sur *Se connecter*
+2. Une fenêtre d'avertissement apparaît annonçant que la partie a déjà démarré
+3. Le joueur ne peut pas joindre la partie
+4. Le joueur peut attendre qu'une partie soit en phase de configuration
 
 ## Modèle de domaine (Ludo)
 ** A COPIER + modifier **
@@ -180,49 +294,55 @@ Les images seront des bonus, des malus ou des images mystère (certaines fois bo
 
 ## Base de données
 
-### Modèle conceptuel ou structure (XML, Json)
-** A COPIER **
+### Modèle conceptuel
+
+![Schéma de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/Database.puml)
 
 #### Commentaires
+La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait joué.
+
 
 
 # Conception
 
 ## Protocole d'échange
-** A COPIER **
+Notre application communiquera à travers le réseau en utilisant le protocole suivant :
 
-### Serveur (Denise)
+![Protocole](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/Protocol.puml)
 
-#### Commentaires
+## Base de données
 
-### Client (Denise)
+### Modèle conceptuel
 
-#### Commentaires
-
-## Base de données (Denise)
-
-### Modèle conceptuel (Denise)
-(une table sans types)
-SCORES
-id autogénéré int
-player : String
-mode : String
-score : int
-date : Date
+![Modèle conceptuel de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/FinalDatabase.puml)
 
 
-# implémentation (Luca)
+# Implémentation (Luca)
 
 ## Problèmes rencontrés
-
 
 # Gestion du projet
 
 ## Rôle des membres du groupe de développement
-** A COPIER **
+
+* Tout le monde: Architecteur/concepteur en chef, programmeur, responsable des tests
+
+* Ludovic: Chef de projet, responsable de la configuration
+* Luca: Responsable des normes et procédures,
+* Abass: Représentatant des clients & utilisateurs
+* Denise: Analyste
 
 ## Plan d'itérations initial
-** A COPIER depuis Trello **
+
+|  Itération  |       Description        | Semaines | Développeur |
+|-------------|:------------------------:|:--------:|:-----------:|
+| Itération 1 |"Joindre une partie"      |     1    | Protocole réseau: Luca, Interface graphique: Abass & Ludovic, Lier l'interface graphique avec le code: Denise |
+| Itération 2 |"Configurer une partie"   |    2-3   | Structure et validation XML: Ludovic, Conversion XML en object: Abass, Serialisation de l'objet en JSON, envoi au client et desérialisation: Denise et Luca |
+| Itération 3 |"Lancer une partie"       |     4    | Gestion des prérequis: tout le monde |
+| Itération 4 |"Jouer une partie"        |    5-6   | Gestion des événements clients: Luca et Abass, gestion des événements de la part du serveur: Ludovic & Denise |
+| Itération 5 |"Réinitialiser les scores"|     7    | Tout le monde |
+| Itération 6 |"Mettre fin à une partie" |     8    | Tout le monde |
+
 Pour chaque itération :
 - Objectifs
 - Durée, dates
@@ -230,19 +350,82 @@ Pour chaque itération :
 - Charge de travail estimée, en heures
 
 ## Suivi du projet
-** A COPIER depuis Trello **
-Pour chaque itération :
-- Bilan
-- Problèmes rencontrés
-- Replanifications
 
-### Synthèse Trello (Denise)
+|  Itération  |       Description        | Semaines | Développeur |
+|-------------|:------------------------:|:--------:|:-----------:|
+| Itération 1 |"Joindre une partie"      |     1    | Protocole réseau: Luca et Denise Interface graphique: Ludovic, Lier l'interface graphique avec le code: Denise, UML des cas d'utilisation : Abass |
+| Itération 2 |"Configurer une partie"   |    2-3   | Structure et validation XML: Ludovic, Conversion XML en object: Abass, Serialisation de l'objet en JSON, Envoi au client et desérialisation: Luca, Interface graphique: Denise |
+| Itération 3 |"Lancer une partie"       |     4    | Interface graphique: Denise, Création et rassemblement des images: Abass, Protocole réseau: Luca, Base de données: Ludovic |
+| Itération 4 |"Réinitialiser les scores"        |    5   | Interface graphique: Denise, Base de données et nettoyage de celle-ci: Ludovic & Luca, Abass absent |
+| Itération 5 |"Mettre fin à une partie"|     6    | Interface graphique et création du rapport: Denise,  Gestion du réseau et ses commandes: Luca, Gestion du réseau et communication client/serveur: Ludovic, Abass absent |
+| Itération 6 |"Jouer une partie" |    7-8    | Interface graphique et rédaction du rapport: Denise, Rédaction du rapport: Luca, Mise à jour de l'interface, logique de jeu et possibilité de jouer: Ludovic, Abass absent |
+
+### Itération 1
+#### Bilan
+Les objectifs prévus ont été réalisés.
+
+#### Problèmes rencontrés
+Pas de problèmes rencontrés.
+
+#### Replanifications
+Pas de replanification.
+
+### Itération 2
+#### Bilan
+Les objectifs prévus ont été réalisés.
+
+#### Problèmes rencontrés
+Pas de problèmes rencontrés.
+
+#### Replanifications
+Pas de replanification.
+
+### Itération 3
+#### Bilan
+L'essentiel du travail a été réalisé. Il reste quelques actions à finaliser du côté du protocole applicatif mais ça n'est pas bloquant.
+
+#### Problèmes rencontrés
+Pas de problèmes rencontrés.
+
+#### Replanifications
+Pas de replanification.
+
+### Itération 4
+#### Bilan
+Les objectifs prévus ont été réalisés.
+
+#### Problèmes rencontrés
+Un membre de notre groupe est absent jusqu'à la fin du semestre. Au niveau de la conception, aucun problème n'a été rencontré.
+
+#### Replanifications
+De par l'absence d'Abass Madhavi, nous avons dû replanifier les itérations. Ainsi, l'itération 4 est devenue l'itération 6, l'itération 5 est devenue l'itération 4 et l'itération 6 est devenue l'itération 5.
+
+### Itération 5
+#### Bilan
+Les objectifs prévus ont été réalisés.
+
+#### Problèmes rencontrés
+Pas de problèmes rencontrés.
+
+#### Replanifications
+Pas de replanification.
+
+### Itération 6
+#### Bilan
+Les objectifs prévus ont été réalisés.
+
+#### Problèmes rencontrés
+Pas de problèmes rencontrés.
+
+#### Replanifications
+Pas de replanification.
 
 ## Stratégie de tests (Ludo/Denise)
 
 ### Résultats des tests (Ludo/Denise)
 
-## Stratégie d'intégration du code de chaque participant (Git) (Denise)
+## Stratégie d'intégration du code de chaque participant (GitHub)
+Nous avons toujours travaillé sur la branche *master*: chacun a toujours testé son code avant de la pousser sur la branche. S'il y avait des cas de conflit, ceux-ci ont été gérés comme il le fallait. 
 
 
 # Etat des lieux (Ludo/Denise)
