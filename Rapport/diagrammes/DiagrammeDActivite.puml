@@ -2,24 +2,24 @@
 |Serveur|
 start
 split
-:Effacer base de donnees;
+:Effacer base de données;
 stop
 split again
-:Configurer de la partie;
+:Configurer la partie;
 :Accepter les connexions;
 end split
 fork
-:Afficher nombre de
-joueurs connectes;
+:Afficher le nombre de
+joueurs connectés;
 :Nombre de joueurs
-desires atteint;
+désiré atteint;
 fork again
 |Client|
 :Configurer connexion;
 if (Partie pleine?) then (Oui)
  stop
 else (Non)
- while (Pseudo deja pris?) is (Oui)
+ while (Pseudo déjà pris?) is (Oui)
   :Modifier pseudo;
 endwhile (Non)
 endif
@@ -29,12 +29,12 @@ endfork
 :Lancer la partie;
 fork
 -[dotted]->
-:Arret premature;
+:Arrêt prématuré;
 -[dotted]->
 fork again
 |Client|
 :Jouer la partie;
-:Partie gagnee;
+:Partie gagnée;
 endfork
 |Serveur|
 end
