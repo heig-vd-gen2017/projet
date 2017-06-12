@@ -1,23 +1,41 @@
 @startuml
-partition Serveur {
-(*) --> "Configuration de la partie"
-"Configuration de la partie" --> "Accepter les connexions"
---> === S1 ===
---> "Affichage du nombre
- de joueurs connectés"
-}
-
-partition Client {
-=== S1 === --> "Connexion"
-"Connexion" --> === S2 ===
-if "Pseudo déjà pris?" then
-->[true] "Choisir un autre pseudo"
-else
-->[false] === S3 ===
+|Serveur|
+start
+split
+:Effacer base de donnees;
+stop
+split again
+:Configurer de la partie;
+:Accepter les connexions;
+end split
+fork
+:Afficher nombre de
+joueurs connectes;
+:Nombre de joueurs
+desires atteint;
+fork again
+|Client|
+:Configurer connexion;
+if (Partie pleine?) then (Oui)
+ stop
+else (Non)
+ while (Pseudo deja pris?) is (Oui)
+  :Modifier pseudo;
+endwhile (Non)
 endif
-}
-
-partition Serveur {
-
-}
+:Se connecter;
+endfork
+|Serveur|
+:Lancer la partie;
+fork
+-[dotted]->
+:Arret premature;
+-[dotted]->
+fork again
+|Client|
+:Jouer la partie;
+:Partie gagnee;
+endfork
+|Serveur|
+end
 @enduml
