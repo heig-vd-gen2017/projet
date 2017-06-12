@@ -1,1 +1,41 @@
 @startuml
+|Serveur|
+start
+split
+:Effacer base de données;
+stop
+split again
+:Configurer la partie;
+:Accepter les connexions;
+end split
+fork
+:Afficher le nombre de
+joueurs connectés;
+:Nombre de joueurs
+désiré atteint;
+fork again
+|Client|
+:Configurer connexion;
+if (Partie pleine?) then (Oui)
+ stop
+else (Non)
+ while (Pseudo déjà pris?) is (Oui)
+  :Modifier pseudo;
+endwhile (Non)
+endif
+:Se connecter;
+endfork
+|Serveur|
+:Lancer la partie;
+fork
+-[dotted]->
+:Arrêt prématuré;
+-[dotted]->
+fork again
+|Client|
+:Jouer la partie;
+:Partie gagnée;
+endfork
+|Serveur|
+end
+@enduml

@@ -1,0 +1,11 @@
+@startuml
+
+object scores {
+    id
+    player
+    mode
+    score
+    date
+}
+
+@enduml
