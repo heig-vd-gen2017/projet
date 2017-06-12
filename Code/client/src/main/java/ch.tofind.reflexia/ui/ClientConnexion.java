@@ -54,15 +54,6 @@ public class ClientConnexion extends Application {
     @FXML
     Button buttonConnect;
 
-    /**
-     * Returns the controller for the current interface.
-     *
-     * @return The controller for the current interface.
-     */
-    public static ClientConnexion getController() {
-        return loader.getController();
-    }
-
     public void start(Stage stage) throws IOException {
         stageGlobal = stage;
         URL fileURL = getClass().getClassLoader().getResource(FXML_FILE);

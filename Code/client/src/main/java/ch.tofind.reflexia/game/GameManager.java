@@ -1,17 +1,11 @@
 package ch.tofind.reflexia.game;
 
-import ch.tofind.reflexia.errors.LobbyClosed;
-import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.mode.GameMode;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.MapProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * @brief game management class
+ * game management class
  */
 public class GameManager {
 
@@ -21,27 +15,19 @@ public class GameManager {
     //! game mode
     private GameMode gameMode;
 
-    //! list of players
-    private List<Player> players;
-
-    //! Accept or not new players
-    private boolean acceptPlayers;
-
     //! number of players connected
-    private IntegerProperty nbPlayers;
+    private IntegerProperty actualScore;
 
 
     /**
-     * @brief GameManager single constructor. Avoid the instantiation.
+     * GameManager single constructor. Avoid the instantiation.
      */
     private GameManager() {
-        this.players = new ArrayList<>();
-        this.acceptPlayers = false;
-        this.nbPlayers = new SimpleIntegerProperty(0);
+        this.actualScore = new SimpleIntegerProperty(0);
     }
 
     /**
-     * @brief Get the object instance
+     * Get the object instance
      * @return The instance of the object
      */
     public static GameManager getInstance() {
@@ -57,60 +43,20 @@ public class GameManager {
         return instance;
     }
 
-    public void acceptPlayers() {
-        acceptPlayers = true;
-    }
-
-    public void refusePlayers() {
-        acceptPlayers = false;
-    }
-
-    public void reset() {
-        players.clear();
-    }
-
-    /**
-     * @brief adds a player
-     * @param pseudo
-     */
-    public void addPlayer(String pseudo) throws LobbyClosed, UsernameTaken {
-
-        if (!acceptPlayers) {
-            throw new LobbyClosed("No more players can be accepted");
-        }
-
-        Player player = new Player(pseudo, 0);
-
-        if (players.contains(player)) {
-            throw new UsernameTaken("Username already taken");
-        }
-
-        players.add(player);
-
-        nbPlayers.setValue(players.size());
-    }
-
-    /**
-     * gets the number of players
-     * @return the number of players
-     */
-    public IntegerProperty getNumberOfPlayers() {
-        return nbPlayers;
-    }
-
-    /**
-     * @brief gets the game mode
-     */
     public GameMode getGameMode() {
         return gameMode;
     }
 
-    /**
-     * @brief sets the game mode
-     * @param gameMode
-     */
     public void setGameMode(GameMode gameMode) {
         this.gameMode = gameMode;
 
+    }
+
+    public IntegerProperty getActualScore() {
+        return actualScore;
+    }
+
+    public void setActualScore(Integer score) {
+        actualScore.set(score);
     }
 }

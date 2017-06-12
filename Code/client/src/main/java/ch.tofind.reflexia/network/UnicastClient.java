@@ -155,7 +155,7 @@ public class UnicastClient implements Runnable {
 
             // If one side closed the connection, we simulate an end of communication
             if (input == null) {
-                commands.add(NetworkProtocol.END_OF_COMMUNICATION);
+                break;
             }
 
             // Get the requested command

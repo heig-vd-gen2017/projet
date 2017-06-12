@@ -129,7 +129,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                             <children>
-                                <CheckBox fx:id="checkBoxBonus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus (+ 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <CheckBox fx:id="checkBoxBonus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets bonus" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>
@@ -138,7 +138,7 @@
                         </AnchorPane>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
                             <children>
-                                <CheckBox fx:id="checkBoxMalus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus (- 100 pts)" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
+                                <CheckBox fx:id="checkBoxMalus" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefHeight="448.0" prefWidth="200.0" text="Objets malus" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="5.0">
                                     <font>
                                         <Font name="Courier New" size="13.0" />
                                     </font>

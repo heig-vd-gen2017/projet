@@ -13,6 +13,8 @@ import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Point;
 import ch.tofind.reflexia.utils.Serialize;
 import javafx.application.Platform;
+import javafx.beans.property.IntegerProperty;
+import javafx.scene.control.Alert;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -137,6 +139,9 @@ public class Core implements ICore {
 
         gameManager.setGameMode(gameMode);
 
+        gameManager.setActualScore(gameMode.getStartingScore());
+
+
         start(multicastAddress, multicastPort, networkInterface, unicastPort);
 
         return NetworkProtocol.END_OF_COMMUNICATION + NetworkProtocol.END_OF_LINE +
@@ -196,23 +201,36 @@ public class Core implements ICore {
 
     public String WINNER(ArrayList<Object> args) {
 
-        System.out.println("WE HAVE A WINNER !!");
+        String player = (String) args.remove(0);
 
         // We stop the game
         stop();
+
+        ClientGame clientGame = ClientGame.getController();
+
+        String message = "We have a winner ! Congrats " + pseudo + "!";
+        Platform.runLater(() -> {
+            clientGame.showAlert("End of game :)", message, Alert.AlertType.INFORMATION);
+        });
 
         return "";
     }
 
     public String SCORES_UPDATE(ArrayList<Object> args) {
 
-        String playsersJson = (String) args.remove(0);
+        args.remove(0);
 
-        Map<String,Object> result = Serialize.unserialize(playsersJson, Map.class);
+        String scoreString = (String) args.remove(0);
 
-        System.out.println("Scores: " + result);
+        Integer score = Integer.valueOf(scoreString);
 
-        return "";
+        // Delegate work to JavaFX thread.
+        Platform.runLater(() -> {
+            gameManager.setActualScore(score);
+        });
+
+        return NetworkProtocol.END_OF_COMMUNICATION + NetworkProtocol.END_OF_LINE +
+                NetworkProtocol.END_OF_COMMAND;
     }
 
 

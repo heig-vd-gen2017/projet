@@ -2,15 +2,15 @@
 <mode>
     <name>Fruits plate</name>
     <startingScore>100</startingScore>
-    <endingScore>500</endingScore>
+    <endingScore>5000</endingScore>
     <rounds>10</rounds>
 	<gameObjects>
         <entry>
             <key>bonus</key>
             <value>
                 <type>bonus</type>
-                <points>50</points>
-                <timeout>3000</timeout>
+                <points>250</points>
+                <timeout>1000</timeout>
                 <enabled>true</enabled>
             </value>
         </entry>
@@ -18,8 +18,8 @@
             <key>malus</key>
             <value>
                 <type>malus</type>
-                <points>-50</points>
-                <timeout>3000</timeout>
+                <points>-350</points>
+                <timeout>1000</timeout>
                 <enabled>true</enabled>
             </value>
         </entry>
@@ -31,6 +31,6 @@
             </value>
         </entry>
     </gameObjects>
-    <minTimeToSpawn>300</minTimeToSpawn>
-    <maxTimeToSpawn>1500</maxTimeToSpawn>
+    <minTimeToSpawn>100</minTimeToSpawn>
+    <maxTimeToSpawn>1000</maxTimeToSpawn>
 </mode>

@@ -94,15 +94,6 @@ public class GameManager {
         return players;
     }
 
-    public void updateScore(String playerPseudo, Integer gameObjectPoints) {
-
-        Player player = players.get(playerPseudo);
-
-        Integer actualScore = player.getScore();
-
-        player.setScore(actualScore + gameObjectPoints);
-    }
-
     public boolean isWinner(String playerPseudo) {
 
         Player player = players.get(playerPseudo);

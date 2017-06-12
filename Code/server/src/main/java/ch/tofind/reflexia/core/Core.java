@@ -1,9 +1,11 @@
 package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.database.DatabaseManager;
+import ch.tofind.reflexia.database.PlayersScores;
 import ch.tofind.reflexia.errors.LobbyClosed;
 import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.game.Player;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameModeManager;
 import ch.tofind.reflexia.mode.GameObject;
@@ -15,17 +17,17 @@ import ch.tofind.reflexia.mode.GameObjectRandomizer;
 import ch.tofind.reflexia.utils.Logger;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Serialize;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
+import java.util.Map;
+import java.util.Random;
+
+import org.hibernate.Session;
+import org.hibernate.query.Query;
 
 public class Core implements ICore {
 
@@ -49,20 +51,18 @@ public class Core implements ICore {
 
     private GameObjectRandomizer gameObjectRandomizer;
 
-    private ScheduledExecutorService sendScoresOnSchedule;
-
     //! Porte used for unicast
     private int unicastPort;
 
     /**
-     * @brief Core single constructor. Avoid the instantiation.
+     * Core single constructor. Avoid the instantiation.
      */
     private Core() {
         gameManager = GameManager.getInstance();
     }
 
     /**
-     * @brief Get the object instance.
+     * Get the object instance.
      * @return The instance of the object.
      */
     public static Core getInstance() {
@@ -79,7 +79,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief sets the game mode
+     * sets the game mode
      * @param gameModeName
      */
     public void setGameMode(String gameModeName) {
@@ -93,7 +93,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief accepts a connection
+     * accepts a connection
      * @param multicastAddress
      * @param multicastPortString
      * @param ipAddressName
@@ -115,7 +115,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief begins the game
+     * begins the game
      */
     public void beginGame() {
 
@@ -129,28 +129,10 @@ public class Core implements ICore {
         gameObjectRandomizer = new GameObjectRandomizer(gameMode, multicast);
 
         new Thread(gameObjectRandomizer).start();
-
-        // Crée un thread qui nettoie les sessions toutes les N secondes
-        sendScoresOnSchedule = Executors.newScheduledThreadPool(1);
-
-        sendScoresOnSchedule.scheduleAtFixedRate(this::refreshScores, 0, 1, TimeUnit.SECONDS);
-    }
-
-    private void refreshScores() {
-
-        String playersJson = Serialize.serialize(gameManager.getPlayers());
-
-        String command = ApplicationProtocol.SCORES_UPDATE + NetworkProtocol.END_OF_LINE +
-                playersJson + NetworkProtocol.END_OF_LINE +
-                NetworkProtocol.END_OF_COMMAND;
-
-        if (multicast != null) {
-            multicast.send(command);
-        }
     }
 
     /**
-     * @brief ends the game
+     * ends the game
      */
     public void endGame() {
 
@@ -169,7 +151,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief resets the scores
+     * resets the scores
      * @param date
      */
     public void resetScores(Date date) {
@@ -186,7 +168,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief makes a player join the game
+     * makes a player join the game
      * @param args Arguments of the command.
      * @return
      */
@@ -216,7 +198,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief Get the player who touched the object, the object and its time.
+     * Get the player who touched the object, the object and its time.
      * @param args Arguments of the command.
      * @return The result of the command.
      */
@@ -226,11 +208,37 @@ public class Core implements ICore {
         String playerPseudo = (String) args.remove(0);
         Integer objectId = Integer.valueOf((String) args.remove(0));
 
-        GameObject gameObjet = gameObjectRandomizer.getGeneratedGameObjects().get(objectId);
+        GameObject gameObject = gameObjectRandomizer.getGeneratedGameObjects().get(objectId);
 
-        gameManager.updateScore(playerPseudo, gameObjet.getPoints());
+        if (gameObject.getType().equals("mystery")) {
+            Random random = new Random();
+            String[] types = {"bonus", "malus"};
+
+            String type = types[random.nextInt(types.length)];
+
+            gameObject = GameManager.getInstance().getGameMode().getGameObjects().get(type);
+
+        }
+
+        Map<String, Player> players = gameManager.getPlayers();
+
+        Player currentPlayer = players.get(playerPseudo);
+
+        currentPlayer.setScore(currentPlayer.getScore() + gameObject.getPoints());
 
         if (gameManager.isWinner(playerPseudo)) {
+
+            // Save all scores in database
+            for (Player player : players.values()) {
+
+                PlayersScores playerScore = new PlayersScores(player.getPseudo(),
+                        gameManager.getGameMode().getName(),
+                        player.getScore());
+
+                DatabaseManager.getInstance().save(playerScore);
+
+            }
+
             String command = ApplicationProtocol.WINNER + NetworkProtocol.END_OF_LINE +
                     playerPseudo + NetworkProtocol.END_OF_LINE +
                     NetworkProtocol.END_OF_COMMAND;
@@ -240,12 +248,13 @@ public class Core implements ICore {
             }
         }
 
-        return NetworkProtocol.END_OF_COMMUNICATION + NetworkProtocol.END_OF_LINE +
+        return ApplicationProtocol.SCORES_UPDATE + NetworkProtocol.END_OF_LINE +
+                currentPlayer.getScore() + NetworkProtocol.END_OF_LINE +
                 NetworkProtocol.END_OF_COMMAND;
     }
 
     /**
-     * @brief Start the server.
+     * Start the server.
      * @param multicastAddress The multicast address to use for communication.
      * @param multicastPort The multicast port to use for communication.
      * @param interfaceToUse The network interface to use for multicast.
@@ -263,7 +272,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief Execute the command on the core.
+     * Execute the command on the core.
      * @param command The command to execute.
      * @param args Arguments of the command. The arguments of the command.
      */
@@ -287,7 +296,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief Stop the server.
+     * Stop the server.
      */
     @Override
     public void stop() {
@@ -296,9 +305,7 @@ public class Core implements ICore {
             multicast = null;
         }
 
-        if (gameObjectRandomizer != null) {
-            gameObjectRandomizer.stop();
-        }
+        gameObjectRandomizer.stop();
 
         if (server != null) {
             server.stop();
@@ -307,7 +314,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief Send message to hostname by unicast.
+     * Send message to hostname by unicast.
      * @param hostname Where to send the message.
      * @param message The message to send.
      */
@@ -317,7 +324,7 @@ public class Core implements ICore {
     }
 
     /**
-     * @brief Send message by multicast.
+     * Send message by multicast.
      * @param message The message to send.
      */
     @Override

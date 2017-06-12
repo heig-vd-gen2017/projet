@@ -5,8 +5,13 @@ import ch.tofind.reflexia.core.Core;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
+import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.mode.GameMode;
+import ch.tofind.reflexia.mode.GameObject;
+import ch.tofind.reflexia.utils.Configuration;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.event.EventHandler;
@@ -15,7 +20,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -41,7 +48,29 @@ public class ClientGame extends Application implements Initializable {
     Pane paneGame;
 
     @FXML
-    TableView<String> tableViewScores;
+    Label actualScore;
+
+    @FXML
+    Label finalScore;
+
+    @FXML
+    Label bonusPoints;
+
+    @FXML
+    Pane bonusImagePane;
+
+    @FXML
+    Label malusPoints;
+
+    @FXML
+    Pane malusImagePane;
+
+    @FXML
+    Label mysteryPoints;
+
+    @FXML
+    Pane mysteryImagePane;
+
 
     /**
      * Returns the controller for the current interface.
@@ -76,15 +105,25 @@ public class ClientGame extends Application implements Initializable {
         stage.show();
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        loader.setController(this);
-    }
-
     @FXML
     public void closeWindow(MouseEvent event) {
         Stage stage = (Stage)buttonClose.getScene().getWindow();
         stage.close();
+    }
+
+    /**
+     * Displays a popup on the main window with the given message.
+     *
+     * @param message The message of the popup.
+     */
+    public void showAlert(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     /**
@@ -115,6 +154,54 @@ public class ClientGame extends Application implements Initializable {
             paneGame.getChildren().remove(gameObject);
             core.objectTouched(objectId);
         });
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        loader.setController(this);
+
+        GameMode gameMode = GameManager.getInstance().getGameMode();
+
+        Map<String, GameObject> gameObjects = gameMode.getGameObjects();
+
+        GameObject bonusObject = gameObjects.get("bonus");
+        GameObject malusObject = gameObjects.get("malus");
+
+        actualScore.textProperty().bind(GameManager.getInstance().getActualScore().asString());
+
+        finalScore.setText(String.valueOf(gameMode.getEndingScore()));
+        bonusPoints.setText(String.valueOf(bonusObject.getPoints()));
+        malusPoints.setText(String.valueOf(malusObject.getPoints()));
+        mysteryPoints.setText("Huh ? :)");
+
+        String imagesPath = System.getProperty("user.dir") + File.separator +
+                Configuration.getInstance().get("MODES_PATH") + File.separator +
+                gameMode.getName() + File.separator;
+
+        String bonusImagePath = imagesPath + "bonus.png";
+        String malusImagePath = imagesPath + "malus.png";
+        String mysteryImagePath = imagesPath + "mystery.png";
+
+        File bonusImageFile = new File(bonusImagePath);
+        File malusImageFile = new File(malusImagePath);
+        File mysteryImageFile = new File(mysteryImagePath);
+
+        String bonusImageUri = bonusImageFile.toURI().toString();
+        String malusImageUri = malusImageFile.toURI().toString();
+        String mysteryImageUri = mysteryImageFile.toURI().toString();
+
+        Image bonusImage = new Image(bonusImageUri);
+        Image malusImage = new Image(malusImageUri);
+        Image mysteryImage = new Image(mysteryImageUri);
+
+        ImageView bonusImageView = new ImageView(bonusImage);
+        ImageView malusImageView = new ImageView(malusImage);
+        ImageView mysteryImageView = new ImageView(mysteryImage);
+
+        bonusImagePane.getChildren().add(bonusImageView);
+        malusImagePane.getChildren().add(malusImageView);
+        mysteryImagePane.getChildren().add(mysteryImageView);
+
     }
 
     @Override
