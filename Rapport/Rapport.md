@@ -179,7 +179,7 @@ Afin de gagner, le joueur devra obtenir le nombre de points à atteindre défini
 * Jouer la partie
 * Quitter la partie (note: la partie en cours n'est pas interrompue, le joueur est considéré comme ayant perdu)
 
-## Diagramme d'activité (Denise)
+## Diagramme d'activité
 ![Diagramme d'activité](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/DiagrammeDActivite.puml)
 
 ## Cas d'utilisation
@@ -187,7 +187,12 @@ Afin de gagner, le joueur devra obtenir le nombre de points à atteindre défini
 ### Diagramme général de contexte
 ![Cas d'utilisation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/UseCases.puml)
 
-### Description des acteurs (Luca)
+### Description des acteurs
+#### Administrateur (Serveur)
+L'administrateur s'occupe de configurer le serveur pour permettre aux joueurs de se connecter. De plus, celui-ci a des droits spéciaux comme arrêter une partie prématurément ou effacer la base de données des scores.
+
+#### Joueur (Client)
+Le joueur joue les parties que l'administrateur a configurées. Il clique sur les images apparaissant sur la surface de jeu jusqu'à ce qu'il gagne ou qu'un autre joueur gagne.
 
 ### Scénarios par cas d'utilisation
 
@@ -285,11 +290,16 @@ Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
 4. Le joueur peut attendre qu'une partie soit en phase de configuration
 
 ## Modèle de domaine (Ludo)
-** A COPIER + modifier **
+** TODO **
+** A CREER automatiquement + modifier **
 
 ### Client
 
+#### Commentaires et justification
+
 ### Serveur
+
+#### Commentaires et justification
 
 ## Base de données
 
@@ -299,7 +309,6 @@ Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
 
 #### Commentaires
 La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait joué.
-
 
 
 # Conception
@@ -320,12 +329,14 @@ Notre application communiquera à travers le réseau en utilisant le protocole s
 
 ## Problèmes rencontrés
 
+## Solutions
+
+
 # Gestion du projet
 
 ## Rôle des membres du groupe de développement
 
 * Tout le monde: Architecteur/concepteur en chef, programmeur, responsable des tests
-
 * Ludovic: Chef de projet, responsable de la configuration
 * Luca: Responsable des normes et procédures,
 * Abass: Représentatant des clients & utilisateurs
@@ -419,12 +430,15 @@ Pas de problèmes rencontrés.
 #### Replanifications
 Pas de replanification.
 
+
 ## Stratégie de tests (Ludo/Denise)
 
 ### Résultats des tests (Ludo/Denise)
 
-## Stratégie d'intégration du code de chaque participant (GitHub)
-Nous avons toujours travaillé sur la branche *master*: chacun a toujours testé son code avant de la pousser sur la branche. S'il y avait des cas de conflit, ceux-ci ont été gérés comme il le fallait. 
+
+## Stratégie d'intégration du code de chaque participant
+Nous avons toujours travaillé sur la branche *master*: chacun de nous a constamment testé son code avant de le pousser sur la branche. S'il y avait des cas de conflit, ceux-ci ont été gérés comme il le fallait. En conclusion, nous n'avons donc pas rencontré de problèmes avec GIT.
+
 
 
 # Etat des lieux (Ludo/Denise)
