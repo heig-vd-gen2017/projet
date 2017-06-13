@@ -79,7 +79,6 @@ public class ClientConnexion extends Application {
         stageGlobal.show();
     }
 
-
     @FXML
     private void initialize() {
 

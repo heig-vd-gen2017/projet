@@ -53,17 +53,6 @@ public class GameModeManager {
 
                 GameMode gameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
 
-                gameMode.addInterfaceObject(new InterfaceObject("waiting", null));
-                gameMode.addInterfaceObject(new InterfaceObject("starting_in_3", 1000));
-                gameMode.addInterfaceObject(new InterfaceObject("starting_in_2", 1000));
-                gameMode.addInterfaceObject(new InterfaceObject("starting_in_1", 1000));
-                gameMode.addInterfaceObject(new InterfaceObject("start", 500));
-                gameMode.addInterfaceObject(new InterfaceObject("winner", null));
-                gameMode.addInterfaceObject(new InterfaceObject("loser", null));
-                gameMode.addInterfaceObject(new InterfaceObject("end_of_game", null));
-                gameMode.addInterfaceObject(new InterfaceObject("end_of_round", null));
-                gameMode.addInterfaceObject(new InterfaceObject("background", null));
-
                 gameModes.put(gameMode.getName(), gameMode);
 
             }

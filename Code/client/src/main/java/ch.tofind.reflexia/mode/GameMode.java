@@ -31,15 +31,11 @@ public class GameMode {
     //! Time beetween every object spawn
     private Integer maxTimeToSpawn;
 
-    //! Interface objects composed by the mode
-    private Map<String, InterfaceObject> interfaceObjects;
-
     /**
      * GameMode parameterless constructor
      */
     private GameMode() {
         this.gameObjects = new HashMap<>();
-        this.interfaceObjects = new HashMap<>();
     }
 
     /**
@@ -57,7 +53,6 @@ public class GameMode {
         this.endingScore = endingScore;
         this.minTimeToSpawn = minTimeToSpawn;
         this.maxTimeToSpawn = maxTimeToSpawn;
-        this.interfaceObjects = new HashMap<>();
     }
 
     /**
@@ -159,22 +154,6 @@ public class GameMode {
      */
     public void setMaxTimeToSpawn(Integer maxTimeToSpawn) {
         this.maxTimeToSpawn = maxTimeToSpawn;
-    }
-
-    /**
-     * gets the gameObjects attributes of game mode
-     * @return the objects composed by the game mode
-     */
-    public Map<String, InterfaceObject> getInterfaceObjects() {
-        return interfaceObjects;
-    }
-
-    /**
-     * adds a gameObject to the gameObjects of a game mode
-     * @param interfaceObject
-     */
-    public void addInterfaceObject(InterfaceObject interfaceObject) {
-        interfaceObjects.put(interfaceObject.getType(), interfaceObject);
     }
 
     /**

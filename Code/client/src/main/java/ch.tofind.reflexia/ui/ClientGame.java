@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Map;
-import java.util.ResourceBundle;
 
 import ch.tofind.reflexia.game.GameManager;
 import ch.tofind.reflexia.mode.GameMode;
@@ -14,16 +13,13 @@ import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.utils.Configuration;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -31,7 +27,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class ClientGame extends Application implements Initializable {
+public class ClientGame extends Application {
 
     private static FXMLLoader loader = new FXMLLoader();
 
@@ -45,7 +41,7 @@ public class ClientGame extends Application implements Initializable {
     Button buttonClose;
 
     @FXML
-    Pane paneGame;
+    Pane gamePane;
 
     @FXML
     Label actualScore;
@@ -143,21 +139,21 @@ public class ClientGame extends Application implements Initializable {
         PauseTransition delay = new PauseTransition(Duration.millis(timeToShow));
 
         delay.setOnFinished(event -> {
-            paneGame.getChildren().remove(gameObject);
+            gamePane.getChildren().remove(gameObject);
         });
 
         delay.play();
 
-        paneGame.getChildren().add(gameObject);
+        gamePane.getChildren().add(gameObject);
 
         gameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            paneGame.getChildren().remove(gameObject);
+            gamePane.getChildren().remove(gameObject);
             core.objectTouched(objectId);
         });
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
+    @FXML
+    private void initialize() {
         loader.setController(this);
 
         GameMode gameMode = GameManager.getInstance().getGameMode();
@@ -178,26 +174,32 @@ public class ClientGame extends Application implements Initializable {
                 Configuration.getInstance().get("MODES_PATH") + File.separator +
                 gameMode.getName() + File.separator;
 
+        String backgroundImagePath = imagesPath + "background.png";
         String bonusImagePath = imagesPath + "bonus.png";
         String malusImagePath = imagesPath + "malus.png";
         String mysteryImagePath = imagesPath + "mystery.png";
 
+        File backgroundImageFile = new File(backgroundImagePath);
         File bonusImageFile = new File(bonusImagePath);
         File malusImageFile = new File(malusImagePath);
         File mysteryImageFile = new File(mysteryImagePath);
 
+        String backgroundImageUri = backgroundImageFile.toURI().toString();
         String bonusImageUri = bonusImageFile.toURI().toString();
         String malusImageUri = malusImageFile.toURI().toString();
         String mysteryImageUri = mysteryImageFile.toURI().toString();
 
+        Image backgroundImage = new Image(backgroundImageUri);
         Image bonusImage = new Image(bonusImageUri);
         Image malusImage = new Image(malusImageUri);
         Image mysteryImage = new Image(mysteryImageUri);
 
+        ImageView backgroundImageView = new ImageView(backgroundImage);
         ImageView bonusImageView = new ImageView(bonusImage);
         ImageView malusImageView = new ImageView(malusImage);
         ImageView mysteryImageView = new ImageView(mysteryImage);
 
+        gamePane.getChildren().add(backgroundImageView);
         bonusImagePane.getChildren().add(bonusImageView);
         malusImagePane.getChildren().add(malusImageView);
         mysteryImagePane.getChildren().add(mysteryImageView);
