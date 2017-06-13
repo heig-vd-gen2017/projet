@@ -53,8 +53,6 @@ public class GameModeManager {
 
                 GameMode gameMode = (GameMode) jaxbUnmarshaller.unmarshal(gameModeFile);
 
-                gameMode.addInterfaceObject(new InterfaceObject("background", null));
-
                 gameModes.put(gameMode.getName(), gameMode);
 
             }
