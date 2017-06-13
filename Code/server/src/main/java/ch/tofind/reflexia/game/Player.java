@@ -10,7 +10,7 @@ public class Player {
     //! Name of the player.
     private String pseudo;
 
-    //! PlayersScores associated with the player.
+    //! PlayerScore associated with the player.
     private Integer score;
 
     /**
@@ -74,6 +74,6 @@ public class Player {
 
         return "Player"                      + '\n' + '\t' +
                "Pseudo..........: " + pseudo + '\n' + '\t' +
-               "PlayersScores...........: " + score  + '\n';
+               "PlayerScore...........: " + score  + '\n';
     }
 }

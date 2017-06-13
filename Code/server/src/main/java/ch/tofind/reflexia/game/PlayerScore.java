@@ -1,4 +1,4 @@
-package ch.tofind.reflexia.database;
+package ch.tofind.reflexia.game;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * This class represents an audio track.
  */
-public class PlayersScores implements Serializable {
+public class PlayerScore implements Serializable {
 
     //! ID of the record in the database
     private Integer id;
@@ -31,7 +31,7 @@ public class PlayersScores implements Serializable {
     /**
      * Empty constructor for Hibernate.
      */
-    protected PlayersScores() {
+    protected PlayerScore() {
 
     }
 
@@ -42,7 +42,7 @@ public class PlayersScores implements Serializable {
      * @param mode The mode.
      * @param score The score.
      */
-    public PlayersScores(String player, String mode, Integer score) {
+    public PlayerScore(String player, String mode, Integer score) {
         this.player = player;
         this.mode = mode;
         this.score = score;
@@ -56,16 +56,16 @@ public class PlayersScores implements Serializable {
             return true;
         }
 
-        if (!(object instanceof PlayersScores)) {
+        if (!(object instanceof PlayerScore)) {
             return false;
         }
 
-        PlayersScores playersScores = (PlayersScores) object;
+        PlayerScore playerScore = (PlayerScore) object;
 
-        return Objects.equals(id, playersScores.id)          &&
-                Objects.equals(player, playersScores.player) &&
-                Objects.equals(mode, playersScores.mode)     &&
-                Objects.equals(playersScores, playersScores.score);
+        return Objects.equals(id, playerScore.id)          &&
+                Objects.equals(player, playerScore.player) &&
+                Objects.equals(mode, playerScore.mode)     &&
+                Objects.equals(playerScore, playerScore.score);
     }
 
     @Override
@@ -80,10 +80,10 @@ public class PlayersScores implements Serializable {
 
         String dateAddedString = date == null ? "N/A" : dateFormat.format(date);
 
-        return "PlayersScores"                  + '\n' + '\t' +
+        return "PlayerScore"                  + '\n' + '\t' +
                "Player.....: " + player + '\n' + '\t' +
                "Mode.......: " + mode   + '\n' + '\t' +
-               "PlayersScores......: " + score  + '\n' + '\t' +
-               "Date.......: " + date   + '\n';
+               "PlayerScore......: " + score  + '\n' + '\t' +
+               "Date.......: " + dateAddedString   + '\n';
     }
 }

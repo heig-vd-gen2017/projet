@@ -225,7 +225,7 @@ public class ServerConfiguration extends Application {
         // Tells the Core that we want to reset the scores
         core.resetScores(date);
 
-        informationLabel.setText("PlayersScores resetted");
+        informationLabel.setText("PlayerScore resetted");
     }
 
     /**

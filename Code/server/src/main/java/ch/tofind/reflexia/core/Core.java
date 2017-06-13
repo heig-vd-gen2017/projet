@@ -1,7 +1,7 @@
 package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.database.DatabaseManager;
-import ch.tofind.reflexia.database.PlayersScores;
+import ch.tofind.reflexia.game.PlayerScore;
 import ch.tofind.reflexia.errors.LobbyClosed;
 import ch.tofind.reflexia.errors.UsernameTaken;
 import ch.tofind.reflexia.game.GameManager;
@@ -158,7 +158,7 @@ public class Core implements ICore {
 
         Session session = DatabaseManager.getInstance().getSession();
 
-        Query deleteScoresBeforeDate = session.createQuery("DELETE PlayersScores WHERE date <= :date");
+        Query deleteScoresBeforeDate = session.createQuery("DELETE PlayerScore WHERE date <= :date");
 
         deleteScoresBeforeDate.setParameter("date", date);
 
@@ -228,10 +228,14 @@ public class Core implements ICore {
 
         if (gameManager.isWinner(playerPseudo)) {
 
+            String results = "We have a winner ! Congrats " + playerPseudo + " !" + '\n' + "Results:" + '\n';
+
             // Save all scores in database
             for (Player player : players.values()) {
 
-                PlayersScores playerScore = new PlayersScores(player.getPseudo(),
+                results += '\t' + player.getPseudo() + ": " + player.getScore() + "\n";
+
+                PlayerScore playerScore = new PlayerScore(player.getPseudo(),
                         gameManager.getGameMode().getName(),
                         player.getScore());
 
@@ -240,12 +244,14 @@ public class Core implements ICore {
             }
 
             String command = ApplicationProtocol.WINNER + NetworkProtocol.END_OF_LINE +
-                    playerPseudo + NetworkProtocol.END_OF_LINE +
+                    results + NetworkProtocol.END_OF_LINE +
                     NetworkProtocol.END_OF_COMMAND;
 
             if (multicast != null) {
                 multicast.send(command);
             }
+
+            stop();
         }
 
         return ApplicationProtocol.SCORES_UPDATE + NetworkProtocol.END_OF_LINE +
@@ -311,6 +317,8 @@ public class Core implements ICore {
             server.stop();
             server = null;
         }
+
+        DatabaseManager.getInstance().close();
     }
 
     /**

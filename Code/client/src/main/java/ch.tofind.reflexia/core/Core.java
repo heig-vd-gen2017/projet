@@ -201,16 +201,20 @@ public class Core implements ICore {
 
     public String WINNER(ArrayList<Object> args) {
 
-        String player = (String) args.remove(0);
+        String data = "";
+
+        for (Object result : args) {
+            data += (String) result + '\n';
+        }
+
+        String results = data;
 
         // We stop the game
         stop();
 
         ClientGame clientGame = ClientGame.getController();
-
-        String message = "We have a winner ! Congrats " + pseudo + "!";
         Platform.runLater(() -> {
-            clientGame.showAlert("End of game :)", message, Alert.AlertType.INFORMATION);
+            clientGame.showAlert("End of game :)", results, Alert.AlertType.INFORMATION);
         });
 
         return "";

@@ -31,7 +31,8 @@ public class Point {
         this.y = y;
     }
 
-    public static Point getRandonPointBetween(Integer minX, Integer maxX, Integer minY, Integer maxY) {
+    public static Point getRandomPointBetween(Integer minX, Integer maxX, Integer minY, Integer maxY) {
+
         Random random = new Random();
 
         Integer x = random.nextInt(maxX - minX + 1) + minX;
