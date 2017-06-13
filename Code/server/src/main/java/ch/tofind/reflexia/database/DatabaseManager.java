@@ -76,7 +76,7 @@ public class DatabaseManager {
      *
      * @param query The query to execute.
      */
-    public void execute(Query query) {
+    public synchronized void execute(Query query) {
 
         try {
             // Wait while transaction is still active.
@@ -98,7 +98,7 @@ public class DatabaseManager {
      *
      * @param object The object to save.
      */
-    public void save(Object object) {
+    public synchronized void save(Object object) {
 
         try {
             // Wait while transaction is still active.
@@ -120,7 +120,7 @@ public class DatabaseManager {
      *
      * @param object The object to delete.
      */
-    public void delete(Object object) {
+    public synchronized void delete(Object object) {
         try {
             // Wait while transaction is still active.
             while(transaction != null && transaction.isActive());
@@ -141,7 +141,7 @@ public class DatabaseManager {
      *
      * @param object The object to update.
      */
-    public void update(Object object) {
+    public synchronized void update(Object object) {
         try {
             // Wait while transaction is still active.
             while(transaction != null && transaction.isActive());

@@ -65,6 +65,11 @@ public class Player {
         return Objects.equals(pseudo, player.pseudo);
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(pseudo);
+    }
+
     /**
      * toString method for player class
      * @return a string representation of a player

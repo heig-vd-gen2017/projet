@@ -18,8 +18,7 @@ public class Serialize {
         return gson.toJson(object);
     }
 
-    public static <T> T unserialize(String jsonObject, Class<T> objectClass) {
+    public static <T> T unserialize(String jsonObject, Type objectClass) {
         return gson.fromJson(jsonObject, objectClass);
     }
-
 }

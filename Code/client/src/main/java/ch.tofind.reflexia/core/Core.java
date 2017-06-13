@@ -1,6 +1,8 @@
 package ch.tofind.reflexia.core;
 
 import ch.tofind.reflexia.game.GameManager;
+import ch.tofind.reflexia.game.Player;
+import ch.tofind.reflexia.game.PlayerScoreComparator;
 import ch.tofind.reflexia.mode.GameMode;
 import ch.tofind.reflexia.mode.GameObject;
 import ch.tofind.reflexia.mode.RandomGameObject;
@@ -17,9 +19,9 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Random;
+import java.util.*;
 
+import com.google.gson.reflect.TypeToken;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 
@@ -200,20 +202,33 @@ public class Core implements ICore {
 
     public String WINNER(ArrayList<Object> args) {
 
-        String data = "";
-
-        for (Object result : args) {
-            data += (String) result + '\n';
-        }
-
-        String results = data;
-
         // We stop the game
         stop();
 
+        String winner = (String) args.remove(0);
+        String playersJson = (String) args.remove(0);
+
+        Map<String, Player> players = Serialize.unserialize(playersJson, new TypeToken<HashMap<String, Player>>() {}.getType());
+
+        PriorityQueue<Player> scores = new PriorityQueue<>(new PlayerScoreComparator());
+
+        for (Player player : players.values()) {
+            scores.add(player);
+        }
+
+
+        String resultsData = winner + " gagne !" + '\n' + '\n';
+        resultsData += "Scores:" + '\n';
+
+        for (Player player : scores) {
+            resultsData += '\t' + player.getPseudo() + ": " + player.getScore() + '\n';
+        }
+
+        String results = resultsData;
+
         ClientGame clientGame = ClientGame.getController();
         Platform.runLater(() -> {
-            clientGame.showAlert("End of game :)", results, Alert.AlertType.INFORMATION);
+            clientGame.showAlert("Fin du jeu", results, Alert.AlertType.INFORMATION);
         });
 
         return "";

@@ -225,12 +225,10 @@ public class Core implements ICore {
 
         if (gameManager.isWinner(playerPseudo)) {
 
-            String results = "We have a winner ! Congrats " + playerPseudo + " !" + '\n' + "Results:" + '\n';
+            String playersJson = Serialize.serialize(players);
 
             // Save all scores in database
             for (Player player : players.values()) {
-
-                results += '\t' + player.getPseudo() + ": " + player.getScore() + "\n";
 
                 PlayerScore playerScore = new PlayerScore(player.getPseudo(),
                         gameManager.getGameMode().getName(),
@@ -241,14 +239,13 @@ public class Core implements ICore {
             }
 
             String command = ApplicationProtocol.WINNER + NetworkProtocol.END_OF_LINE +
-                    results + NetworkProtocol.END_OF_LINE +
+                    playerPseudo + NetworkProtocol.END_OF_LINE +
+                    playersJson + NetworkProtocol.END_OF_LINE +
                     NetworkProtocol.END_OF_COMMAND;
 
             if (multicast != null) {
                 multicast.send(command);
             }
-
-            stop();
         }
 
         return ApplicationProtocol.SCORES_UPDATE + NetworkProtocol.END_OF_LINE +
