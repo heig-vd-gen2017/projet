@@ -6,49 +6,37 @@ Serveur -> Serveur : Le pseudo est-il déjà utilisé ?
 
 Client <-x Serveur : USERNAME_USED
 
-Serveur -> Serveur : Reste-il de la place dans la partie ?
+Serveur -> Serveur : Est-ce que le lobby est ouvert ?
 
-Client <-x Serveur : FULL_GAME
+Client <-x Serveur : GAME_FULL
 
 Serveur -> Serveur : Ajout du joueur
 
-Serveur -> Client : JOINED <i>{configuration and spirtes}</i>
+Serveur -> Client : JOINED <i>{GameMode}</i>
 
 Client -> Client : Chargement de la configuration
-
-Serveur --> Client : UPDATE <i>{players and scores}</i>
-
-Client -> Serveur : UPDATED
-
-Serveur -> Serveur : Supprime les éventuels joueurs déconnectés
-
-Serveur -> Serveur : Attend qu'il y a le bon nombre de joueurs
 
 Serveur --> Client : BEGIN_GAME
 
 Serveur -> Serveur : Temps aléatoire
 
-Serveur --> Client : SEND <i>{object type, id, timeout}</i>
+Serveur --> Client : SHOW_OBJECT <i>{Random Game Object}</i>
 
-Client --> Serveur : SEND <i>{object type, id, time}</i>
+Client --> Serveur : OBJECT_TOUCHED <i>{Object ID}</i>
 
-Serveur -> Serveur : Vérifie les scores et joueurs vivants et définit si la partie est terminée
+Serveur -> Serveur : Vérifie les scores et définit si la partie est terminée
 
-Serveur --> Client : UPDATE <i>{players and scores}</i>
-
-Client --> Serveur : UPDATED
-
-Serveur -> Serveur : Supprime les éventuels joueurs déconnectés/morts
-
-Serveur -> Serveur : Vérifie si la partie est terminée
-
-Serveur --> Client
+Serveur --> Client : SCORES_UPDATE <i>{player's score}</i>
 
 Client --> Serveur
 
 Serveur --> Client
 
 Client --> Serveur
+
+Serveur -> Serveur : Vérifie les scores et définit si la partie est terminée
+
+Serveur --> Client : WINNER <i>{winner's pseudo, players}</i>
 
 Serveur --> Client : END_OF_GAME
 
