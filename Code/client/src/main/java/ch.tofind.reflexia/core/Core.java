@@ -12,17 +12,16 @@ import ch.tofind.reflexia.utils.Configuration;
 import ch.tofind.reflexia.utils.Network;
 import ch.tofind.reflexia.utils.Point;
 import ch.tofind.reflexia.utils.Serialize;
-import javafx.application.Platform;
-import javafx.beans.property.IntegerProperty;
-import javafx.scene.control.Alert;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Random;
+
+import javafx.application.Platform;
+import javafx.scene.control.Alert;
 
 public class Core implements ICore {
 
