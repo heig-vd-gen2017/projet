@@ -67,7 +67,7 @@ public class UnicastClient implements Runnable {
      *
      * @param command
      */
-    public void send(String command) {
+    public synchronized void send(String command) {
         out.write(command + NetworkProtocol.END_OF_LINE);
         out.flush();
     }
@@ -77,7 +77,7 @@ public class UnicastClient implements Runnable {
      *
      * @param file The file to send to the server.
      */
-    public void send(File file) {
+    public synchronized void send(File file) {
 
         FileInputStream fileStream = null;
         try {
@@ -155,7 +155,7 @@ public class UnicastClient implements Runnable {
 
             // If one side closed the connection, we simulate an end of communication
             if (input == null) {
-                commands.add(NetworkProtocol.END_OF_COMMUNICATION);
+                break;
             }
 
             // Get the requested command

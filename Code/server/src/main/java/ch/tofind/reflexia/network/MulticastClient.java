@@ -80,7 +80,7 @@ public class MulticastClient implements Runnable {
      *
      * @param message The message to send.
      */
-    public void send(String message) {
+    public synchronized void send(String message) {
 
         // Transforms the message in bytes
         byte[] messageBytes = message.getBytes();
@@ -92,7 +92,11 @@ public class MulticastClient implements Runnable {
         try {
             socket.send(out);
         } catch (IOException e) {
-            LOG.error(e);
+            if (running) {
+                LOG.error(e);
+            } else {
+                // Do nothing
+            }
         }
     }
 
