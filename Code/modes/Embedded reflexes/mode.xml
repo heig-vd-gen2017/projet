@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mode>
+    <name>Embedded reflexes</name>
+    <startingScore>0</startingScore>
+    <endingScore>300</endingScore>
+    <rounds>10</rounds>
+    <gameObjects>
+        <entry>
+            <key>bonus</key>
+            <value>
+                <type>bonus</type>
+                <points>20</points>
+                <timeout>1500</timeout>
+                <enabled>true</enabled>
+            </value>
+        </entry>
+        <entry>
+            <key>malus</key>
+            <value>
+                <type>malus</type>
+                <points>-30</points>
+                <timeout>3000</timeout>
+                <enabled>true</enabled>
+            </value>
+        </entry>
+        <entry>
+            <key>mystery</key>
+            <value>
+                <type>mystery</type>
+                <enabled>true</enabled>
+            </value>
+        </entry>
+    </gameObjects>
+    <minTimeToSpawn>300</minTimeToSpawn>
+    <maxTimeToSpawn>1500</maxTimeToSpawn>
+</mode>
