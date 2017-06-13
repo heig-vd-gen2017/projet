@@ -3,7 +3,6 @@
     <name>Beach day</name>
     <startingScore>500</startingScore>
     <endingScore>1000</endingScore>
-    <rounds>10</rounds>
     <gameObjects>
         <entry>
             <key>bonus</key>

@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Game Mode class
  */
-@XmlType(propOrder = { "name", "startingScore", "endingScore", "rounds" , "gameObjects", "minTimeToSpawn", "maxTimeToSpawn"})
+@XmlType(propOrder = { "name", "startingScore", "endingScore", "gameObjects", "minTimeToSpawn", "maxTimeToSpawn"})
 @XmlRootElement(name = "mode")
 public class GameMode {
 
@@ -21,9 +21,6 @@ public class GameMode {
 
     //! Score to end with
     private Integer endingScore;
-
-    //! Number of rounds
-    private Integer rounds;
 
     //! Game objects composed by the mode
     private Map<String, GameObject> gameObjects;
@@ -51,13 +48,13 @@ public class GameMode {
      * @param name Name of the mode
      * @param startingScore Starting score
      * @param endingScore Ending score
-     * @param rounds Number of rounds
+     * @param minTimeToSpawn Minimum time between each spawn
+     * @param maxTimeToSpawn Maximum time between each spawn
      */
-    public GameMode(String name, Integer startingScore, Integer endingScore, Integer rounds, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
+    public GameMode(String name, Integer startingScore, Integer endingScore, Integer minTimeToSpawn, Integer maxTimeToSpawn) {
         this.name = name;
         this.startingScore = startingScore;
         this.endingScore = endingScore;
-        this.rounds = rounds;
         this.minTimeToSpawn = minTimeToSpawn;
         this.maxTimeToSpawn = maxTimeToSpawn;
         this.interfaceObjects = new HashMap<>();
@@ -111,23 +108,6 @@ public class GameMode {
      */
     public void setEndingScore(Integer endingScore) {
         this.endingScore = endingScore;
-    }
-
-    /**
-     * gets the number of rounds of a game mode
-     * @return the number of rounds
-     */
-    @XmlElement(name = "rounds")
-    public Integer getRounds() {
-        return rounds;
-    }
-
-    /**
-     * sets the rounds of a game mode
-     * @param rounds of a game mode
-     */
-    public void setRounds(Integer rounds) {
-        this.rounds = rounds;
     }
 
     /**
@@ -207,7 +187,6 @@ public class GameMode {
                "Name............: " + name          + '\n' + '\t' +
                "Starting score..: " + startingScore + '\n' + '\t' +
                "Ending  score...: " + endingScore   + '\n' + '\t' +
-               "Rounds..........: " + rounds        + '\n' +
                gameObjects                          + '\n';
     }
 }

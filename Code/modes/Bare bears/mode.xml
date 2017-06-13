@@ -3,7 +3,6 @@
     <name>Bare bears</name>
     <startingScore>100</startingScore>
     <endingScore>5000</endingScore>
-    <rounds>10</rounds>
 	<gameObjects>
         <entry>
             <key>bonus</key>

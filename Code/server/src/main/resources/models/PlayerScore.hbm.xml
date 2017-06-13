@@ -4,7 +4,7 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-access="field">
-    <class name="ch.tofind.reflexia.game.PlayerScore" table="playerScore">
+    <class name="ch.tofind.reflexia.game.PlayerScore" table="player_score">
         <meta attribute="class-description">
             This class represents the scores of all players
         </meta>

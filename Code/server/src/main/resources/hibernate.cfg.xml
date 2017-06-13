@@ -16,7 +16,7 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <!-- List of mapping classes -->
-        <mapping resource="models/PlayersScores.hbm.xml"/>
+        <mapping resource="models/PlayerScore.hbm.xml"/>
 
     </session-factory>
 </hibernate-configuration>

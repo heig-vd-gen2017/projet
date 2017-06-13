@@ -3,7 +3,6 @@
     <name>Interstellar</name>
     <startingScore>0</startingScore>
     <endingScore>40</endingScore>
-    <rounds>10</rounds>
     <gameObjects>
         <entry>
             <key>bonus</key>

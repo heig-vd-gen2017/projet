@@ -3,7 +3,6 @@
     <name>Bad humor</name>
     <startingScore>0</startingScore>
     <endingScore>300</endingScore>
-    <rounds>10</rounds>
 	<gameObjects>
         <entry>
             <key>bonus</key>

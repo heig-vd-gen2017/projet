@@ -246,7 +246,6 @@ public class ServerConfiguration extends Application {
             textFieldModeName.setText(newValue);
             textFieldInitialScore.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getStartingScore()));
             textFieldScoreToGet.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getEndingScore()));
-            textFieldNumberOfRounds.setText(Integer.toString(GameModeManager.getInstance().getGameModes().get(newValue).getRounds()));
 
             Map<String, GameObject> gameObjects = GameModeManager.getInstance().getGameModes().get(newValue).getGameObjects();
 

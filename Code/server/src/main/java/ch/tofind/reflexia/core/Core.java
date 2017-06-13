@@ -21,10 +21,7 @@ import ch.tofind.reflexia.utils.Serialize;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -306,14 +303,16 @@ public class Core implements ICore {
      */
     @Override
     public void stop() {
-        if (multicast != null) {
+        if (!Objects.isNull(multicast)) {
             multicast.stop();
             multicast = null;
         }
 
-        gameObjectRandomizer.stop();
+        if (!Objects.isNull(gameObjectRandomizer)) {
+            gameObjectRandomizer.stop();
+        }
 
-        if (server != null) {
+        if (!Objects.isNull(server)) {
             server.stop();
             server = null;
         }
