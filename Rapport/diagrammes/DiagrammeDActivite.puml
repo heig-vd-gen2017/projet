@@ -30,11 +30,16 @@ endfork
 fork
 -[dotted]->
 :Arrêt prématuré;
--[dotted]->
+end
 fork again
 |Client|
 :Jouer la partie;
-:Partie gagnée;
+split
+:Partie terminée;
+split again
+:Partie quittée;
+stop
+end split
 endfork
 |Serveur|
 end
