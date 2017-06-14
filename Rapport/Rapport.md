@@ -180,12 +180,22 @@ Afin de gagner, le joueur devra obtenir le nombre de points à atteindre défini
 * Quitter la partie (note: la partie en cours n'est pas interrompue, le joueur est considéré comme ayant perdu)
 
 ## Diagramme d'activité
-![Diagramme d'activité](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/DiagrammeDActivite.puml)
+
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.7\textheight]{diagrammes_png/diagramme_d_activite.png}
+  \captionof{figure}{Diagramme d'activité}
+\end{minipage}
 
 ## Cas d'utilisation
 
 ### Diagramme général de contexte
-![Cas d'utilisation](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/UseCases.puml)
+
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.2\textheight]{diagrammes_png/use_cases.png}
+  \captionof{figure}{Cas d'utilisation}
+\end{minipage}
 
 ### Description des acteurs
 #### Administrateur (Serveur)
@@ -305,7 +315,11 @@ Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
 
 ### Modèle conceptuel
 
-![Schéma de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/Database.puml)
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.3\textheight]{diagrammes_png/database.png}
+  \captionof{figure}{Base de données}
+\end{minipage}
 
 #### Commentaires
 La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait joué.
@@ -316,14 +330,21 @@ La base de données servira à stocker les scores des différents joueurs pour c
 ## Protocole d'échange
 Notre application communiquera à travers le réseau en utilisant le protocole suivant :
 
-![Protocole](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/Protocol.puml)
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.6\textheight]{diagrammes_png/protocol.png}
+  \captionof{figure}{Protocole}
+\end{minipage}
 
 ## Base de données
 
 ### Modèle conceptuel
 
-![Modèle conceptuel de la base de données](http://www.plantuml.com/plantuml/proxy?src=https://raw.githubusercontent.com/heig-vd-gen2017/projet/master/Rapport/diagrammes/FinalDatabase.puml)
-
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.1\textheight]{diagrammes_png/final_database.png}
+  \captionof{figure}{Base de données finale}
+\end{minipage}
 
 # Implémentation (Luca)
 
@@ -344,14 +365,28 @@ Notre application communiquera à travers le réseau en utilisant le protocole s
 
 ## Plan d'itérations initial
 
-|  Itération  |       Description        | Semaines | Développeur |
-|-------------|:------------------------:|:--------:|:-----------:|
-| Itération 1 |"Joindre une partie"      |     1    | Protocole réseau: Luca, Interface graphique: Abass & Ludovic, Lier l'interface graphique avec le code: Denise |
-| Itération 2 |"Configurer une partie"   |    2-3   | Structure et validation XML: Ludovic, Conversion XML en object: Abass, Serialisation de l'objet en JSON, envoi au client et desérialisation: Denise et Luca |
-| Itération 3 |"Lancer une partie"       |     4    | Gestion des prérequis: tout le monde |
-| Itération 4 |"Jouer une partie"        |    5-6   | Gestion des événements clients: Luca et Abass, gestion des événements de la part du serveur: Ludovic & Denise |
-| Itération 5 |"Réinitialiser les scores"|     7    | Tout le monde |
-| Itération 6 |"Mettre fin à une partie" |     8    | Tout le monde |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération     | Description                | Semaines | Développeur                                                |
++===============+============================+==========+============================================================+
+| Itération 1   | "Joindre une partie"       | 1        | Protocole réseau: Luca (4 heures)\                         |
+|               |                            |          | Interface graphique: Abass & Ludovic (6 heures)\           |
+|               |                            |          | Lier l'interface graphique avec le code: Denise (4 heures) |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 2   | "Configurer une partie"    | 2-3      | Structure et validation XML: Ludovic (2 heures)\           |
+|               |                            |          | Conversion XML en object: Abass (4 heures)\                |
+|               |                            |          | Serialisation de l'objet en JSON, envoi au client et\      |
+|               |                            |          | desérialisation: Denise et Luca (4 heures)                 | +---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 3   | "Lancer une partie"        | 4        | Gestion des prérequis: tout le monde (10 heures)           |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 4   | "Jouer une partie"         | 5-6      | Gestion des événements clients: Luca et Abass (6 heures)   |
+|               |                            |          | Gestion des événements de la part du serveur: Ludovic &    |
+|               |                            |          | Denise (10 heures)                                         |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 5   | "Réinitialiser les scores" | 7        | Tout le monde (10 heures)                                  |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 6   | "Mettre fin à une partie"  | 8        | Tout le monde (10 heures)                                  |
++---------------+----------------------------+----------+------------------------------------------------------------+
+
 
 Pour chaque itération :
 - Objectifs
@@ -361,14 +396,39 @@ Pour chaque itération :
 
 ## Suivi du projet
 
-|  Itération  |       Description        | Semaines | Développeur |
-|-------------|:------------------------:|:--------:|:-----------:|
-| Itération 1 |"Joindre une partie"      |     1    | Protocole réseau: Luca et Denise Interface graphique: Ludovic, Lier l'interface graphique avec le code: Denise, UML des cas d'utilisation : Abass |
-| Itération 2 |"Configurer une partie"   |    2-3   | Structure et validation XML: Ludovic, Conversion XML en object: Abass, Serialisation de l'objet en JSON, Envoi au client et desérialisation: Luca, Interface graphique: Denise |
-| Itération 3 |"Lancer une partie"       |     4    | Interface graphique: Denise, Création et rassemblement des images: Abass, Protocole réseau: Luca, Base de données: Ludovic |
-| Itération 4 |"Réinitialiser les scores"        |    5   | Interface graphique: Denise, Base de données et nettoyage de celle-ci: Ludovic & Luca, Abass absent |
-| Itération 5 |"Mettre fin à une partie"|     6    | Interface graphique et création du rapport: Denise,  Gestion du réseau et ses commandes: Luca, Gestion du réseau et communication client/serveur: Ludovic, Abass absent |
-| Itération 6 |"Jouer une partie" |    7-8    | Interface graphique et rédaction du rapport: Denise, Rédaction du rapport: Luca, Mise à jour de l'interface, logique de jeu et possibilité de jouer: Ludovic, Abass absent |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération     | Description                | Semaines | Développeur                                                |
++===============+============================+==========+============================================================+
+| Itération 1   | "Joindre une partie"       | 1        | Protocole réseau: Luca et Denise\                          |
+|               |                            |          | UML des cas d'utilisation: Abass\                          |
+|               |                            |          | Interface graphique: Ludovic\                              |
+|               |                            |          | Lier interface graphique et code: Denise                   |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 2   | "Configurer une partie"    | 2-3      | Structure et validation XML: Ludovic\                    |
+|               |                            |          | Conversion XML en object: Abass\                           |
+|               |                            |          | Serialisation de l'objet en JSON, envoi au client et\      |
+|               |                            |          | desérialisation: Luca\                                     |
+|               |                            |          | Interface graphique: Denise                                | +---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 3   | "Lancer une partie"        | 4        | Base de données: Ludovic\                                  |
+|               |                            |          | Création et rassemblement des images: Abass\               |
+|               |                            |          | Protocole réseau: Luca\                                    |
+|               |                            |          | Interface graphique: Denise                                | 
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 4   | "Réinitialiser les scores" | 5        | Base de données et nettoyage de celle-ci: Luca et Ludovic\ |
+|               |                            |          | Interface graphique: Denise\                               |
+|               |                            |          | Absent: Abass                                              |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 5   | "Mettre fin à une partie"  | 6        | Gestion du réseau et communication client/serveur: Ludovic\|
+|               |                            |          | Interface graphique et création du rapport: Denise\        |
+|               |                            |          | Gestion du réseau et ses commandes: Luca\                  |
+|               |                            |          | Absent: Abass                                              |
++---------------+----------------------------+----------+------------------------------------------------------------+
+| Itération 6   | "Jouer une partie"         | 7-8      | Mise à jour de l'interface, logique de jeu et possibilité\ |
+|               |                            |          | de jouer: Ludovic\                                         |
+|               |                            |          | Interface graphique et rédaction du rapport: Denise\       |
+|               |                            |          | Rédaction du rapport: Luca\                                |
+|               |                            |          | Absent: Abass                                              |
++---------------+----------------------------+----------+------------------------------------------------------------+
 
 ### Itération 1
 #### Bilan
