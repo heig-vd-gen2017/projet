@@ -1,6 +1,5 @@
 @startuml
 class GameManager {
-    [[GameManager.html]]
     -gameMode
     -players
     -acceptPlayers
