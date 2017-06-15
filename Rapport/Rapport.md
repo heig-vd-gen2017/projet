@@ -138,6 +138,7 @@ Dans ce rapport, nous allons expliquer notre planification de travail à travers
 
 La dernière semaine de cours aura lieu un oral durant lequel nous aurons l'opportunité de présenter et défendre notre projet.
 
+\newpage
 
 # Analyse
 
@@ -299,7 +300,7 @@ Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
 3. Le joueur ne peut pas joindre la partie
 4. Le joueur peut attendre qu'une partie soit en phase de configuration
 
-## Modèle de domaine (Ludo)
+## Modèle de domaine
 
 ### Client
 \begin{minipage}{\linewidth}
@@ -331,6 +332,7 @@ La logique métier reste la même des deux côtés. La différence, c'est que c'
 #### Commentaires
 La base de données servira à stocker les scores des différents joueurs pour chacun des modes auxquels il aurait joué.
 
+\newpage
 
 # Conception
 
@@ -353,22 +355,26 @@ Notre application communiquera à travers le réseau en utilisant le protocole s
   \captionof{figure}{Base de données finale}
 \end{minipage}
 
-# Implémentation (Luca)
+Nous avons finalement décidé de réduire la base de données à une table. En effet, la base de données prévue au début aurait été plus utile dans le cas où nous aurions eu besoin d'informations de modes de jeu plus évolués ou d'un système de login pour les utilisateurs. Dans notre cas, tout ce qui nous intéresse se retrouve dans cette table: l'ID de l'instance, le pseudo du joueur, le mode de jeu joué durant le score atteint, le score et la date à laquelle le score a été atteint.
+
+\newpage
+
+# Implémentation
 
 ## Problèmes rencontrés
 
 ## Solutions
 
+\newpage
 
 # Gestion du projet
 
 ## Rôle des membres du groupe de développement
 
-* Tout le monde: Architecteur/concepteur en chef, programmeur, responsable des tests
-* Ludovic: Chef de projet, responsable de la configuration
-* Luca: Responsable des normes et procédures,
-* Abass: Représentatant des clients & utilisateurs
-* Denise: Analyste
+* Ludovic: Chef de projet, responsable de l'architecture
+* Luca: Responsable du protocole applicatif et responsable de la communication réseau
+* Abass: Expert Trello & documentation et responsable des définitions des modes de jeu
+* Denise: Experte interface graphique et graphic designer
 
 ## Plan d'itérations initial
 
@@ -448,27 +454,33 @@ Pas de problèmes rencontrés.
 #### Replanifications
 Pas de replanification.
 
+ \newpage
 
-## Stratégie de tests (Ludo/Denise)
+## Stratégie de tests
 
-### Résultats des tests (Ludo/Denise)
+### Résultats des tests
+
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.4\textheight]{images/tests.png}
+  \captionof{figure}{Plan d'itérations final}
+\end{minipage}
 
 
 ## Stratégie d'intégration du code de chaque participant
 Nous avons toujours travaillé sur la branche *master*: chacun de nous a constamment testé son code avant de le pousser sur la branche. S'il y avait des cas de conflit, ceux-ci ont été gérés comme il le fallait. En conclusion, nous n'avons donc pas rencontré de problèmes avec GIT.
 
-
-
-# Etat des lieux (Ludo/Denise)
+# Etat des lieux
 
 ## Ce qui fonctionne
-(résultats des tests)
+Nous avons pu développer un prototype fonctionnel qui comporte encore quelques bogues. Il est plus réactif que l'idée de base. Toutes les fonctionnalités de base discutées dans les cas d'utilisation ont été développées. 
 
 ## Ce qu'il resterait à développer
 De ce que nous avons défini comme fonctions principales, il ne reste rien de plus à développer. Cependant, nous pourrions développer comme pensé au début des variantes de jeu, comme par exemple, inverser le sens de la souris, devoir résoudre un labyrithe avant d'atteindre l'objet, etc.
 
+\newpage
 
-# Auto-critique
+# Autocritique
 
 ## Implémentation
 Au niveau de l'implémentation, tout s'est passé sans problèmes majeurs. Nous avons également assez rapidement pu nous rattraper après que nous ayons appris l'absence à long terme de l'un des membres du groupe. En effet, nous avons dû replanifier les itérations, ce qui ne nous a pas pris beaucoup de temps.
@@ -490,6 +502,8 @@ De plus, suite à la replanification du plan d'itération, nous n'avons pas ress
 ## Améliorations possibles
 Prévoir un but un peu moins ambitieux nous aurait permis de nous concentrer sur des détails quant au produit que nous avons finalement réalisé. 
 De par la charge de travail extérieure que nous avons eu durant le semestre, nous n'avons malheureusement pas pu nous voir autant que nous voulions en face à face. Cela est un point qui nous semble très important et que nous améliorerons quoiqu'il arrive dans le futur, en espérant qu'un semestre de cet acabit ne se reproduise plus.
+
+\newpage
 
 # Conclusion
 Nous avons pu implémenter un jeu fonctionnel, qui graphiquement nous plaît. La facilité de connexion reste difficile, cependant, nous imaginons facilement pouvoir y jouer lors de soirées avec des amis, ce qui est d'ailleurs prévu! Le jeu est finalement bien plus réactif que prévu, ce qui est une bonne nouvelle pour nous. Nous pensions nous retrouver face à des problèmes majeurs quant à la concurrence.
