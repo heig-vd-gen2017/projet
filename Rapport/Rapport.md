@@ -300,16 +300,23 @@ Le joueur remplit la fenêtre de connexion mais la partie a déjà démarré.
 4. Le joueur peut attendre qu'une partie soit en phase de configuration
 
 ## Modèle de domaine (Ludo)
-** TODO **
-** A CREER automatiquement + modifier **
 
 ### Client
-
-#### Commentaires et justification
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.3\textheight]{diagrammes_png/domaineFinalClient.png}
+  \captionof{figure}{Modèle de domaine du côté client}
+\end{minipage}
 
 ### Serveur
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.25\textheight]{diagrammes_png/domaineFinalServeur.png}
+  \captionof{figure}{Modèle de domaine du côté serveur}
+\end{minipage}
 
-#### Commentaires et justification
+### Commentaires et justification
+La logique métier reste la même des deux côtés. La différence, c'est que c'est le serveur qui va générer les objets aléatoires, alors que le client va recevoir l'objet aléatoire et l'afficher sur l'interface.
 
 ## Base de données
 
@@ -365,70 +372,21 @@ Notre application communiquera à travers le réseau en utilisant le protocole s
 
 ## Plan d'itérations initial
 
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération     | Description                | Semaines | Développeur                                                |
-+===============+============================+==========+============================================================+
-| Itération 1   | "Joindre une partie"       | 1        | Protocole réseau: Luca (4 heures)\                         |
-|               |                            |          | Interface graphique: Abass & Ludovic (6 heures)\           |
-|               |                            |          | Lier l'interface graphique avec le code: Denise (4 heures) |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 2   | "Configurer une partie"    | 2-3      | Structure et validation XML: Ludovic (2 heures)\           |
-|               |                            |          | Conversion XML en object: Abass (4 heures)\                |
-|               |                            |          | Serialisation de l'objet en JSON, envoi au client et\      |
-|               |                            |          | desérialisation: Denise et Luca (4 heures)                 | +---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 3   | "Lancer une partie"        | 4        | Gestion des prérequis: tout le monde (10 heures)           |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 4   | "Jouer une partie"         | 5-6      | Gestion des événements clients: Luca et Abass (6 heures)   |
-|               |                            |          | Gestion des événements de la part du serveur: Ludovic &    |
-|               |                            |          | Denise (10 heures)                                         |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 5   | "Réinitialiser les scores" | 7        | Tout le monde (10 heures)                                  |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 6   | "Mettre fin à une partie"  | 8        | Tout le monde (10 heures)                                  |
-+---------------+----------------------------+----------+------------------------------------------------------------+
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.3\textheight]{images/planIterInit.png}
+  \captionof{figure}{Plan d'itérations initial}
+\end{minipage}
 
-
-Pour chaque itération :
-- Objectifs
-- Durée, dates
-- Qui fait quoi
-- Charge de travail estimée, en heures
 
 ## Suivi du projet
 
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération     | Description                | Semaines | Développeur                                                |
-+===============+============================+==========+============================================================+
-| Itération 1   | "Joindre une partie"       | 1        | Protocole réseau: Luca et Denise\                          |
-|               |                            |          | UML des cas d'utilisation: Abass\                          |
-|               |                            |          | Interface graphique: Ludovic\                              |
-|               |                            |          | Lier interface graphique et code: Denise                   |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 2   | "Configurer une partie"    | 2-3      | Structure et validation XML: Ludovic\                    |
-|               |                            |          | Conversion XML en object: Abass\                           |
-|               |                            |          | Serialisation de l'objet en JSON, envoi au client et\      |
-|               |                            |          | desérialisation: Luca\                                     |
-|               |                            |          | Interface graphique: Denise                                | +---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 3   | "Lancer une partie"        | 4        | Base de données: Ludovic\                                  |
-|               |                            |          | Création et rassemblement des images: Abass\               |
-|               |                            |          | Protocole réseau: Luca\                                    |
-|               |                            |          | Interface graphique: Denise                                | 
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 4   | "Réinitialiser les scores" | 5        | Base de données et nettoyage de celle-ci: Luca et Ludovic\ |
-|               |                            |          | Interface graphique: Denise\                               |
-|               |                            |          | Absent: Abass                                              |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 5   | "Mettre fin à une partie"  | 6        | Gestion du réseau et communication client/serveur: Ludovic\|
-|               |                            |          | Interface graphique et création du rapport: Denise\        |
-|               |                            |          | Gestion du réseau et ses commandes: Luca\                  |
-|               |                            |          | Absent: Abass                                              |
-+---------------+----------------------------+----------+------------------------------------------------------------+
-| Itération 6   | "Jouer une partie"         | 7-8      | Mise à jour de l'interface, logique de jeu et possibilité\ |
-|               |                            |          | de jouer: Ludovic\                                         |
-|               |                            |          | Interface graphique et rédaction du rapport: Denise\       |
-|               |                            |          | Rédaction du rapport: Luca\                                |
-|               |                            |          | Absent: Abass                                              |
-+---------------+----------------------------+----------+------------------------------------------------------------+
+\begin{minipage}{\linewidth}
+  \centering
+  \includegraphics[height=0.5\textheight]{images/planIterFinal.png}
+  \captionof{figure}{Plan d'itérations final}
+\end{minipage}
+
 
 ### Itération 1
 #### Bilan
@@ -507,18 +465,33 @@ Nous avons toujours travaillé sur la branche *master*: chacun de nous a constam
 (résultats des tests)
 
 ## Ce qu'il resterait à développer
-(proposer une planification)
+De ce que nous avons défini comme fonctions principales, il ne reste rien de plus à développer. Cependant, nous pourrions développer comme pensé au début des variantes de jeu, comme par exemple, inverser le sens de la souris, devoir résoudre un labyrithe avant d'atteindre l'objet, etc.
 
 
-# Auto-critique (Ludo/Denise/Luca)
+# Auto-critique
 
 ## Implémentation
+Au niveau de l'implémentation, tout s'est passé sans problèmes majeurs. Nous avons également assez rapidement pu nous rattraper après que nous ayons appris l'absence à long terme de l'un des membres du groupe. En effet, nous avons dû replanifier les itérations, ce qui ne nous a pas pris beaucoup de temps.
+
+A un niveau plus technique, l'implémentation des entités est bonne, le code est clair et propre et la documentation et les commentaires ont été rédigés au mieux.
+
+Par rapport à l'utilisation de l'interface de connexion au jeu, nous aurions pu rendre cela plus facile, plutôt que de devoir entrer des adresses IP, ce qui n'est pas évident pour des personnes ne s'y connaissant pas en informatique.
 
 ## Gestion de projet
+La gestion du projet a principalement été faite par Ludovic Delafontaine, le chef de groupe. Ludovic a su donner des tâches à chacun des membres de façon à ce que personne ne soit inactif durant tout le long du projet. Cela a permis de suivre les itérations comme il le fallait et modifier les tâches de l'itération comme il le fallait sans que quelqu'un se retrouve de côté.
+La replanification a été inattendue, mais a été réalisée assez rapidement en une discussion de moins d'une heure. La stratégie de replanification utilisée a été satisfaisante pour le reste de l'exécution du projet.
+En outre, la communication au sein du groupe était bonne et tout le monde était à l'écoute des autres. Cela a permis une bonne ambiance au sein du groupe qui nous a encouragé à exécuter un beau et bon programme.
 
 ## Plan d'itération
+Au niveau du plan d'itération initial, nous n'avons pas été très précis lors de l'élaboration, ce qui n'a pas posé de problèmes, vu que semaine après semaine, nous nous sommes attribués des tâches afin de pouvoir compléter l'itération au mieux. A la fin de chaque itération, nous avons pu obtenir un résultat fonctionnel.
+
+De plus, suite à la replanification du plan d'itération, nous n'avons pas ressenti de difficultés majeures. Nous avons pu nous rattraper comme il le fallait par rapport au fait qu'un membre du groupe manquait. 
 
 ## Améliorations possibles
+Prévoir un but un peu moins ambitieux nous aurait permis de nous concentrer sur des détails quant au produit que nous avons finalement réalisé. 
+De par la charge de travail extérieure que nous avons eu durant le semestre, nous n'avons malheureusement pas pu nous voir autant que nous voulions en face à face. Cela est un point qui nous semble très important et que nous améliorerons quoiqu'il arrive dans le futur, en espérant qu'un semestre de cet acabit ne se reproduise plus.
 
-
-# Conclusion (Ludo/Denise/Luca)
+# Conclusion
+Nous avons pu implémenter un jeu fonctionnel, qui graphiquement nous plaît. La facilité de connexion reste difficile, cependant, nous imaginons facilement pouvoir y jouer lors de soirées avec des amis, ce qui est d'ailleurs prévu! Le jeu est finalement bien plus réactif que prévu, ce qui est une bonne nouvelle pour nous. Nous pensions nous retrouver face à des problèmes majeurs quant à la concurrence.
+Grâce à ce projet, nous avons pu lier plusieurs notions acquises dans d'autres cours, telles que la sérialisation, la concurrence, l'orienté-objet, la gestion de projet, la sécurité et la communication client-serveur. Nous avons donc finalement pu approfondir des sujets importants pour ce semestre.
+Nous pensons également que ce cours pourra nous être utile dans le futur, dans le cas de la gestion de projet et plus exactement dans une situation de stress comme celle que nous avons vécue ce semestre.
