@@ -6,13 +6,6 @@ class GameManager {
     -nbPlayers
 }
 
-class PlayerScore {
-    -player
-    -mode
-    -score
-    -date
-}
-
 class Player {
     -pseudo
     -score
@@ -49,9 +42,17 @@ class RandomGameObject {
     -point
 }
 
+class PlayerScore {
+    -player
+    -mode
+    -score
+    -date
+}
+
 GameModeManager "1" -- "*" GameMode
-GameMode "1" - "*" GameObject
+GameObjectRandomizer - RandomGameObject
+GameObject"*" - "1" GameMode
 GameManager "1" - "*" Player
 GameMode "1" - "1" GameObjectRandomizer
-RandomGameObject -- GameObjectRandomizer
+
 @enduml

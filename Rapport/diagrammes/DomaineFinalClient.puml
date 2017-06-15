@@ -45,9 +45,9 @@ class RandomGameObject {
     -point
 }
 
-GameModeManager "1" -- "*" GameMode
-GameMode "1" - "*" GameObject
-GameManager "1" - "*" Player
 GameMode "1" - "1" RandomGameObject
-Player "1" -- "*" PlayerScore
+GameMode "1" - "*" GameObject
+GameModeManager "1" -- "*" GameMode
+Player "1" - "*" PlayerScore
+GameManager "1" - "*" Player
 @enduml
