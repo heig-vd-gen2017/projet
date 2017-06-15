@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @brief game management class
+ * Game management class
  */
 public class GameManager {
 
@@ -37,7 +37,7 @@ public class GameManager {
     private IntegerProperty nbPlayers = new SimpleIntegerProperty(0);
 
     /**
-     * @brief GameManager single constructor. Avoid the instantiation.
+     * GameManager single constructor. Avoid the instantiation.
      */
     private GameManager() {
         this.players = new HashMap<>();
@@ -45,7 +45,7 @@ public class GameManager {
     }
 
     /**
-     * @brief Get the object instance
+     * Get the object instance
      * @return The instance of the object
      */
     public static GameManager getInstance() {

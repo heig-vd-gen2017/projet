@@ -47,6 +47,8 @@ public class GameObjectRandomizer implements Runnable {
 
     /**
      * Initialisation constructor.
+     * @param gameMode The GameMode
+     * @param multicastClient The multicast client
      */
     public GameObjectRandomizer(GameMode gameMode, MulticastClient multicastClient) {
 

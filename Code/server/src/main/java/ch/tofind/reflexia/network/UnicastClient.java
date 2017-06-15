@@ -65,7 +65,7 @@ public class UnicastClient implements Runnable {
     /**
      * Send a message to the server.
      *
-     * @param command
+     * @param command The command
      */
     public synchronized void send(String command) {
         out.write(command + NetworkProtocol.END_OF_LINE);

@@ -135,7 +135,6 @@ public class ClientGame extends Application {
 
         gameObject.relocate(imagePosX, imagePosY);
 
-
         PauseTransition delay = new PauseTransition(Duration.millis(timeToShow));
 
         delay.setOnFinished(event -> {
@@ -147,6 +146,7 @@ public class ClientGame extends Application {
         gamePane.getChildren().add(gameObject);
 
         gameObject.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            gameObject.setDisable(true);
             gamePane.getChildren().remove(gameObject);
             core.objectTouched(objectId);
         });

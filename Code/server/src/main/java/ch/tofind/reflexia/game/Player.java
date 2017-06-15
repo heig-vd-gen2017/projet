@@ -44,6 +44,7 @@ public class Player {
 
     /**
      * Set the player's score.
+     * @param score The score
      */
     public void setScore(Integer score) {
         this.score = score;

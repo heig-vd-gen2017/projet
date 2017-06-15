@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <mode>
     <name>Christmas magic</name>
-    <startingScore>500</startingScore>
+    <startingScore>0</startingScore>
     <endingScore>20</endingScore>
     <gameObjects>
         <entry>

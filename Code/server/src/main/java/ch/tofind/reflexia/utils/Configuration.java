@@ -53,6 +53,7 @@ public class Configuration {
 
     /**
      * Get the property from the configuration file
+     * @param property the property to get
      * @return The property
      */
     public String get(String property) {

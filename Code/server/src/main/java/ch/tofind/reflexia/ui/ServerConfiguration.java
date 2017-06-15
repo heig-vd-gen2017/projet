@@ -28,7 +28,7 @@ import java.time.ZoneId;
 import java.util.*;
 
 /**
- * @brief This class defines the configuration and use of the GUI
+ * This class defines the configuration and use of the GUI
  */
 public class ServerConfiguration extends Application {
 
@@ -103,8 +103,7 @@ public class ServerConfiguration extends Application {
     private Label informationLabel;
 
     /**
-     * @brief
-     * @param stage
+     * @param stage The stage
      * @throws IOException
      */
     public void start(Stage stage) throws IOException {
@@ -132,8 +131,8 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief Tells the Core what mode was selected
-     * @param event
+     * Tells the Core what mode was selected
+     * @param event A mouse event
      */
     @FXML
     private void saveMode(MouseEvent event) {
@@ -158,8 +157,8 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief Tells the Core what network settings were set
-     * @param event
+     * Tells the Core what network settings were set
+     * @param event A mouse event
      */
     @FXML
     private void acceptConnections(MouseEvent event) {
@@ -180,8 +179,8 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief Tells the Core that user wants to start the game
-     * @param event
+     * Tells the Core that user wants to start the game
+     * @param event A mouse event
      */
     @FXML
     private void beginGame(MouseEvent event) {
@@ -197,8 +196,8 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief tells the core to stop the game and reset th interface
-     * @param event
+     * Tells the core to stop the game and reset th interface
+     * @param event A mouse event
      */
     @FXML
     private void endGame(MouseEvent event) {
@@ -213,8 +212,8 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief tells the core to reset the scores
-     * @param event
+     * Tells the core to reset the scores
+     * @param event A mouse event
      */
     @FXML
     private void resetScores(MouseEvent event) {
@@ -229,7 +228,7 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief resets the interface
+     * Resets the interface
      */
     @FXML
     private void initialize() {
@@ -283,7 +282,7 @@ public class ServerConfiguration extends Application {
     }
 
     /**
-     * @brief updates the number of players
+     * Updates the number of players
      */
     public void updateNbPlayers() {
 

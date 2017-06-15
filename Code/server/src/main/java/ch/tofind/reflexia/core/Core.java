@@ -77,7 +77,7 @@ public class Core implements ICore {
 
     /**
      * sets the game mode
-     * @param gameModeName
+     * @param gameModeName The name of the game mode
      */
     public void setGameMode(String gameModeName) {
 
@@ -91,10 +91,10 @@ public class Core implements ICore {
 
     /**
      * accepts a connection
-     * @param multicastAddress
-     * @param multicastPortString
-     * @param ipAddressName
-     * @param unicastPortString
+     * @param multicastAddress The multicast address
+     * @param multicastPortString The multicast port
+     * @param ipAddressName The name of the IP address
+     * @param unicastPortString The Unicast Port
      */
     public void acceptConnections(String multicastAddress, String multicastPortString, String ipAddressName, String unicastPortString) {
 
@@ -149,7 +149,7 @@ public class Core implements ICore {
 
     /**
      * resets the scores
-     * @param date
+     * @param date The date at which to reset the scores
      */
     public void resetScores(Date date) {
 
@@ -167,7 +167,7 @@ public class Core implements ICore {
     /**
      * makes a player join the game
      * @param args Arguments of the command.
-     * @return
+     * @return The JSON Game Mode
      */
     public String JOIN(ArrayList<Object> args) {
 
