@@ -15,13 +15,11 @@ class PlayerScore {
 }
 
 class Player {
-    [[Player.html]]
     -pseudo
     -score
 }
 
 class GameMode {
-    [[GameMode.html]]
     -name
     -startingScore
     -endingScore
@@ -31,12 +29,10 @@ class GameMode {
 }
 
 class GameModeManager {
-    [[GameModeManager.html]]
     -gameModes
 }
 
 class GameObject {
-    [[GameObject.html]]
     -type
     -enabled
     -points
@@ -44,7 +40,6 @@ class GameObject {
 }
 
 class RandomGameObject {
-    [[GameObjectRandomizer.html]]
     -id
     -gameObject
     -point
